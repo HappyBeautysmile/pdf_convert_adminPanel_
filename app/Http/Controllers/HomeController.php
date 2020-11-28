@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data["page_flg"]="homePage";
+        return view('home_page',$data);
     }
 }
