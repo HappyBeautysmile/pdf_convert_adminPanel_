@@ -16,8 +16,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/createProject','CreateProjectController@index' );
+Route::get('/allPdf','AllPdfController@index' );
+Route::get('/data','DataController@index' );
+Route::get('/pictures','PicturesController@index' );
+Route::get('/homePage','HomePageController@index' );
+Route::post('/operating', 'CreateProjectController@operating_pdf')->name('operating');
