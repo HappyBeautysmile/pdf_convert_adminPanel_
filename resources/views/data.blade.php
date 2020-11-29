@@ -53,7 +53,6 @@
   </div>
 </div>
 <meta name="_token" content="{!! csrf_token() !!}" />
-
 <script>
   var jsonTreeData =
     [
