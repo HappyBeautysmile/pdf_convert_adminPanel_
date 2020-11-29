@@ -13,7 +13,9 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.5",
-        "tcg/voyager": "^1.4"
+        "phpoffice/phpexcel": "^1.8",
+        "tcg/voyager": "^1.4",
+        "phpexcel/phpexcel": "dev-master" 
     },
     "require-dev": {
         "filp/whoops": "^2.0",
