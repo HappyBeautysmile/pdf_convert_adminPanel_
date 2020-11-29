@@ -51,7 +51,7 @@ input {
         <div class="col-sm-9"> 
             <p>
             <input class="col-sm-10" placeholder="select folder..." oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
-            <button type="button" class="btn btn-success btn-lg"name="select_folder_btn"  data-toggle="modal" data-target="#folder" >SELECT</button> 
+            <button type="button" class="btn btn-success btn-lg"name="select_folder_btn"  data-toggle="modal" data-target="#folder" id="viewPdfs" >SELECT</button> 
             </p>
         </div>
     </div>
@@ -100,48 +100,65 @@ input {
 </div>
 <script>
   var srcPdfFileArray = <?php echo js_array($src_pdfFileArray);?>;//convert php array to javascript array
-  var currentPdfPageIndex = <?php echo $currentPdfPageIndex?>;
+  var currentPdfPageIndex =2;
   var sourceDir ="./Home1/uploads/media";
   var folder_dir =["ok"];
-
-    function nextPdfFunc(index)
+  var convertedPdfName ="";
+  var dirInform ="./Home/uploads/media";
+  var currentFolder_dir = "";
+  function currentPdfPageFind(){
+    // alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
+    if(srcPdfFileArray.length <= 3)
     {
-        if(folder_dir[0]!="ok")
-        {
-            document.getElementById("pdfView").src=sourceDir + "/" + srcPdfFileArray[currentPdfPageIndex];
-            $(document).ready(function() {
-                if(currentPdfPageIndex + index + 1== srcPdfFileArray.length)
-                {
-                $("#nextPdfViewBtn").addClass("disabled");
-                $("#nextPdfViewBtn").prop('disabled',true);
-                
-                }
-                else if(currentPdfPageIndex < srcPdfFileArray.length)
-                {
-                $("#nextPdfViewBtn").removeClass("disabled");
-                $("#nextPdfViewBtn").prop('disabled',false);
-                }
-                if(currentPdfPageIndex + index == 2)
-                {
-                $("#backPdfViewBtn").addClass('disabled');
-                $("#backPdfViewBtn").prop('disabled',true);
-                }
-                else if(currentPdfPageIndex > 1)
-                {
-                $("#backPdfViewBtn").removeClass('disabled');
-                $("#backPdfViewBtn").prop('disabled',false);
-                }
-                if(currentPdfPageIndex + index > 1  && currentPdfPageIndex + index < srcPdfFileArray.length){
-                currentPdfPageIndex += index ;
-                }
-                // alert(currentPdfPageIndex + "   " +srcPdfFileArray[currentPdfPageIndex]);
-                // alert(currentPdfPageIndex);
-                document.getElementById("pdfView").src= sourceDir + "/" + srcPdfFileArray[currentPdfPageIndex];
-
-            });
-
-        }
+        $("#nextPdfViewBtn").addClass("disabled");
+        $("#nextPdfViewBtn").prop('disabled',true);
+        $("#backPdfViewBtn").addClass('disabled');
+        $("#backPdfViewBtn").prop('disabled',true);
     }
+    else
+    {
+      $("#nextPdfViewBtn").removeClass("disabled");
+      $("#nextPdfViewBtn").prop('disabled',false);
+      $("#backPdfViewBtn").removeClass('disabled');
+      $("#backPdfViewBtn").prop('disabled',false);
+    }
+    document.getElementById("pdfView").src=  currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex];
+  }
+  function nextPdfFunc(index)
+  {
+    // alert("nextStep" : currentPdfPageIndex + index) ;
+    if(srcPdfFileArray.length > 3){
+      $(document).ready(function() {
+        if(currentPdfPageIndex + index + 1== srcPdfFileArray.length)
+        {
+          $("#nextPdfViewBtn").addClass("disabled");
+          $("#nextPdfViewBtn").prop('disabled',true);
+        
+        }
+        else if(currentPdfPageIndex < srcPdfFileArray.length)
+        {
+          $("#nextPdfViewBtn").removeClass("disabled");
+          $("#nextPdfViewBtn").prop('disabled',false);
+        }
+        if(currentPdfPageIndex + index == 2)
+        {
+          $("#backPdfViewBtn").addClass('disabled');
+          $("#backPdfViewBtn").prop('disabled',true);
+        }
+        else if(currentPdfPageIndex > 1)
+        {
+          $("#backPdfViewBtn").removeClass('disabled');
+          $("#backPdfViewBtn").prop('disabled',false);
+        }
+        if(currentPdfPageIndex + index > 1  && currentPdfPageIndex + index < srcPdfFileArray.length){
+          currentPdfPageIndex += index ;
+        }
+        // alert("here is" + currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex])
+        document.getElementById("pdfView").src=  currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex];
+        });
+
+    }
+  }
 
   var jsonTreeData =
         [
@@ -154,31 +171,15 @@ input {
             {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0",    "data":{},
                 "a_attr":{"href":"google.com"}
             },
-            {"id":"00","name":"ALL PDF","text":"ALL PROJECT","parent_id":"0",    "data":{},
+            {"id":"400","name":"ALL PROJECTS","text":"ALL PROJECTS","parent_id":"0",    "data":{},
                 "a_attr":{"href":"google.com"}
             },
-            {"id":"1","name":"Electronics","text":"Electronics","parent_id":"0",
+            {"id":"1","name":"DATA","text":"DATA","parent_id":"0",
                     "children":[
                         {
-                            "id":"2","name":"Mobile","text":"Mobile","parent_id":"1",
+                            "id":"2","name":"2020","text":"2020","parent_id":"1",
                             "children":[
-                                {"id":"7","name":"Samsung","text":"Samsung","parent_id":"2","children":[],"data":{},"a_attr":{"href":"google.com"}},
-                                {"id":"8","name":"Apple","text":"Apple","parent_id":"2","children":[],"data":{},"a_attr":{"href":"google.com"}}
-                            ],
-                            "data":{},
-                            "a_attr":{"href":"google.com"}
-                        },
-                        {
-                            "id":"3","name":"Laptop","text":"Laptop","parent_id":"1",
-                            "children":[
-                                {"id":"4","name":"Keyboard","text":"Keyboard","parent_id":"3","children":[],"data":{},"a_attr":{"href":"google.com"}},
-                                {"id":"5","name":"Computer Peripherals","text":"Computer Peripherals","parent_id":"3",
-                                    "children":[
-                                        {"id":"6","name":"Printers","text":"Printers","parent_id":"5","children":[],"data":{},"a_attr":{"href":"google.com"}},
-                                        {"id":"10","name":"Monitors","text":"Monitors","parent_id":"5","children":[],"data":{},"a_attr":{"href":"google.com"}}
-                                    ],
-                                    "data":{},"a_attr":{"href":"google.com"}},
-                                {"id":"11","name":"Dell","text":"Dell","parent_id":"3","children":[],"data":{},"a_attr":{"href":"google.com"}}
+                                {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","children":[],"data":{},"a_attr":{"href":"google.com"}},
                             ],
                             "data":{},
                             "a_attr":{"href":"google.com"}
@@ -248,6 +249,7 @@ input {
               }
               // alert(folder_dir);
               // $('#selected_data').val( table.row( this ).data()[0]);
+              currentFolder_dir ="./TCPDFCustomize/ResourceData/"
               var txt_folder_dir=""
               for(var i = 0 ; i < folder_dir.length ; i++)
               {
@@ -255,13 +257,38 @@ input {
                 if(folder_dir.length != i + 1){
                   txt_folder_dir +=" > " ;
                 }
+                currentFolder_dir = currentFolder_dir + folder_dir[i] + "/";
               }
               $('#selected_folder').val(txt_folder_dir);
             //   alert(folder_dir[0]);
-              currentPdfPageIndex = 2;
-            nextPdfFunc(currentPdfPageIndex);
+              nextPdfFunc(currentPdfPageIndex);
               generatePossible();
-              $('#folder').modal('hide')
+              $('#folder').modal('hide');
+              // alert(currentFolder_dir);
+              $.ajax({
+                  type:"POST",
+                  url: "{{ url('/pdfInformArray') }}",
+                  headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                          },
+                  data: {"soureDir" :currentFolder_dir},
+                  success:function(data){
+                    srcPdfFileArray = [];
+                    srcPdfFileArray[0]="",srcPdfFileArray[1]="";
+                    inc = 2 ;
+                    for(var i = 2 ; i < data.length ; i++)
+                    {
+                      if(data[i].search(".pdf") > 0)
+                      {
+                        srcPdfFileArray[inc++] = data[i];
+                      }
+                    }
+                    currentPdfPageIndex = 2;
+                    currentPdfPageFind();
+                  },  
+                }).done(function() {
+                  $( this ).addClass( "done" );
+              });
             }
           }
         })
