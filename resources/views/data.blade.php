@@ -10,11 +10,27 @@
         </li>
       </ul>
     </div>
+    {{ csrf_field() }}
     <div class="col-sm-8"> 
       <div class="tab-content">
         <div class="tab-pane container active" id="datas_area">
           <div class="text-right" >
-            <button class="btn btn-success btn-lg" style="margin-bottom:10px" id="createData">CREATE DATA</button>
+              <form method="POST" id="contact" name="13" class="form-horizontal wpc_contact" novalidate="novalidate" enctype="multipart/form-data">
+                  <fieldset>
+                      <div class="control-group">
+                          <!-- File Upload --> 
+                          {{ csrf_field() }}
+                          <input class="input-file" id="fileInput" type="file" name="fileToUpload">
+                          <button class="btn btn-success">Button</button>
+                      </div>
+                  </fieldset>
+              </form>           
+            <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
+              Select image to upload:
+              {{ csrf_field() }}
+              <input type="file" name="fileToUpload" id="fileToUpload">
+              <input type="submit" value="Upload xlsx" name="submit">
+            </form>
           </div>
           <table id="datas_table" class="display" width="100%"></table>
         </div>
@@ -22,6 +38,8 @@
     </div>
   </div>
 </div>
+<meta name="_token" content="{!! csrf_token() !!}" />
+
 <script>
   var jsonTreeData =
     [
@@ -193,6 +211,35 @@
        
     } );
     // table data end------------------
+        //     url: "{{ url('/xlsxuploadingToJson') }}",
 
+//  xlsx file upload begin
+  var form = $('form')[0]; // You need to use standard javascript object here
+  var formData = new FormData(form);
+  var formData = new FormData();
+  
+    $('.wpc_contact').submit(function(event){
+       event.preventDefault();
+        formData.append('fileToUpload', $('input[type=file]')[0].files[0]); 
+        console.log( $('input[type=file]')[0].files[0]);
+        // var formname = $('.wpc_contact').attr('name');
+        // var form = $('.wpc_contact').serialize();               
+        // var FormData = new FormData($(form)[1]);
+
+        $.ajax({
+            url: "{{ url('/xlsxuploadingToJson') }}",
+            headers: {
+				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				           },
+            data: formData,
+            type: 'POST',
+            contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+            processData: false, // NEEDED, DON'T OMIT THIS
+            success : function(data){
+              alert(data); 
+            }
+        });
+   });
+//  xlsx file upload end
 </script>
 @endsection
