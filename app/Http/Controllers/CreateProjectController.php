@@ -8,6 +8,8 @@ class CreateProjectController extends Controller
 {
     public function index()
     {
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
+        $data["jsonDataInformDir"]= $jsonDataInformDir;
         $data["page_flg"]="createProject";
         return view('create_project',$data);
     }
