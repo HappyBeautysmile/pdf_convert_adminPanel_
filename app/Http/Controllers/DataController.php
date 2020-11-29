@@ -52,8 +52,6 @@ class DataController extends Controller
             // require_once __DIR__.'./Classes/PHPExcel.php';
             // require_once '../Classes/PHPExcel/IOFactory.php';
             require __DIR__.'/Classes/PHPExcel.php';
-            $str ="sadfsd";
-            echo $str[0];
             $tmpfname = "uploads/upload.xlsx";
             $excelReader = PHPExcel_IOFactory::createReaderForFile($tmpfname);
             $excelObj = $excelReader->load($tmpfname);
