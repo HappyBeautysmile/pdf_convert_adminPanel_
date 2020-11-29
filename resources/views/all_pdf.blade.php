@@ -98,6 +98,7 @@ input {
     </div>
   </div>
 </div>
+<script src="{{ asset('js/createProject/jsonData.js') }}" ></script>
 <script>
   var srcPdfFileArray = <?php echo js_array($src_pdfFileArray);?>;//convert php array to javascript array
   var currentPdfPageIndex =2;
@@ -160,35 +161,6 @@ input {
     }
   }
 
-  var jsonTreeData =
-        [
-            {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0",    "data":{},
-                "a_attr":{"href":"google.com"}
-            },
-            {"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0",    "data":{},
-                "a_attr":{"href":"google.com"}
-            },
-            {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0",    "data":{},
-                "a_attr":{"href":"google.com"}
-            },
-            {"id":"400","name":"ALL PROJECTS","text":"ALL PROJECTS","parent_id":"0",    "data":{},
-                "a_attr":{"href":"google.com"}
-            },
-            {"id":"1","name":"DATA","text":"DATA","parent_id":"0",
-                    "children":[
-                        {
-                            "id":"2","name":"2020","text":"2020","parent_id":"1",
-                            "children":[
-                                {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","children":[],"data":{},"a_attr":{"href":"google.com"}},
-                            ],
-                            "data":{},
-                            "a_attr":{"href":"google.com"}
-                        }
-                    ],
-                    "data":{},
-                    "a_attr":{"href":"google.com"}
-                }
-        ];
     function generatePossible()
     {
       $(document).ready(function() {
