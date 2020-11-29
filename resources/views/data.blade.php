@@ -21,16 +21,16 @@
                           <!-- File Upload --> 
                           {{ csrf_field() }}
                           <input class="input-file" id="fileInput" type="file" id="fileToUpload" name="fileToUpload">
-                          <button class="btn btn-success">Button</button>
+                          <button class="btn btn-success" id="wpc_contact">Button</button>
                       </div>
                   </fieldset>
               </form>           
-            <!-- <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
+            <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
               Select image to upload:
               {{ csrf_field() }}
               <input type="file" name="fileToUpload" id="fileToUpload">
               <input type="submit" value="Upload xlsx" name="submit">
-            </form> -->
+            </form>
           </div>
           <table id="datas_table" class="display" width="100%"></table>
         </div>
@@ -134,8 +134,10 @@
         });
     } );
     // table data begin------------------
-    var dataSet = [
-        [ "Tiger Nixon", "2011/07/25", "2011/04/25", "Edinburgh"],
+  //  var src_jsonDataFileArray = [];
+
+    var dataUrlArray = [
+        [ "Tiger Nixon", "2011/07/25", "Edinburgh"],
         [ "Garrett Winters",  "2011/07/25", "Accountant"],
         [ "Ashton Cox", "2011/07/25","Junior Technical Author" ],
         [ "Cedric Kelly", "2011/07/25","Senior Javascript Developer"  ],
@@ -163,53 +165,56 @@
         [ "Martena Mccray", "2011/03/09", "Post-Sales support" ],
         [ "Unity Butler", "2011/03/09", "Marketing Designer"]
     ];
-    
-    $(document).ready(function() {
-      var dataTable= $('#datas_table').DataTable( {
-            data: dataSet,
-            columns: [
-                { title: "Name data"},
-                { title: "Create date" },
-                { title: "Author" }
-            ],
-        } );
-        var counter = 1;
-// date type begin
-        var d = new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
-        // alert([year, month, day].join('/'))
-// date type end
+    function datatUrlPrint(srcData){
+      $(document).ready(function() {
+        var dataTable= $('#datas_table').DataTable( {
+              data: srcData,
+              columns: [
+                  { title: "Name data"},
+                  { title: "Create date" },
+                  { title: "Author" }
+              ],
+          } );
+          var counter = 1;
+  // date type begin
+          var d = new Date(),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+          if (month.length < 2) 
+              month = '0' + month;
+          if (day.length < 2) 
+              day = '0' + day;
+          // alert([year, month, day].join('/'))
+  // date type end
 
-        dataTable.column( '1:visible' )
-                    .order( 'dec' )
-                    .draw();
-        $('#createData').on( 'click', function () {
-            dataTable.row.add( [
-                "NEW",
-                [year, month, day].join('/'),
-                "NEW"
-            ] ).draw( false );
-    
-            counter++;
-        } );
-    
-        // Automatically add a first row of data
-        $('#createData').click();
+          dataTable.column( '1:visible' )
+                      .order( 'dec' )
+                      .draw();
+          $('#createData').on( 'click', function () {
+              dataTable.row.add( [
+                  "NEW",
+                  [year, month, day].join('/'),
+                  "NEW"
+              ] ).draw( false );
+      
+              counter++;
+          } );
+      
+          // Automatically add a first row of data
+          $('#createData').click();
 
-        $('#datas_table').on( 'click', 'tr', function () {
-          // alert( table.row( this ).data()[0]);
-          // $('#selected_data').val( table.row( this ).data()[0]);
-          // generatePossible();
-          // $('#data').modal('hide')
-        } );
-       
-    } );
+          $('#datas_table').on( 'click', 'tr', function () {
+            // alert( table.row( this ).data()[0]);
+            // $('#selected_data').val( table.row( this ).data()[0]);
+            // generatePossible();
+            // $('#data').modal('hide')
+          } );
+        
+      } );
+
+  }
+  // datatUrlPrint(dataUrlArray);
     // table data end------------------
         //     url: "{{ url('/xlsxuploadingToJson') }}",
 
@@ -217,28 +222,33 @@
   var form = $('form')[0]; // You need to use standard javascript object here
   var formData = new FormData(form);
   var formData = new FormData();
-  
+  var src_jsonDataFileArray = [];
     $('.wpc_contact').submit(function(event){
        event.preventDefault();
         formData.append('fileToUpload', $('input[type=file]')[0].files[0]); 
         console.log( $('input[type=file]')[0].files[0]);
-        // var formname = $('.wpc_contact').attr('name');
-        // var form = $('.wpc_contact').serialize();               
-        // var FormData = new FormData($(form)[1]);
-
         $.ajax({
+
             url: "{{ url('/xlsxuploadingToJson') }}",
             headers: {
 				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				           },
+                   },
+            enctype: 'multipart/form-data',
             data: formData,
             type: 'POST',
             contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
             processData: false, // NEEDED, DON'T OMIT THIS
             success : function(data){
-              alert(data); 
+              var contact = JSON.parse(data);  
+              // console.log(contact[0][0]);
+              datatUrlPrint(contact);
+            },
+            error : function(data){
+              console.log("error" , data); 
             }
         });
+        // alert(src_jsonDataFileArray); 
+        
    });
 //  xlsx file upload end
 </script>
