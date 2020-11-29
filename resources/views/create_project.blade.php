@@ -238,6 +238,7 @@
 <meta name="_token" content="{!! csrf_token() !!}" />
 
 <script>
+  var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
   $('#viewPdfs').on('click', function() {
       $soureDir = "./Home1/uploads/media/";
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
@@ -258,7 +259,7 @@
           $( this ).addClass( "done" );
       });
     })
-   
+  
 </script>
 <script src="{{ asset('js/createProject/jsonData.js') }}" ></script>
 <script src="{{ asset('js/createProject/createProjectFunctions.js') }}" ></script>
