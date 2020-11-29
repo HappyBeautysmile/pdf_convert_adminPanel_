@@ -1,6 +1,20 @@
 @extends('home')
 
 @section('main_area')
+<h1><?php echo gettype($jsonDataInformDir) ?></h1>
+<?php
+  function js_str($s)
+  {
+      return '"' . addcslashes($s, "\0..\37\"\\") . '"';
+  }
+
+  function js_array($array)
+  {
+      $temp = array_map('js_str', $array);
+      return '[' . implode(',', $temp) . ']';
+  }
+  // echo 'var cities = ', js_array($jsonDataInformDir ), ';';
+?>
 <div class="container">
   <div class="row" style="margin-top:50px;">
     <div class="col-sm-3" style="border:2px solid gray;border-radius:5px; overflow: scroll; height:500px;">
@@ -134,43 +148,44 @@
         });
     } );
     // table data begin------------------
-  //  var src_jsonDataFileArray = [];
-
-    var dataUrlArray = [
-        [ "Tiger Nixon", "2011/07/25", "Edinburgh"],
-        [ "Garrett Winters",  "2011/07/25", "Accountant"],
-        [ "Ashton Cox", "2011/07/25","Junior Technical Author" ],
-        [ "Cedric Kelly", "2011/07/25","Senior Javascript Developer"  ],
-        [ "Airi Satou", "2011/07/25","Accountant" ],
-        [ "Brielle Williamson", "2011/07/25","Integration Specialist" ],
-        [ "Herrod Chandler","2011/07/25", "Sales Assistant" ],
-        [ "Rhona Davidson", "2011/07/25","Integration Specialist"],
-        [ "Colleen Hurst", "2008/12/13","Javascript Developer" ],
-        [ "Sonya Frost","2008/12/13", "Software Engineer" ],
-        [ "Jena Gaines", "2008/12/13","Office Manager"],
-        [ "Quinn Flynn", "2008/12/13","Support Lead" ],
-        [ "Charde Marshall", "2008/12/13","Regional Director"],
-        [ "Haley Kennedy","2008/12/13", "Senior Marketing Designer"],
-        [ "Tatyana Fitzpatrick","2008/12/13", "Regional Director"],
-        [ "Michael Silva","2012/11/27", "Marketing Designer"],
-        [ "Paul Byrd","2012/11/27", "Chief Financial Officer (CFO)"],
-        [ "Gloria Little","2012/11/27", "Systems Administrator"],
-        [ "Bradley Greer","2012/11/27", "Software Engineer" ],
-        [ "Dai Rios","2012/09/26",  "Personnel Lead"],
-        [ "Jenette Caldwell","2012/09/26", "Development Lead"],
-        [ "Yuri Berry", "2012/09/26", "Chief Marketing Officer (CMO)"],
-        [ "Caesar Vance", "2012/09/26", "Pre-Sales Support"],
-        [ "Doris Wilder", "2012/09/26", "Sales Assistant" ],
-        [ "Angelica Ramos","2012/09/26", "Chief Executive Officer (CEO)"],
-        [ "Martena Mccray", "2011/03/09", "Post-Sales support" ],
-        [ "Unity Butler", "2011/03/09", "Marketing Designer"]
-    ];
+    var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
+    // [
+    //     [ "Tiger Nixon", "2011/07/25", "Edinburgh"],
+    //     [ "Garrett Winters",  "2011/07/25", "Accountant"],
+    //     [ "Ashton Cox", "2011/07/25","Junior Technical Author" ],
+    //     [ "Cedric Kelly", "2011/07/25","Senior Javascript Developer"  ],
+    //     [ "Airi Satou", "2011/07/25","Accountant" ],
+    //     [ "Brielle Williamson", "2011/07/25","Integration Specialist" ],
+    //     [ "Herrod Chandler","2011/07/25", "Sales Assistant" ],
+    //     [ "Rhona Davidson", "2011/07/25","Integration Specialist"],
+    //     [ "Colleen Hurst", "2008/12/13","Javascript Developer" ],
+    //     [ "Sonya Frost","2008/12/13", "Software Engineer" ],
+    //     [ "Jena Gaines", "2008/12/13","Office Manager"],
+    //     [ "Quinn Flynn", "2008/12/13","Support Lead" ],
+    //     [ "Charde Marshall", "2008/12/13","Regional Director"],
+    //     [ "Haley Kennedy","2008/12/13", "Senior Marketing Designer"],
+    //     [ "Tatyana Fitzpatrick","2008/12/13", "Regional Director"],
+    //     [ "Michael Silva","2012/11/27", "Marketing Designer"],
+    //     [ "Paul Byrd","2012/11/27", "Chief Financial Officer (CFO)"],
+    //     [ "Gloria Little","2012/11/27", "Systems Administrator"],
+    //     [ "Bradley Greer","2012/11/27", "Software Engineer" ],
+    //     [ "Dai Rios","2012/09/26",  "Personnel Lead"],
+    //     [ "Jenette Caldwell","2012/09/26", "Development Lead"],
+    //     [ "Yuri Berry", "2012/09/26", "Chief Marketing Officer (CMO)"],
+    //     [ "Caesar Vance", "2012/09/26", "Pre-Sales Support"],
+    //     [ "Doris Wilder", "2012/09/26", "Sales Assistant" ],
+    //     [ "Angelica Ramos","2012/09/26", "Chief Executive Officer (CEO)"],
+    //     [ "Martena Mccray", "2011/03/09", "Post-Sales support" ],
+    //     [ "Unity Butler", "2011/03/09", "Marketing Designer"]
+    // ];
     function datatUrlPrint(srcData){
+      // alert(srcData.length);
       $(document).ready(function() {
         var dataTable= $('#datas_table').DataTable( {
               data: srcData,
               paging: false,
               destroy: true,
+              paging: true,
               columns: [
                   { title: "Name data"},
                   { title: "Create date" },
@@ -208,6 +223,8 @@
               var contact = JSON.parse(data);  
               // console.log(contact[0][0]);
               dataUrlArray = contact;
+              // alert("sss  " + contact.length);
+              // alert("sss")
               datatUrlPrint(dataUrlArray);
             },
             error : function(data){

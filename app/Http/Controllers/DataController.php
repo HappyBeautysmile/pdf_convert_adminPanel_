@@ -11,7 +11,10 @@ class DataController extends Controller
 {
     public function index()
     {
+
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
         $data["page_flg"]="data";
+        $data["jsonDataInformDir"]= $jsonDataInformDir;
         return view('data',$data);
     }
     public function xlsxuploadingToJson()
@@ -65,7 +68,6 @@ class DataController extends Controller
                     'fields_10' => $worksheet->getCell('Q'.$row)->getValue()
                 ];
             }
-            // echo json_encode($data);
             $json_data = json_encode($data);
             file_put_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt", $json_data);
           
@@ -80,6 +82,23 @@ class DataController extends Controller
         // var_dump($src_jsonDataFileArray);
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
+        $fileExist = false ;
+        foreach ($jsonDataInform as $value) {
+            if($value[0] == $fileName){
+                $fileExist = true ;
+            }
+        }
+        if($fileExist == false)
+        {
+            array_push($jsonDataInform, array($fileName,'2020/11/2', Auth::user()->name));
+            $json_data = json_encode($jsonDataInform);
+            file_put_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt", $json_data);
+        }     
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInform = json_decode($jsonDataInformDir);
+       
+
+        // var_dump($jsonDataInform);
         return response()->json($jsonDataInformDir);
         // $data["page_flg"]="data";
         // return 'tested';
