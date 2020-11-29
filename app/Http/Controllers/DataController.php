@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use PHPExcel_IOFactory;
+
 class DataController extends Controller
 {
     public function index()
@@ -19,20 +21,20 @@ class DataController extends Controller
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         if($imageFileType != "xlsx" ) {
-            echo "Sorry, only xlsx is allowed.".'<br/>';
+            // echo "Sorry, only xlsx is allowed.".'<br/>';
         $uploadOk = 0;
         }
         if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
+        // echo "Sorry, your file was not uploaded.";
         } else {
             $tmpName = htmlspecialchars( basename( $_FILES["fileToUpload"]["name"]));
             $fileName = substr($tmpName ,0, strlen($tmpName)-5);
-            echo "File name is ". $tmpName .'<br/>';
+            // echo "File name is ". $tmpName .'<br/>';
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". "upload.xlsx". " has been uploaded.";
+                // echo "The file ". "upload.xlsx". " has been uploaded.";
             } 
             else {
-                echo "Sorry, there was an error uploading your file.";
+                // echo "Sorry, there was an error uploading your file.";
             }
             require realpath(__DIR__.'/Classes/PHPExcel.php');
             $tmpfname = "./TCPDFCustomize/ResourceData/DATA/2020/upload.xlsx";
@@ -63,20 +65,23 @@ class DataController extends Controller
                     'fields_10' => $worksheet->getCell('Q'.$row)->getValue()
                 ];
             }
-            echo json_encode($data);
+            // echo json_encode($data);
             $json_data = json_encode($data);
             file_put_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt", $json_data);
           
             // Recovering
-            $the_data = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt");
-            $the_array = json_decode($the_data);
+            // $the_data = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt");
+            // $the_array = json_decode($the_data);
+            // echo  $the_data;
+            // echo  Auth::user()->name;
         }
-        $jsonDataSrcDir = "./TCPDFCustomize/ResourceData/DATA/2020/Janvier/";
-        $src_jsonDataFileArray = scandir($jsonDataSrcDir,0);
-        // $str = '[{"a":"b"}]' ;
-        // return response()->json('[{"a":"b"}]');
-        return response()->json($src_jsonDataFileArray);
+        // $jsonDataSrcDir = "./TCPDFCustomize/ResourceData/DATA/2020/Janvier/";
+        // $src_jsonDataFileArray = scandir($jsonDataSrcDir,0);
+        // var_dump($src_jsonDataFileArray);
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInform = json_decode($jsonDataInformDir);
+        return response()->json($jsonDataInformDir);
         // $data["page_flg"]="data";
-        // return view('data',$data,$str);
+        // return 'tested';
     }
 }
