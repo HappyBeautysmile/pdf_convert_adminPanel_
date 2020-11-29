@@ -257,7 +257,8 @@
         }).done(function() {
           $( this ).addClass( "done" );
       });
-    }) 
+    })
+   
 </script>
 <script src="{{ asset('js/createProject/jsonData.js') }}" ></script>
 <script src="{{ asset('js/createProject/createProjectFunctions.js') }}" ></script>
