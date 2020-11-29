@@ -20,17 +20,17 @@
                       <div class="control-group">
                           <!-- File Upload --> 
                           {{ csrf_field() }}
-                          <input class="input-file" id="fileInput" type="file" name="fileToUpload">
+                          <input class="input-file" id="fileInput" type="file" id="fileToUpload" name="fileToUpload">
                           <button class="btn btn-success">Button</button>
                       </div>
                   </fieldset>
               </form>           
-            <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
+            <!-- <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
               Select image to upload:
               {{ csrf_field() }}
               <input type="file" name="fileToUpload" id="fileToUpload">
               <input type="submit" value="Upload xlsx" name="submit">
-            </form>
+            </form> -->
           </div>
           <table id="datas_table" class="display" width="100%"></table>
         </div>
