@@ -169,52 +169,18 @@
       $(document).ready(function() {
         var dataTable= $('#datas_table').DataTable( {
               data: srcData,
+              paging: false,
+              destroy: true,
               columns: [
                   { title: "Name data"},
                   { title: "Create date" },
                   { title: "Author" }
               ],
           } );
-          var counter = 1;
-  // date type begin
-          var d = new Date(),
-          month = '' + (d.getMonth() + 1),
-          day = '' + d.getDate(),
-          year = d.getFullYear();
-          if (month.length < 2) 
-              month = '0' + month;
-          if (day.length < 2) 
-              day = '0' + day;
-          // alert([year, month, day].join('/'))
-  // date type end
-
-          dataTable.column( '1:visible' )
-                      .order( 'dec' )
-                      .draw();
-          $('#createData').on( 'click', function () {
-              dataTable.row.add( [
-                  "NEW",
-                  [year, month, day].join('/'),
-                  "NEW"
-              ] ).draw( false );
-      
-              counter++;
-          } );
-      
-          // Automatically add a first row of data
-          $('#createData').click();
-
-          $('#datas_table').on( 'click', 'tr', function () {
-            // alert( table.row( this ).data()[0]);
-            // $('#selected_data').val( table.row( this ).data()[0]);
-            // generatePossible();
-            // $('#data').modal('hide')
-          } );
-        
       } );
 
   }
-  // datatUrlPrint(dataUrlArray);
+  datatUrlPrint(dataUrlArray);
     // table data end------------------
         //     url: "{{ url('/xlsxuploadingToJson') }}",
 
@@ -241,7 +207,8 @@
             success : function(data){
               var contact = JSON.parse(data);  
               // console.log(contact[0][0]);
-              datatUrlPrint(contact);
+              dataUrlArray = contact;
+              datatUrlPrint(dataUrlArray);
             },
             error : function(data){
               console.log("error" , data); 
