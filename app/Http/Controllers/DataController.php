@@ -83,6 +83,9 @@ class DataController extends Controller
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
         $fileExist = false ;
+
+        $currentDay=date('y/m/d');
+        // echo "time is " .  $currentDay;
         foreach ($jsonDataInform as $value) {
             if($value[0] == $fileName){
                 $fileExist = true ;
@@ -90,7 +93,7 @@ class DataController extends Controller
         }
         if($fileExist == false)
         {
-            array_push($jsonDataInform, array($fileName,'2020/11/2', Auth::user()->name));
+            array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name));
             $json_data = json_encode($jsonDataInform);
             file_put_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt", $json_data);
         }     
