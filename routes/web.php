@@ -29,5 +29,6 @@ Route::get('/data','DataController@index' );
 Route::get('/pictures','PicturesController@index' );
 Route::get('/homePage','HomePageController@index' );
 Route::post('/operating', 'CreateProjectController@operating_pdf')->name('operating');
+Route::post('/pdfInformArray', 'AllPdfController@pdfInformArray')->name('pdfInformArray');
 
 Route::post('/xlsxuploadingToJson', 'DataController@xlsxuploadingToJson')->name('xlsxuploadingToJson');

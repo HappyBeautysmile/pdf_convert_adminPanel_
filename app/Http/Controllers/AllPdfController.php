@@ -11,4 +11,11 @@ class AllPdfController extends Controller
         $data["page_flg"]="allPdf";
         return view('all_pdf',$data);
     }
+    public function pdfInformArray(){
+
+        $soureDir = $_REQUEST['soureDir'];
+        $src_pdfFileArray = scandir($soureDir,0);
+
+        return response()->json($src_pdfFileArray);
+    }
 }
