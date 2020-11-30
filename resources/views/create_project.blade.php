@@ -181,7 +181,7 @@
                     <center>
                         <div class="modal-header" style="display: inline;">
                         <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                        <h2 class="modal-title text-success" >PDF CONVERT</h2>
+                           <h2 class="modal-title text-success" >PDF CONVERT</h2>
                         </div>
                         <div class="modal-body">
                             <h3 ><span class="text-success">DATA = </span> <span id='select_data_name_modal'></span></h3>
