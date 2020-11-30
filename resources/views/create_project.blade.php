@@ -241,7 +241,6 @@
   var choosedData = [];
   var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
   $('#generator').on('click', function() {
-    alert("generator");
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
       var fileName = $('#selected_data').val();
       $.ajax({
@@ -253,7 +252,6 @@
           data: {"fileName" : fileName},
           success:function(data){
             choosedData = data["jsonData"];
-            // alert(choosedData[0].id);
             pdfConvertFunc()
             // alert(choosedData[0]['Last name']);
           },  
@@ -265,7 +263,7 @@
       $soureDir = "./Home1/uploads/media/";
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +'/';
       var fileName = $('#selected_data').val();
-      alert("soureDir is" + requestDirInForm) ;
+      // alert("soureDir is" + requestDirInForm) ;
       $.ajax({
           type:"POST",
           url: "{{ url('/operating') }}",
@@ -275,7 +273,7 @@
           data: {"soureDir" :requestDirInForm ,"fileName" : fileName},
           success:function(data){
             srcPdfFileArray = data['src_pdfFileArray'];
-            alert("srcPdfFileArray length:  " + srcPdfFileArray.length + "pageName is + " + srcPdfFileArray[2]);
+            // alert("srcPdfFileArray length:  " + srcPdfFileArray.length + "pageName is + " + srcPdfFileArray[2]);
             currentPdfPageFind();
           },  
         }).done(function() {

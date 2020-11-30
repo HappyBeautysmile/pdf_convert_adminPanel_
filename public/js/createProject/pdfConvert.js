@@ -1,75 +1,64 @@
     // pdf converting begin **********************
     function pdfConvertFunc(){
-        // console.log(choosedData[0]);
+        console.log(choosedData[0]);
         // alert("chooseData  " + choosedData[0]);
 
         $('#pdfConvertModal').modal({
             backdrop: false            
         });
         $(document).ready(function() {
-        var htmldata = getTrumbowygContent();
-        var ID = '1';
-        var Last_name ='Egor';
-        var First_name ='Cotta';
-        var City = 'krasnodar';
-        var Telephone_no ='112-121-12111';
-        var E_mail = 'vitaliy.gmail.com';
-        var Birthday_date ="1986.12.2";
-        var fields_01 ='This is static';
-        var fields_02 ='But if I complete data page,we can get dynamic value ';
-        var fields_03 ="Don't worry about it";
-        var fields_04 ='Thank you.';
-        var fields_05 ='I am very tired!';
-        var fields_06 ='I am working very hard without sleeping.';
-        var fields_07 ='So I am very tired';
-        var fields_08 ='please give me strong!';
-        var fields_09 ='How about do you think?';
-        var fields_10 ='Are you okay?';
-        var htmldata = htmldata.replace("{ID}", ID);
-        var htmldata = htmldata.replace("{Last name}", Last_name);
-        var htmldata = htmldata.replace("{First name}", First_name);
-        var htmldata = htmldata.replace("{City}", City);
-        var htmldata = htmldata.replace("{Telephone no}", Telephone_no);
-        var htmldata = htmldata.replace("{E-mail}", E_mail);
-        var htmldata = htmldata.replace("{Birthday_date}", Birthday_date);
-        var htmldata = htmldata.replace("{fields_01}", fields_01);
-        var htmldata = htmldata.replace("{fields_02}", fields_02);
-        var htmldata = htmldata.replace("{fields_03}", fields_03);
-        var htmldata = htmldata.replace("{fields_04}", fields_04);
-        var htmldata = htmldata.replace("{fields_05}", fields_05);
-        var htmldata = htmldata.replace("{fields_06}", fields_06);
-        var htmldata = htmldata.replace("{fields_07}", fields_07);
-        var htmldata = htmldata.replace("{fields_08}", fields_08);
-        var htmldata = htmldata.replace("{fields_09}", fields_09);
-        var htmldata = htmldata.replace("{fields_10}", fields_10);
-        dirInform="" ;
-        // var dirInform = 'DATA/2020/Janvier';
-        for(var i = 0 ; i < folder_dir.length ; i++)
-        {
-            dirInform += folder_dir[i];
-            if(folder_dir.length != i + 1){
-            dirInform +="/" ;
-            $('#dirInform').val(dirInform);
+            var trumbowygData = getTrumbowygContent();
+            var htmldata = [];
+            // alert(choosedData[0]['Last name']);
+            for(var i = 0 ; i < choosedData.length; i++)
+            {
+                htmldata[i] = trumbowygData ;
+                htmldata[i] = htmldata[i].replace("{ID}", choosedData[i]["ID"]);
+                htmldata[i] = htmldata[i].replace("{Last name}", choosedData[i]["Last name"]);
+                htmldata[i] = htmldata[i].replace("{First name}", choosedData[i]["First name"]);
+                htmldata[i] = htmldata[i].replace("{City}", choosedData[i]["City"]);
+                htmldata[i] = htmldata[i].replace("{Telephone no}", choosedData[i]["Telephone no"]);
+                htmldata[i] = htmldata[i].replace("{E-mail}", choosedData[i]["E-mail"]);
+                htmldata[i] = htmldata[i].replace("{Birthday_date}", choosedData[i]["Birthday_date"]);
+                htmldata[i] = htmldata[i].replace("{fields_01}", choosedData[i]["fields_01"]);
+                htmldata[i] = htmldata[i].replace("{fields_02}", choosedData[i]["fields_02"]);
+                htmldata[i] = htmldata[i].replace("{fields_03}", choosedData[i]["fields_03"]);
+                htmldata[i] = htmldata[i].replace("{fields_04}", choosedData[i]["fields_04"]);
+                htmldata[i] = htmldata[i].replace("{fields_05}", choosedData[i]["fields_05"]);
+                htmldata[i] = htmldata[i].replace("{fields_06}", choosedData[i]["fields_06"]);
+                htmldata[i] = htmldata[i].replace("{fields_07}", choosedData[i]["fields_07"]);
+                htmldata[i] = htmldata[i].replace("{fields_08}", choosedData[i]["fields_08"]);
+                htmldata[i] = htmldata[i].replace("{fields_09}", choosedData[i]["fields_09"]);
+                htmldata[i] = htmldata[i].replace("{fields_10}", choosedData[i]["fields_10"]);
+                convertedPdfName[i] = choosedData[i]["ID"];
+
             }
-        }
-        var date = new Date;
-    
-        var seconds = date.getSeconds();
-        var minutes = date.getMinutes();
-        var hour = date.getHours();
-    
-        var year = date.getFullYear();
-        var month = date.getMonth(); // beware: January = 0; February = 1, etc.
-        var day = date.getDate();
-        convertedPdfName =year +'_' + month + '_' + day +'_' +   hour + '_' + minutes + '_' + seconds;
-        $.ajax({
-            type:"POST",
-            url: "TCPDFCustomize/examples/main.php",
-            // data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform}
-            data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform}
-            }).done(function() {
-            $( this ).addClass( "done" );
-        });
+            dirInform="" ;
+            // var dirInform = 'DATA/2020/Janvier';
+            for(var i = 0 ; i < folder_dir.length ; i++)
+            {
+                dirInform += folder_dir[i];
+                if(folder_dir.length != i + 1){
+                dirInform +="/" ;
+                $('#dirInform').val(dirInform);
+                }
+            }
+            // var date = new Date;
+        
+            // var seconds = date.getSeconds();
+            // var minutes = date.getMinutes();
+            // var hour = date.getHours();
+        
+            // var year = date.getFullYear();
+            // var month = date.getMonth(); // beware: January = 0; February = 1, etc.
+            // var day = date.getDate();
+            $.ajax({
+                type:"POST",
+                url: "TCPDFCustomize/examples/main.php",
+                data: {"htmldata": htmldata[0],"convertedPdfName" : convertedPdfName[0] ,"dirInform" :dirInform}
+                }).done(function() {
+                $( this ).addClass( "done" );
+            });
         });
         document.getElementById("pdfConvertFinished").style.display = "none";
         document.getElementById("pdfConverting").style.display = "inline";
