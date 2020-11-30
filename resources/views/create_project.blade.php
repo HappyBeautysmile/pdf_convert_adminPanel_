@@ -240,6 +240,7 @@
 <script>
   var choosedData = [];
   var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
+ 
   $('#generator').on('click', function() {
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
       var fileName = $('#selected_data').val();
@@ -274,6 +275,9 @@
           success:function(data){
             srcPdfFileArray = data['src_pdfFileArray'];
             // alert("srcPdfFileArray length:  " + srcPdfFileArray.length + "pageName is + " + srcPdfFileArray[2]);
+            currentConvertPdfPagesGetFunc();
+            alert("CreatePage srpdffilearray length: " +srcPdfFileArray.length);
+
             currentPdfPageFind();
           },  
         }).done(function() {
