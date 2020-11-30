@@ -276,7 +276,7 @@
             srcPdfFileArray = data['src_pdfFileArray'];
             // alert("srcPdfFileArray length:  " + srcPdfFileArray.length + "pageName is + " + srcPdfFileArray[2]);
             currentConvertPdfPagesGetFunc();
-            alert("CreatePage srpdffilearray length: " +srcPdfFileArray.length);
+            // alert("CreatePage srpdffilearray length: " +srcPdfFileArray.length);
 
             currentPdfPageFind();
           },  
