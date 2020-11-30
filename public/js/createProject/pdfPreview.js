@@ -53,3 +53,27 @@ function currentPdfPageFind(){
         });
     }
   }
+
+  function currentConvertPdfPagesGetFunc()
+  {
+    var tmpPdfFileArray=[] , inc = 2 ;
+    tmpPdfFileArray[0]="";
+    tmpPdfFileArray[1]=".";
+    alert("srcPdfFilearray  " + srcPdfFileArray.length + "srcPdfFileData0 :" + srcPdfFileArray[0] + "srcOdfFukeArray 0 type: " + typeof(srcPdfFileArray[0]));
+    alert("chooseData : " + choosedData[0]['ID'] + "chooseDataType : " + typeof(choosedData[0]['ID']));
+    for(var i = 0 ; i < choosedData.length; i++)
+    {
+      for(var t = 0 ; t < srcPdfFileArray.length ; t++)
+      {
+        var str = choosedData[i]['ID'].toString();
+        // alert(str);
+        if((srcPdfFileArray[t]).search(str) > -1 && srcPdfFileArray[t].length == str.length + 4)        
+        {
+          tmpPdfFileArray[inc++] =srcPdfFileArray[t];
+          break ;
+        }
+      }
+    }
+    srcPdfFileArray = tmpPdfFileArray ;
+    alert("Func srpdffilearray length: " +srcPdfFileArray.length);
+  }
