@@ -25,4 +25,13 @@ class CreateProjectController extends Controller
 
         return response()->json(array('src_pdfFileArray' => $src_pdfFileArray, 'jsonData' =>  $jsonData));
     }
+    public function pdfGenerate(){
+
+        $fileName = $_REQUEST['fileName'];
+
+        $jsonDataDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt");
+        $jsonData = json_decode($jsonDataDir);
+
+        return response()->json(array('jsonData' =>  $jsonData));
+    }
 }

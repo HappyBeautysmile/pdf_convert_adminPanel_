@@ -171,7 +171,7 @@
                   </div>
                 </div>
               <div class="text-center">
-                  <button type="button" id = "generator" class="btn btn-success btn-lg disabled" data-toggle="modal" data-target="#pdfConvertModal" disabled onclick="pdfConvertFunc()">Generator</button>
+                  <button type="button" id = "generator" class="btn btn-success btn-lg disabled" data-toggle="modal" data-target="#pdfConvertModal" disabled onclick="">Generator</button>
               </div>
               <div class="modal fade" id="pdfConvertModal" role="dialog">
                 <div class="modal-dialog">
@@ -240,10 +240,32 @@
 <script>
   var choosedData = [];
   var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
-  $('#viewPdfs').on('click', function() {
-      $soureDir = "./Home1/uploads/media/";
+  $('#generator').on('click', function() {
+    alert("generator");
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
       var fileName = $('#selected_data').val();
+      $.ajax({
+          type:"POST",
+          url: "{{ url('/pdfGenerate') }}",
+          headers: {
+				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				           },
+          data: {"fileName" : fileName},
+          success:function(data){
+            choosedData = data["jsonData"];
+            // alert(choosedData[0].id);
+            pdfConvertFunc()
+            // alert(choosedData[0]['Last name']);
+          },  
+        }).done(function() {
+          $( this ).addClass( "done" );
+      });
+    })
+  $('#viewPdfs').on('click', function() {
+      $soureDir = "./Home1/uploads/media/";
+      var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +'/';
+      var fileName = $('#selected_data').val();
+      alert("soureDir is" + requestDirInForm) ;
       $.ajax({
           type:"POST",
           url: "{{ url('/operating') }}",
@@ -253,8 +275,7 @@
           data: {"soureDir" :requestDirInForm ,"fileName" : fileName},
           success:function(data){
             srcPdfFileArray = data['src_pdfFileArray'];
-            choosedData = data["jsonData"];
-            alert(choosedData[0]['Last name']);
+            alert("srcPdfFileArray length:  " + srcPdfFileArray.length + "pageName is + " + srcPdfFileArray[2]);
             currentPdfPageFind();
           },  
         }).done(function() {

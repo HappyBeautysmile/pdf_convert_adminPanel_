@@ -1,10 +1,12 @@
     // pdf converting begin **********************
     function pdfConvertFunc(){
+        // console.log(choosedData[0]);
+        // alert("chooseData  " + choosedData[0]);
+
         $('#pdfConvertModal').modal({
             backdrop: false            
         });
         $(document).ready(function() {
-        console.log(choosedData[0]);
         var htmldata = getTrumbowygContent();
         var ID = '1';
         var Last_name ='Egor';

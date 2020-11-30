@@ -39,6 +39,16 @@ $('#temp').html($('#trumbowyg-demo').trumbowyg('html'));
         var table = $('#datas_table').DataTable();
         $('#datas_table').on( 'click', 'tr', function () {
           // alert( table.row( this ).data()[0]);
+          currentFolder_dir ="./TCPDFCustomize/ResourceData/"
+          var txt_folder_dir=""
+          for(var i = 0 ; i < folder_dir.length ; i++)
+          {
+            txt_folder_dir += folder_dir[i];
+            if(folder_dir.length != i + 1){
+              txt_folder_dir +=" > " ;
+            }
+            currentFolder_dir = currentFolder_dir + folder_dir[i] + "/";
+          }
           $('#selected_data').val( table.row( this ).data()[0]);
           $("#select_data_name_modal").html( table.row( this ).data()[0]);
           $("#select_data_name").html( table.row( this ).data()[0]);
