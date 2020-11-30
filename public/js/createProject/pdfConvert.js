@@ -4,6 +4,7 @@
             backdrop: false            
         });
         $(document).ready(function() {
+        console.log(choosedData[0]);
         var htmldata = getTrumbowygContent();
         var ID = '1';
         var Last_name ='Egor';
@@ -62,6 +63,7 @@
         $.ajax({
             type:"POST",
             url: "TCPDFCustomize/examples/main.php",
+            // data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform}
             data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform}
             }).done(function() {
             $( this ).addClass( "done" );
