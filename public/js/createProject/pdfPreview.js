@@ -1,5 +1,5 @@
 function currentPdfPageFind(){
-  alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
+  // alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
   if(srcPdfFileArray.length <= 3)
   {
       $("#nextPdfViewBtn").addClass("disabled");
