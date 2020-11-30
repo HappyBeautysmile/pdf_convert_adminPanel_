@@ -31,13 +31,14 @@
         <div id="adminmenu">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a target="_self" href="http://localhost:8000/admin/roles">
+                <!-- href="{{ url('/homePage') }} -->
+                    <a target="_self" href="{{ url('/admin/roles') }}">
                         <span class="icon voyager-lock"></span> <span class="title">Roles</span>
                     </a> 
                     <!---->
                 </li>
                 <li class="">
-                    <a target="_self" href="http://localhost:8000/admin/users">
+                    <a target="_self"  href="{{ url('/admin/users') }}">
                         <span class="icon voyager-person"></span> <span class="title">Users</span></a>
                 </li>
             </ul>
