@@ -28,17 +28,54 @@
 require_once('tcpdf_include.php');
 // new \Kanboard\Analysis\TCPDF(...);
 
+function formatJavaScript($string, $doubleQuotesContext = true, $addQuotes = false) {
+
+    // It must be a string else numbers get mangled
+    $string = (string) $string;
+        
+    // Encode as standard JSON, double quotes
+    $string = json_encode($string);
+        
+    // Remove " from start and end"
+    $string = mb_substr($string, 1, -1);
+    
+    // If using single quotes, reaplce " with ' and escape
+    if ($doubleQuotesContext === false) {
+        
+        // Remove \ from "
+        $string = str_replace('\"', '"', $string);
+            
+        // Escape single quotes
+        $string = str_replace("'", "\'", $string);
+        
+    }
+        
+    if ($addQuotes === true) {
+    
+        if ($doubleQuotesContext === true) {
+        
+            $string = '"' . $string . '"';
+        
+        } else {
+        
+            $string = "'" . $string . "'";
+            
+        }
+    
+    }
+        
+    return $string;
+        
+}
+function pdfConvertFunc($printID)
+{
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-$htmldata = ($_REQUEST["htmldata"]);
-$convertedPdfName = ($_REQUEST["convertedPdfName"]);
-$dirInform = ($_REQUEST["dirInform"]);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle($convertedPdfName);
+$pdf->SetTitle('TCPDF Example 006');
 $pdf->SetSubject('TCPDF Tutorial');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -119,63 +156,42 @@ $str='<table cellspacing="0" cellpadding="1" border="0">
 //--------------------------------------------------
 
 // $q = json_decode($_REQUEST["q"]);
+$htmldata = ($_REQUEST["htmldata"]);
+$dirInform =($_REQUEST["dirInform"]);
+$convertedPdfName =($_REQUEST["convertedPdfName"]);
 
-// $convertedPdfName = 'ConvertPdf';
-// $dirInform = 'DATA/2020/Janvier';
 // $html ='<p style="color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;"><span style="color: #dcdcaa;">getTrumbowygContent</span></p>WOOWOWOWOOW';
 
-function formatJavaScript($string, $doubleQuotesContext = true, $addQuotes = false) {
 
-    // It must be a string else numbers get mangled
-    $string = (string) $string;
-        
-    // Encode as standard JSON, double quotes
-    $string = json_encode($string);
-        
-    // Remove " from start and end"
-    $string = mb_substr($string, 1, -1);
-    
-    // If using single quotes, reaplce " with ' and escape
-    if ($doubleQuotesContext === false) {
-        
-        // Remove \ from "
-        $string = str_replace('\"', '"', $string);
-            
-        // Escape single quotes
-        $string = str_replace("'", "\'", $string);
-        
-    }
-        
-    if ($addQuotes === true) {
-    
-        if ($doubleQuotesContext === true) {
-        
-            $string = '"' . $string . '"';
-        
-        } else {
-        
-            $string = "'" . $string . "'";
-            
-        }
-    
-    }
-        
-    return $string;
-        
-}
-$html = formatJavaScript($html);
+// $html = formatJavaScript($html);
 
 // output the HTML content
-$pdf->writeHTML($htmldata, true, false, true, false, '');
+$pdf->writeHTML($htmldata[$printID], true, false, true, false, '');
 
 // Print some HTML Cells
 
+$ordernumber = 22 ;
 // ---------------------------------------------------------
+
+
 $pdf->lastPage();
-$pdf->Output(__DIR__ .'../../ResourceData/'.$dirInform.'/'.$convertedPdfName.'.pdf', 'F');
+// $pdf->Output('kuitti'.$ordernumber.'.pdf', 'D');
+// $pdf->Output(__DIR__ .'/images/'. 'kuitti'.$ordernumber.'.pdf', 'F');
+$pdf->Output(__DIR__ .'../../ResourceData/'.$dirInform.'/'.$convertedPdfName[$printID].'.pdf', 'F');
+
 // Store the file name into variable 
 //============================================================+
 // END OF FILE
 //============================================================+
 // file_put_contents('kuitti'.$ordernumber.'.pdf',$pdf);
 // $pdf->Upload('My Post Code.pdf', $pdf->data);
+
+}
+$pdfValue =($_REQUEST["pdfValue"]);
+
+for($i = 0 ; $i < $pdfValue ; $i++)
+{
+    pdfConvertFunc($i);
+}
+
+
