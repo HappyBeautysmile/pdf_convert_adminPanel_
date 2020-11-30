@@ -31,7 +31,6 @@
                 htmldata[i] = htmldata[i].replace("{fields_09}", choosedData[i]["fields_09"]);
                 htmldata[i] = htmldata[i].replace("{fields_10}", choosedData[i]["fields_10"]);
                 convertedPdfName[i] = choosedData[i]["ID"];
-
             }
             var pdfValue = htmldata.length;
             dirInform="" ;

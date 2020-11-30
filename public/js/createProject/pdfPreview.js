@@ -14,6 +14,8 @@ function currentPdfPageFind(){
     $("#backPdfViewBtn").removeClass('disabled');
     $("#backPdfViewBtn").prop('disabled',false);
   }
+  // alert("srcPdfFileArray length :" + srcPdfFileArray.length + " dirInform: " + dirInform + " currentPdfPageIndex: " + currentPdfPageIndex + "srcPdfFileArray :" + srcPdfFileArray[currentPdfPageIndex]);
+  // alert(currentFolder_dir  + "sd as as "+ srcPdfFileArray[currentPdfPageIndex]);
   document.getElementById("pdfView").src=  currentFolder_dir + dirInform+'/' + srcPdfFileArray[currentPdfPageIndex];
 }
 
