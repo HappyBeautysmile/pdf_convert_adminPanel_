@@ -17,7 +17,14 @@ class CreateProjectController extends Controller
     public function operating_pdf(){
 
         $soureDir = $_REQUEST['soureDir'];
+        // $fileName = $_REQUEST['fileName'];
         $src_pdfFileArray = scandir($soureDir,0);
+        // $jsonDataDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName);
+        // $jsonData = json_decode($jsonDataDir);
+
+
+        $data["src_pdfFileArray"] =$src_pdfFileArray;
+        // $data["jsonData"] =$jsonData;
 
         return response()->json($src_pdfFileArray);
     }

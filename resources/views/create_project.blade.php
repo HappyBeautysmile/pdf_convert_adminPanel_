@@ -242,7 +242,7 @@
   $('#viewPdfs').on('click', function() {
       $soureDir = "./Home1/uploads/media/";
       var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
-      "./TCPDFCustomize/ResourceData/"
+      var fileName = $('#selected_data').val();
       $.ajax({
           type:"POST",
           url: "{{ url('/operating') }}",
@@ -251,8 +251,8 @@
 				           },
           data: {"soureDir" :requestDirInForm},
           success:function(data){
-            // alert(data[3]);
             srcPdfFileArray = data;
+            alert(data[1]);
             currentPdfPageFind();
           },  
         }).done(function() {
