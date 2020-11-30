@@ -5,3 +5,4 @@ var folder_dir =["ok"];
 var convertedPdfName ="";
 var srcPdfFileArray = [];//convert php array to javascript array
 var currentPdfPageIndex = 2 ;
+var choosedData = [];

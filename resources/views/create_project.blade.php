@@ -238,6 +238,7 @@
 <meta name="_token" content="{!! csrf_token() !!}" />
 
 <script>
+  var choosedData = [];
   var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
   $('#viewPdfs').on('click', function() {
       $soureDir = "./Home1/uploads/media/";
@@ -249,10 +250,11 @@
           headers: {
 				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				           },
-          data: {"soureDir" :requestDirInForm},
+          data: {"soureDir" :requestDirInForm ,"fileName" : fileName},
           success:function(data){
-            srcPdfFileArray = data;
-            alert(data[1]);
+            srcPdfFileArray = data['src_pdfFileArray'];
+            choosedData = data["jsonData"];
+            alert(choosedData[0]['Last name']);
             currentPdfPageFind();
           },  
         }).done(function() {
