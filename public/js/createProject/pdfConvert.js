@@ -33,6 +33,7 @@
                 convertedPdfName[i] = choosedData[i]["ID"];
 
             }
+            var pdfValue = htmldata.length;
             dirInform="" ;
             // var dirInform = 'DATA/2020/Janvier';
             for(var i = 0 ; i < folder_dir.length ; i++)
@@ -55,7 +56,7 @@
             $.ajax({
                 type:"POST",
                 url: "TCPDFCustomize/examples/main.php",
-                data: {"htmldata": htmldata[0],"convertedPdfName" : convertedPdfName[0] ,"dirInform" :dirInform}
+                data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform ,"pdfValue" : pdfValue}
                 }).done(function() {
                 $( this ).addClass( "done" );
             });
