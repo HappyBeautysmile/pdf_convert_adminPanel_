@@ -15,7 +15,7 @@
         "laravel/ui": "^1.5",
         "phpoffice/phpexcel": "^1.8",
         "tcg/voyager": "^1.4",
-        "phpexcel/phpexcel": "dev-master" 
+        "phpexcel/phpexcel": "dev-master"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
