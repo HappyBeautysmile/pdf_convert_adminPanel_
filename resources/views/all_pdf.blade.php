@@ -157,7 +157,6 @@ input {
         // alert("here is" + currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex])
         document.getElementById("pdfView").src=  currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex];
         });
-
     }
   }
 

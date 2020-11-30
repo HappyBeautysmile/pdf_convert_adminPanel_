@@ -36,7 +36,6 @@ function showTab(n) {
       return false;
     }
     if(currentTab == 2 && n == 1) {
-      changePdfPreview();
       // alert('now ' + dirInform);
     }
     // Otherwise, display the correct tab:
