@@ -32,6 +32,9 @@ ul{
       <li class="nav-item">
         <a class="nav-link bg-success {{ $page_flg =='data'?'active':''}}"  href="{{ url('/data') }}">DATA</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link bg-success {{ $page_flg =='folders'?'active':''}}"  href="{{ url('/folders') }}">FOLDERS</a>
+      </li>
     </ul>
   </div>
 </nav>
