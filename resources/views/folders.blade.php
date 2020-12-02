@@ -57,7 +57,7 @@ input {
                 </div>
                 <div class="modal-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="insert a new folder name..">
+                    <input type="text" class="form-control"  style= "font-size:20px; padding:10px" placeholder="insert a new folder name..">
                     <div class="input-group-append">
                       <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -82,7 +82,7 @@ input {
                 </div>
                 <div class="modal-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="insert that folder rename..">
+                    <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename..">
                     <div class="input-group-append">
                       <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
