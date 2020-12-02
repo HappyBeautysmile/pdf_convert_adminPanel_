@@ -6,6 +6,15 @@ use Illuminate\Http\Request;
 
 class AllPdfController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data["page_flg"]="allPdf";
