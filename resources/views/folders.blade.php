@@ -28,7 +28,7 @@ input {
   <div class = "row">
     <div class="col-sm-7">
       <ul class="nav nav-tabs flex-column">
-        <li>ConvertPDF
+        <li>
           <div class="well" id="folder_tree" ></div>
         </li>
       </ul>
@@ -57,9 +57,9 @@ input {
                 </div>
                 <div class="modal-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control"  style= "font-size:20px; padding:10px" placeholder="insert a new folder name..">
+                    <input type="text" class="form-control"  style= "font-size:20px; padding:10px" value="New Folder" placeholder="insert a new folder name.." id = "addfolderInput">
                     <div class="input-group-append">
-                      <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
+                      <button type="button" class="btn btn-primary"   style="width:80px" id = "addfolderBtn">Okay</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -73,7 +73,7 @@ input {
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
 
-                <div class="modal-header">
+                <div class="modal-header" >
                   <h5 class="modal-title"><i class="material-icons" class="text-success" style="font-size:30px;color:#5bc0de">mode_edit</i></h5>
                   <span style="font-size:23px;">Folder Rename</span>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -84,7 +84,7 @@ input {
                   <div class="input-group mb-3">
                     <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename..">
                     <div class="input-group-append">
-                      <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
+                      <button type="button" class="btn btn-primary"   style="width:80px">Okay</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -122,75 +122,98 @@ input {
    
 </div>
 <script>
-
 var currentNodeId = 0 ;
- var jsonTreeData =
-    [
-        {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0",  "state" : { "disabled" : false } ,   "data":{},
+ var jsonTreeData =[
+      {
+        "id":"0","name":"Root","text":"Root","parent_id":"1111111111", "state" : {"opened" : true } ,  
+        "children": [
+
+          {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0", "children":[] ,"state" : {"selected" :true  } ,   "data":{},
+              "a_attr":{"href":"google.com"}
+          },
+          {"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0",  "children":[] , "state" : {  } ,  "data":{},
+              "a_attr":{"href":"google.com"}
+          },
+          {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0", "children":[] , "state" : {  }  ,  "data":{},
+              "a_attr":{"href":"google.com"}
+          },
+          {"id":"400","name":"ALL PROJECT","text":"ALL PROJECT","parent_id":"0", "children":[] ,"state" : {  } ,   "data":{},
+              "a_attr":{"href":"google.com"}
+          },
+          {"id":"1","name":"DATA","text":"DATA","parent_id":"0","state" : {},
+              "children":[
+                  {
+                      "id":"2","name":"2020","text":"2020","parent_id":"1","state" : {},
+                      "children":[
+                          {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","state" : {}, "children":[],"data":{},"a_attr":{"href":"google.com"}}
+                      ],
+                      "data":{},
+                      "a_attr":{"href":"google.com"}
+                  }
+              ],
+            "data":{},
             "a_attr":{"href":"google.com"}
-        },
-        {"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0",   "state" : { "disabled" : false } ,  "data":{},
+          }
+        ],
+        "data":{},
             "a_attr":{"href":"google.com"}
-        },
-        {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0",  "state" : { "disabled" : false }  ,  "data":{},
-            "a_attr":{"href":"google.com"}
-        },
-        {"id":"400","name":"ALL PDF","text":"ALL PROJECT","parent_id":"0", "state" : { "disabled" : false } ,   "data":{},
-            "a_attr":{"href":"google.com"}
-        },
-        {"id":"1","name":"DATA","text":"DATA","parent_id":"0","state" : { "opened" : true },
-                "children":[
-                    {
-                        "id":"2","name":"2020","text":"2020","parent_id":"1","state" : { "opened" : true },
-                        "children":[
-                            {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","state" : { "selected" : true }, "children":[],"data":{},"a_attr":{"href":"google.com"}}
-                        ],
-                        "data":{},
-                        "a_attr":{"href":"google.com"}
-                    }
-                ],
-                "data":{},
-                "a_attr":{"href":"google.com"}
-            }
-    ];
+      }
+
+  ]
+
+  function insertNodeIntoTree(node, nodeId, newNode) {
+    // console.log(node);
+    // alert("node.nodeId : " + node.id +" nodeId: " + nodeId);
+    if (node.id == nodeId) {
+        // get new id
+        let n = 0;
+        /** Your logic to generate new Id **/
+        if (newNode) {
+            // alert("get parent");
+            // console.log("node " + node);
+            console.log("newNode " + newNode);
+            node.children.push(newNode);
+            return node
+        }
+
+    } else if (node.children != null) {
+      // alert("chilid");
+        for (let i = 0; i < node.children.length; i++) {
+          // alert(node.children[i].id) ;
+            insertNodeIntoTree(node.children[i], nodeId, newNode);
+        }
+
+    }
+    return node
+  }
+  function getParent(tree, childNode, index)
+  {
+    var i, res;
+    if (tree!="[object Object]" || !tree.children.length) {
+      return null;
+    }
+    for (var i = 0 ;i < tree.children.length; i++) {
+      if (tree.children[i].id == childNode) {
+        folder_dir[index++] = tree.name ;
+        folder_dir[index++] = tree.children[i].name ;
+        return tree;
+      }
+      if(tree.children[i].children != null && tree.children[i].children.length > 0){
+        folder_dir[index] = tree.name ;
+        res = getParent(tree.children[i], childNode, index + 1);
+        if (res) {
+          return res;
+        }
+      }
+    }
+    return null;
+  }
+  function FolderTreeDisplayFunc(){
     $(document).ready(function() {
       $('#folder_tree')
         .on("changed.jstree", function (e, data) {
           folder_dir=[];
-          function getParent(tree, childNode, index)
-          {
-            var i, res;
-            if (tree!="[object Object]" || !tree.children.length) {
-              return null;
-            }
-            for (var i = 0 ;i < tree.children.length; i++) {
-              if (tree.children[i].id == childNode) {
-                folder_dir[index++] = tree.name ;
-                folder_dir[index++] = tree.children[i].name ;
-                return tree;
-              }
-              if(tree.children[i].children != null && tree.children[i].children.length > 0){
-                folder_dir[index] = tree.name ;
-                res = getParent(tree.children[i], childNode, index + 1);
-                if (res) {
-                  return res;
-                }
-              }
-            }
-            return null;
-          }
-          for(var i = 0 ; i < jsonTreeData.length ; i++)
-          {
-            folder_dir[0] = jsonTreeData[i].name;
-            if(data.instance.get_node(data.selected[0]).id == jsonTreeData[i].id)
-            {
-              break;
-            }
-            if(jsonTreeData[i].children !=null)
-            {
-              getParent(jsonTreeData[i] ,data.instance.get_node(data.selected[0]).id ,0);
-            }
-          }
+          getParent(jsonTreeData[0] ,data.instance.get_node(data.selected[0]).id ,0);
           var txt_folder_dir=""
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
@@ -200,7 +223,7 @@ var currentNodeId = 0 ;
             }
           }
           currentNodeId = data.instance.get_node(data.selected[0]).id;
-          // alert("currentNodeId    " + currentNodeId);
+          alert("currentNodeId    " + currentNodeId);
           $('#selected_folder').val(txt_folder_dir);
         })
         .jstree({
@@ -208,8 +231,35 @@ var currentNodeId = 0 ;
           'data' : jsonTreeData
         }
         });
-    } );
+   
+      });
+    }
+    FolderTreeDisplayFunc()
+    $(document).ready(function() {
+      $('#addfolderBtn').on('click', function() {
+          console.log(jsonTreeData);
+          var NewFolderName =$('#addfolderInput').val();
+          var updateNode =jsonTreeData;
+          // {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","state" : { "selected" : true }, "children":[],"data":{},"a_attr":{"href":"google.com"}}
 
-
+          var newNode =new Object();
+          var date = new Date();
+          newNode.id = date.getTime().toString() ;
+          newNode.name = NewFolderName;
+          newNode.text = NewFolderName;
+          newNode.parent_id =currentNodeId;
+          newNode.state ={};
+          newNode.children =[];
+          newNode.data={};
+          newNode.a_attr ={"href":"google.com"};
+          jsonTreeData = insertNodeIntoTree(jsonTreeData[0],currentNodeId,newNode)
+          console.log(jsonTreeData);
+          // alert($('#addfolderInput').val());
+          $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+          $('#folder_tree').jstree(true).refresh();
+          $('#addFolder').modal('hide');
+          FolderTreeDisplayFunc();
+        })
+    });
 </script>
 @endsection
