@@ -15,25 +15,115 @@ input {
   font-weight: bold;
 }
 </style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
 <div class="container">
   <div class = "row" style="margin-top:50px;">
-      <div class="col-sm-2 select_lable">Select FOLDER</div>
+      <div class="col-sm-2 select_lable">Selected FOLDER</div>
       <div class="col-sm-9"> 
           <p>
           <input class="col-sm-10" placeholder="select folder..." oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
-          <button type="button" class="btn btn-success btn-lg"name="select_folder_btn"  data-toggle="modal" data-target="#folder" id="viewPdfs" >SELECT</button> 
           </p>
       </div>
   </div>
-  <div>
-    <ul class="nav nav-tabs flex-column">
-      <li>ConvertPDF
-        <div class="well" id="folder_tree" ></div>
-      </li>
-    </ul>
-  </div>
+  <div class = "row">
+    <div class="col-sm-7">
+      <ul class="nav nav-tabs flex-column">
+        <li>ConvertPDF
+          <div class="well" id="folder_tree" ></div>
+        </li>
+      </ul>
+      </div>
+      <div class="col-sm-5">      
+        <div class="row" style="padding-top:10px">
+          <button type="button" class="btn btn-success btn-lg" style="width:160px" data-toggle="modal" data-target="#addFolder">ADD Folder</button>
+        </div> 
+        <div class="row" style="padding-top:10px">
+          <button type="button" class="btn btn-info btn-lg" style="width:160px" data-toggle="modal" data-target="#renameFolder">Rename Folder</button>
+        </div> 
+        <div class="row" style="padding-top:10px">
+          <button type="button" class="btn btn-danger btn-lg" style="width:160px" data-toggle="modal" data-target="#deleteFolder">Delete Folder</button>
+        </div> 
+
+          <!-- Add New Folder Modal -->
+          <div class="modal fade" id="addFolder" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"><i class="material-icons" style="font-size:30px;color:#5cb85c">create_new_folder</i></h5>
+                  <span style="font-size:23px;">Add Folder</span>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="insert a new folder name..">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rename Folder Modal -->
+          <div class="modal fade" id="renameFolder" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title"><i class="material-icons" class="text-success" style="font-size:30px;color:#5bc0de">mode_edit</i></h5>
+                  <span style="font-size:23px;">Folder Rename</span>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="insert that folder rename..">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-primary"   style="width:80px"data-dismiss="modal">Okay</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Delete Folder Modal -->
+
+          <div class="modal fade" tabindex="-1" id='deleteFolder'>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"> <i class="material-icons" style="font-size:30px;color:#d9534f">delete</i></h5><span style="font-size:23px;">Delete !</span>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to Delete ?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+   
 </div>
 <script>
+
+var currentNodeId = 0 ;
  var jsonTreeData =
     [
         {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0",  "state" : { "disabled" : false } ,   "data":{},
@@ -45,7 +135,7 @@ input {
         {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0",  "state" : { "disabled" : false }  ,  "data":{},
             "a_attr":{"href":"google.com"}
         },
-        {"id":"00","name":"ALL PDF","text":"ALL PROJECT","parent_id":"0", "state" : { "disabled" : false } ,   "data":{},
+        {"id":"400","name":"ALL PDF","text":"ALL PROJECT","parent_id":"0", "state" : { "disabled" : false } ,   "data":{},
             "a_attr":{"href":"google.com"}
         },
         {"id":"1","name":"DATA","text":"DATA","parent_id":"0","state" : { "opened" : true },
@@ -109,7 +199,8 @@ input {
               txt_folder_dir +=" > " ;
             }
           }
-          // alert(folder_dir);
+          currentNodeId = data.instance.get_node(data.selected[0]).id;
+          // alert("currentNodeId    " + currentNodeId);
           $('#selected_folder').val(txt_folder_dir);
         })
         .jstree({
@@ -118,5 +209,7 @@ input {
         }
         });
     } );
+
+
 </script>
 @endsection
