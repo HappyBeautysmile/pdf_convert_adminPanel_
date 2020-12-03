@@ -41,4 +41,12 @@ class FoldersController extends Controller
 
         return response()->json("nice");
     }
+    public function renameFolder()
+    {
+        $folderName = $_REQUEST['folderName'];
+        $rename = $_REQUEST['rename'];
+        $renameFolderDir = $_REQUEST['renameFolderDir'];
+        $jsonFolderDirInform = $_REQUEST['jsonFolderDirInform'];
+        return response()->json("nice");
+    }
 }

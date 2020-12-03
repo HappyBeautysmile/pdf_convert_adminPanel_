@@ -192,8 +192,11 @@ function getParent(tree, childNode, index)
   return null;
 }
 var addFolderDir ="" ;
+var reanFolderDir ="";
 var renameFolderDir ="" ;
 var deleteFolderDir ="" ;
+ 
+ 
 function FolderTreeDisplayFunc(){
   $(document).ready(function() {
     $('#folder_tree')
@@ -203,7 +206,7 @@ function FolderTreeDisplayFunc(){
         getParent(jsonFolderDirInform[0] ,data.instance.get_node(data.selected[0]).id ,0);
         var txt_folder_dir=""; currentFolderName=" "
         if(findSelectFlag == true){
-          addFolderDir ="" ;
+          addFolderDir ="" ,renameFolderDir ="";
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
             txt_folder_dir += folder_dir[i];
@@ -211,8 +214,11 @@ function FolderTreeDisplayFunc(){
               txt_folder_dir +=" > " ;
             }
             addFolderDir = addFolderDir + folder_dir[i] + '/' 
+            if(folder_dir.length != i + 1){
+              renameFolderDir = renameFolderDir + folder_dir[i] + '/' 
+            }
           }
-          // alert(addFolderDir);
+          // alert(renameFolderDir);
           currentFolderName = folder_dir[folder_dir.length-1] ;
         }
         currentFolderId = data.instance.get_node(data.selected[0]).id;
@@ -245,10 +251,7 @@ $(document).ready(function() {
     newNode.a_attr ={"href":"google.com"};
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
-    // alert($('#addfolderInput').val());
     $('#addFolder').modal('hide');
-    // ("./TCPDFCustomize/" + $addFolderDir + $folderName,0777)
-    // alert("./TCPDFCustomize/" + addFolderDir + newNode.name);
     $.ajax({
           type:"POST",
           url: "{{ url('/addFolder') }}",
@@ -277,7 +280,24 @@ $(document).ready(function() {
     updateNodeInTree(jsonFolderDirInform[0], currentFolderId, rename);
     $('#folder_tree').jstree(true).refresh();
     $('#renameFolder').modal('hide');
+    $.ajax({
+          type:"POST",
+          url: "{{ url('/renameFolder') }}",
+          headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+          data: {"folderName" : currentFolderName ,"rename": rename,"renameFolderDir":renameFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
+          success:function(data){
+            alert("change the name" + "from '" + currentFolderName + "'" +"folder" + "to" + "'" + rename +"'" +'!');
+          }, 
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert("Name is same!");
+          }
+
+        }).done(function() {
+          $( this ).addClass( "done" );
     });
+  });
   
   $('#deletefolderBtn').on('click', function() { 
     $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
