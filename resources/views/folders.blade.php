@@ -232,7 +232,7 @@ function FolderTreeDisplayFunc(){
         folder_dir=[];
         findSelectFlag = false ;
         getParent(jsonTreeData[0] ,data.instance.get_node(data.selected[0]).id ,0);
-        var txt_folder_dir=""
+        var txt_folder_dir=""; currentFolderName=" "
         if(findSelectFlag == true){
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
@@ -241,10 +241,10 @@ function FolderTreeDisplayFunc(){
               txt_folder_dir +=" > " ;
             }
           }
+          currentFolderName = folder_dir[folder_dir.length-1] ;
         }
         currentFolderId = data.instance.get_node(data.selected[0]).id;
         $('#selected_folder').val(txt_folder_dir);
-        currentFolderName = folder_dir[folder_dir.length-1] ;
         $('#renamefolderInput').val(currentFolderName);
       })
       .jstree({
