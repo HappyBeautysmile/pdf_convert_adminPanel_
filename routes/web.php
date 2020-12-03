@@ -30,6 +30,9 @@ Route::post('/addFolder','FoldersController@addFolder')->name('addFolder');
 Route::post('/renameFolder','FoldersController@renameFolder')->name('renameFolder');
 Route::post('/deleteFolder','FoldersController@deleteFolder')->name('deleteFolder');
 
+Route::post('/getFolderDirInform','FoldersController@getFolderDirInform')->name('getFolderDirInform');
+
+// getFolderDirInform
 
 Route::get('/data','DataController@index' );
 Route::get('/pictures','PicturesController@index' );
