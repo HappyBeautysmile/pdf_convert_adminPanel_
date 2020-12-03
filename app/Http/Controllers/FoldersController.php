@@ -47,6 +47,9 @@ class FoldersController extends Controller
         $rename = $_REQUEST['rename'];
         $renameFolderDir = $_REQUEST['renameFolderDir'];
         $jsonFolderDirInform = $_REQUEST['jsonFolderDirInform'];
+        rename("./TCPDFCustomize/".$renameFolderDir.$folderName,"./TCPDFCustomize/".$renameFolderDir.$rename);
+        $json_data = json_encode($jsonFolderDirInform);
+        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
         return response()->json("nice");
     }
 }
