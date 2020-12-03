@@ -195,6 +195,7 @@ var addFolderDir ="" ;
 var reanFolderDir ="";
 var renameFolderDir ="" ;
 var deleteFolderDir ="" ;
+var deleteFolderDir ="" ;
  
  
 function FolderTreeDisplayFunc(){
@@ -206,17 +207,18 @@ function FolderTreeDisplayFunc(){
         getParent(jsonFolderDirInform[0] ,data.instance.get_node(data.selected[0]).id ,0);
         var txt_folder_dir=""; currentFolderName=" "
         if(findSelectFlag == true){
-          addFolderDir ="" ,renameFolderDir ="";
+          addFolderDir ="" ,renameFolderDir ="",deleteFolderDir="";
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
             txt_folder_dir += folder_dir[i];
             if(folder_dir.length != i + 1){
               txt_folder_dir +=" > " ;
               renameFolderDir = renameFolderDir + folder_dir[i] + '/' 
+              deleteFolderDir = deleteFolderDir + folder_dir[i] + '/' 
             }
             addFolderDir = addFolderDir + folder_dir[i] + '/' 
           }
-          // alert(renameFolderDir);
+          alert(addFolderDir);
           currentFolderName = folder_dir[folder_dir.length-1] ;
         }
         currentFolderId = data.instance.get_node(data.selected[0]).id;
@@ -247,6 +249,7 @@ $(document).ready(function() {
     newNode.children =[];
     newNode.data={};
     newNode.a_attr ={"href":"google.com"};
+    alert("id :" + newNode.id + "  name: " + newNode.name + "  " );
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     $('#addFolder').modal('hide');
@@ -278,7 +281,6 @@ $(document).ready(function() {
     updateNodeInTree(jsonFolderDirInform[0], currentFolderId, rename);
     $('#folder_tree').jstree(true).refresh();
     $('#renameFolder').modal('hide');
-    // rename($renameFolderDir.$folderName,$renameFolderDir.$rename);
     // alert(renameFolderDir +currentFolderName +" change name : " + renameFolderDir +rename );
     $.ajax({
           type:"POST",
@@ -304,6 +306,26 @@ $(document).ready(function() {
     deleteNodeFromTree(jsonFolderDirInform[0],currentFolderId);
     $('#deleteFolder').modal('hide');
     $('#folder_tree').jstree(true).refresh();
+    alert("deleteFolderDir "+deleteFolderDir + currentFolderName );
+    var deletedFolderName = currentFolderName;
+    alert("cur : " + currentFolderName);
+    $.ajax({
+          type:"POST",
+          url: "{{ url('/deleteFolder') }}",
+          headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+          data: {"folderName" : currentFolderName , "deleteFolderDir":deleteFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
+          success:function(data){
+            alert("success " +"'" + deletedFolderName + "'"+ " delete");
+          }, 
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert("delete folder faild");
+          }
+
+        }).done(function() {
+          $( this ).addClass( "done" );
+    });
   });
 
   $('#selectRename').on('click', function() {

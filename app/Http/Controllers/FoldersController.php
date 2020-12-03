@@ -52,4 +52,24 @@ class FoldersController extends Controller
         file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
         return response()->json("nice");
     }
+    public function deleteFolder()
+    {
+        $folderName = $_REQUEST['folderName'];
+        $deleteFolderDir = $_REQUEST['deleteFolderDir'];
+        $jsonFolderDirInform = $_REQUEST['jsonFolderDirInform'];
+        # recursively remove a directory
+        function rrmdir($dir) {
+            foreach(glob($dir . '/*') as $file) {
+                if(is_dir($file))
+                    rrmdir($file);
+                else
+                    unlink($file);
+            }
+            rmdir($dir);
+        }
+        rrmdir("./TCPDFCustomize/".$deleteFolderDir.$folderName);
+        $json_data = json_encode($jsonFolderDirInform);
+        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
+        return response()->json("nice");
+    }
 }
