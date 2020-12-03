@@ -28,6 +28,7 @@ Route::get('/allPdf','AllPdfController@index' );
 Route::get('/folders','FoldersController@index' );
 Route::post('/addFolder','FoldersController@addFolder')->name('addFolder');
 Route::post('/renameFolder','FoldersController@renameFolder')->name('renameFolder');
+Route::post('/deleteFolder','FoldersController@deleteFolder')->name('deleteFolder');
 
 
 Route::get('/data','DataController@index' );
