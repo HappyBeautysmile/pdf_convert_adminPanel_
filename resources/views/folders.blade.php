@@ -119,6 +119,8 @@ input {
       </div>
     </div>
 </div>
+<meta name="_token" content="{!! csrf_token() !!}" />
+
 <script>
 var currentFolderId = 0 ;
 var currentFolderName ="";
@@ -189,6 +191,9 @@ function getParent(tree, childNode, index)
   }
   return null;
 }
+var addFolderDir ="" ;
+var renameFolderDir ="" ;
+var deleteFolderDir ="" ;
 function FolderTreeDisplayFunc(){
   $(document).ready(function() {
     $('#folder_tree')
@@ -198,13 +203,16 @@ function FolderTreeDisplayFunc(){
         getParent(jsonFolderDirInform[0] ,data.instance.get_node(data.selected[0]).id ,0);
         var txt_folder_dir=""; currentFolderName=" "
         if(findSelectFlag == true){
+          addFolderDir ="" ;
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
             txt_folder_dir += folder_dir[i];
             if(folder_dir.length != i + 1){
               txt_folder_dir +=" > " ;
             }
+            addFolderDir = addFolderDir + folder_dir[i] + '/' 
           }
+          // alert(addFolderDir);
           currentFolderName = folder_dir[folder_dir.length-1] ;
         }
         currentFolderId = data.instance.get_node(data.selected[0]).id;
@@ -238,9 +246,29 @@ $(document).ready(function() {
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     // alert($('#addfolderInput').val());
+    $('#addFolder').modal('hide');
+    // ("./TCPDFCustomize/" + $addFolderDir + $folderName,0777)
+    // alert("./TCPDFCustomize/" + addFolderDir + newNode.name);
+    $.ajax({
+          type:"POST",
+          url: "{{ url('/addFolder') }}",
+          headers: {
+				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				           },
+          data: {"folderName" : newNode.name ,"addFolderDir":addFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
+          success:function(data){
+            alert("create " + "'" + newNode.name + "'" + " folder!");
+          }, 
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert("Already floder exist!");
+          }
+
+        }).done(function() {
+          $( this ).addClass( "done" );
+    });
+
     $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
     $('#folder_tree').jstree(true).refresh();
-    $('#addFolder').modal('hide');
   });
 
   $('#renamefolderBtn').on('click', function() {

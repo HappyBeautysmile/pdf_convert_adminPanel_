@@ -29,4 +29,16 @@ class FoldersController extends Controller
         $data["page_flg"]="folders";
         return view('folders',$data);
     }
+    public function addFolder()
+    {
+        $folderName = $_REQUEST['folderName'];
+        $addFolderDir = $_REQUEST['addFolderDir'];
+        $jsonFolderDirInform = $_REQUEST['jsonFolderDirInform'];
+        mkdir("./TCPDFCustomize/".$addFolderDir.$folderName,0777);
+
+        $json_data = json_encode($jsonFolderDirInform);
+        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
+
+        return response()->json("nice");
+    }
 }
