@@ -131,7 +131,14 @@ function insertNodeIntoTree(node, nodeId, newNode) {
       let n = 0;
       /** Your logic to generate new Id **/
       if (newNode) {
+
+        if(node.children === undefined){
+          node.childeren= [newNode];
+        }
+        else{
           node.children.push(newNode);
+        }
+        // node.children.push(newNode);
       }
 
   } else if (node.children != null) {
