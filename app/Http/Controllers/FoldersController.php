@@ -24,9 +24,8 @@ class FoldersController extends Controller
      */
     public function index()
     {
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
-        $data["jsonDataInformDir"]= $jsonDataInformDir;
-
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $data["jsonFolderDirInform"]= $jsonFolderDirInform;
         $data["page_flg"]="folders";
         return view('folders',$data);
     }

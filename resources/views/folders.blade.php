@@ -122,44 +122,8 @@ input {
 <script>
 var currentFolderId = 0 ;
 var currentFolderName ="";
- var jsonTreeData =[
-      {
-        "id":"0","name":"Root","text":"Root","parent_id":"0", "state" : {"opened" : true } ,  
-        "children": [
-
-          {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0", "children":[] ,"state" : {"selected" :true  } ,   "data":{},
-              "a_attr":{"href":"google.com"}
-          },
-          {"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0",  "children":[] , "state" : {  } ,  "data":{},
-              "a_attr":{"href":"google.com"}
-          },
-          {"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0", "children":[] , "state" : {  }  ,  "data":{},
-              "a_attr":{"href":"google.com"}
-          },
-          {"id":"400","name":"ALL PROJECT","text":"ALL PROJECT","parent_id":"0", "children":[] ,"state" : {  } ,   "data":{},
-              "a_attr":{"href":"google.com"}
-          },
-          {"id":"1","name":"DATA","text":"DATA","parent_id":"0","state" : {},
-              "children":[
-                  {
-                      "id":"2","name":"2020","text":"2020","parent_id":"1","state" : {},
-                      "children":[
-                          {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","state" : {}, "children":[],"data":{},"a_attr":{"href":"google.com"}}
-                      ],
-                      "data":{},
-                      "a_attr":{"href":"google.com"}
-                  }
-              ],
-            "data":{},
-            "a_attr":{"href":"google.com"}
-          }
-        ],
-        "data":{},
-            "a_attr":{"href":"google.com"}
-      }
-
-  ]
-
+var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
+ 
 function insertNodeIntoTree(node, nodeId, newNode) {
   if (node.id == nodeId) {
       let n = 0;
@@ -231,7 +195,7 @@ function FolderTreeDisplayFunc(){
       .on("changed.jstree", function (e, data) {
         folder_dir=[];
         findSelectFlag = false ;
-        getParent(jsonTreeData[0] ,data.instance.get_node(data.selected[0]).id ,0);
+        getParent(jsonFolderDirInform[0] ,data.instance.get_node(data.selected[0]).id ,0);
         var txt_folder_dir=""; currentFolderName=" "
         if(findSelectFlag == true){
           for(var i = 0 ; i < folder_dir.length ; i++)
@@ -249,7 +213,7 @@ function FolderTreeDisplayFunc(){
       })
       .jstree({
         'core' : {
-        'data' : jsonTreeData
+        'data' : jsonFolderDirInform
       }
       });
   
@@ -259,7 +223,7 @@ FolderTreeDisplayFunc();
 $(document).ready(function() {
   $('#addfolderBtn').on('click', function() {
     var NewFolderName =$('#addfolderInput').val();
-    var updateNode =jsonTreeData;
+    var updateNode =jsonFolderDirInform;
 
     var newNode =new Object();
     var date = new Date();
@@ -271,25 +235,25 @@ $(document).ready(function() {
     newNode.children =[];
     newNode.data={};
     newNode.a_attr ={"href":"google.com"};
-    // console.log("current JsonTreeData :" + jsonTreeData);
-    insertNodeIntoTree(jsonTreeData[0],currentFolderId,newNode)
+    // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
+    insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     // alert($('#addfolderInput').val());
-    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+    $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
     $('#folder_tree').jstree(true).refresh();
     $('#addFolder').modal('hide');
   });
 
   $('#renamefolderBtn').on('click', function() {
-    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+    $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
     var rename = $('#renamefolderInput').val();
-    updateNodeInTree(jsonTreeData[0], currentFolderId, rename);
+    updateNodeInTree(jsonFolderDirInform[0], currentFolderId, rename);
     $('#folder_tree').jstree(true).refresh();
     $('#renameFolder').modal('hide');
     });
   
   $('#deletefolderBtn').on('click', function() { 
-    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
-    deleteNodeFromTree(jsonTreeData[0],currentFolderId);
+    $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
+    deleteNodeFromTree(jsonFolderDirInform[0],currentFolderId);
     $('#deleteFolder').modal('hide');
     $('#folder_tree').jstree(true).refresh();
   });
