@@ -38,10 +38,10 @@ input {
           <button type="button" class="btn btn-success btn-lg" style="width:160px" data-toggle="modal" data-target="#addFolder">ADD Folder</button>
         </div> 
         <div class="row" style="padding-top:10px">
-          <button type="button" class="btn btn-info btn-lg" style="width:160px" data-toggle="modal" data-target="#renameFolder">Rename Folder</button>
+          <button type="button" class="btn btn-info btn-lg" style="width:160px" data-toggle="modal" data-target="#renameFolder" id="selectRename">Rename Folder</button>
         </div> 
         <div class="row" style="padding-top:10px">
-          <button type="button" class="btn btn-danger btn-lg" style="width:160px" data-toggle="modal" data-target="#deleteFolder">Delete Folder</button>
+          <button type="button" class="btn btn-danger btn-lg" style="width:160px" data-toggle="modal" data-target="#deleteFolder" id="selectDelete">Delete Folder</button>
         </div> 
 
           <!-- Add New Folder Modal -->
@@ -82,9 +82,9 @@ input {
                 </div>
                 <div class="modal-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename..">
+                    <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename.."  id = "renamefolderInput">
                     <div class="input-group-append">
-                      <button type="button" class="btn btn-primary"   style="width:80px">Okay</button>
+                      <button type="button" class="btn btn-primary"   style="width:80px" id ="renamefolderBtn">Okay</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
@@ -95,7 +95,6 @@ input {
 
 
           <!-- Delete Folder Modal -->
-
           <div class="modal fade" tabindex="-1" id='deleteFolder'>
             <div class="modal-dialog">
               <div class="modal-content">
@@ -106,11 +105,11 @@ input {
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Are you sure you want to Delete ?</p>
+                  <p id="folderDeleteSentence">Are you sure you want to delete</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
-                  <button type="button" class="btn btn-danger">Delete</button>
+                  <button type="button" class="btn btn-danger"  id = "deletefolderBtn">Delete</button>
                 </div>
               </div>
             </div>
@@ -119,13 +118,13 @@ input {
 
       </div>
     </div>
-   
 </div>
 <script>
-var currentNodeId = 0 ;
+var currentFolderId = 0 ;
+var currentFolderName ="";
  var jsonTreeData =[
       {
-        "id":"0","name":"Root","text":"Root","parent_id":"1111111111", "state" : {"opened" : true } ,  
+        "id":"0","name":"Root","text":"Root","parent_id":"0", "state" : {"opened" : true } ,  
         "children": [
 
           {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0", "children":[] ,"state" : {"selected" :true  } ,   "data":{},
@@ -161,60 +160,80 @@ var currentNodeId = 0 ;
 
   ]
 
-  function insertNodeIntoTree(node, nodeId, newNode) {
-    // console.log(node);
-    // alert("node.nodeId : " + node.id +" nodeId: " + nodeId);
-    if (node.id == nodeId) {
-        // get new id
-        let n = 0;
-        /** Your logic to generate new Id **/
-        if (newNode) {
-            // alert("get parent");
-            // console.log("node " + node);
-            console.log("newNode " + newNode);
-            node.children.push(newNode);
-            return node
-        }
+function insertNodeIntoTree(node, nodeId, newNode) {
+  if (node.id == nodeId) {
+      let n = 0;
+      /** Your logic to generate new Id **/
+      if (newNode) {
+          node.children.push(newNode);
+      }
 
-    } else if (node.children != null) {
-      // alert("chilid");
-        for (let i = 0; i < node.children.length; i++) {
-          // alert(node.children[i].id) ;
-            insertNodeIntoTree(node.children[i], nodeId, newNode);
-        }
+  } else if (node.children != null) {
+      for (let i = 0; i < node.children.length; i++) {
+          insertNodeIntoTree(node.children[i], nodeId, newNode);
+      }
 
-    }
-    return node
   }
-  function getParent(tree, childNode, index)
-  {
-    var i, res;
-    if (tree!="[object Object]" || !tree.children.length) {
-      return null;
-    }
-    for (var i = 0 ;i < tree.children.length; i++) {
-      if (tree.children[i].id == childNode) {
-        folder_dir[index++] = tree.name ;
-        folder_dir[index++] = tree.children[i].name ;
-        return tree;
+}
+function updateNodeInTree(node, nodeId, rename) {
+  if (node.id == nodeId) {
+      node.name = rename;
+      node.text = rename;
+  } else if (node.children != null) {
+      for (let i = 0; i < node.children.length; i++) {
+          result = updateNodeInTree(node.children[i], nodeId, rename);
       }
-      if(tree.children[i].children != null && tree.children[i].children.length > 0){
-        folder_dir[index] = tree.name ;
-        res = getParent(tree.children[i], childNode, index + 1);
-        if (res) {
-          return res;
+  }
+}
+
+function deleteNodeFromTree(node, id) {
+    if (node.children != null)  {
+        for (let i = 0; i < node.children.length; i++) {
+            let filtered = node.children.filter(f => f.id == id);
+            if (filtered && filtered.length > 0) {
+                node.children = node.children.filter(f => f.id != id);
+                return;
+            }
+            console.log("deleteNdoeFromTree  :  " + node.id);
+            deleteNodeFromTree(node.children[i], id);
         }
-      }
     }
+
+}
+
+var findSelectFlag = false ;
+function getParent(tree, childNode, index)
+{
+  var i, res;
+  if (tree!="[object Object]" || !tree.children.length) {
     return null;
   }
-  function FolderTreeDisplayFunc(){
-    $(document).ready(function() {
-      $('#folder_tree')
-        .on("changed.jstree", function (e, data) {
-          folder_dir=[];
-          getParent(jsonTreeData[0] ,data.instance.get_node(data.selected[0]).id ,0);
-          var txt_folder_dir=""
+  for (var i = 0 ;i < tree.children.length; i++) {
+    if (tree.children[i].id == childNode) {
+      folder_dir[index++] = tree.name ;
+      folder_dir[index++] = tree.children[i].name ;
+      findSelectFlag = true;
+      return tree;
+    }
+    if(tree.children[i].children != null && tree.children[i].children.length > 0){
+      folder_dir[index] = tree.name ;
+      res = getParent(tree.children[i], childNode, index + 1);
+      if (res) {
+        return res;
+      }
+    }
+  }
+  return null;
+}
+function FolderTreeDisplayFunc(){
+  $(document).ready(function() {
+    $('#folder_tree')
+      .on("changed.jstree", function (e, data) {
+        folder_dir=[];
+        findSelectFlag = false ;
+        getParent(jsonTreeData[0] ,data.instance.get_node(data.selected[0]).id ,0);
+        var txt_folder_dir=""
+        if(findSelectFlag == true){
           for(var i = 0 ; i < folder_dir.length ; i++)
           {
             txt_folder_dir += folder_dir[i];
@@ -222,44 +241,76 @@ var currentNodeId = 0 ;
               txt_folder_dir +=" > " ;
             }
           }
-          currentNodeId = data.instance.get_node(data.selected[0]).id;
-          alert("currentNodeId    " + currentNodeId);
-          $('#selected_folder').val(txt_folder_dir);
-        })
-        .jstree({
-          'core' : {
-          'data' : jsonTreeData
         }
-        });
-   
+        currentFolderId = data.instance.get_node(data.selected[0]).id;
+        $('#selected_folder').val(txt_folder_dir);
+        currentFolderName = folder_dir[folder_dir.length-1] ;
+        $('#renamefolderInput').val(currentFolderName);
+      })
+      .jstree({
+        'core' : {
+        'data' : jsonTreeData
+      }
       });
-    }
-    FolderTreeDisplayFunc()
-    $(document).ready(function() {
-      $('#addfolderBtn').on('click', function() {
-          console.log(jsonTreeData);
-          var NewFolderName =$('#addfolderInput').val();
-          var updateNode =jsonTreeData;
-          // {"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","state" : { "selected" : true }, "children":[],"data":{},"a_attr":{"href":"google.com"}}
-
-          var newNode =new Object();
-          var date = new Date();
-          newNode.id = date.getTime().toString() ;
-          newNode.name = NewFolderName;
-          newNode.text = NewFolderName;
-          newNode.parent_id =currentNodeId;
-          newNode.state ={};
-          newNode.children =[];
-          newNode.data={};
-          newNode.a_attr ={"href":"google.com"};
-          jsonTreeData = insertNodeIntoTree(jsonTreeData[0],currentNodeId,newNode)
-          console.log(jsonTreeData);
-          // alert($('#addfolderInput').val());
-          $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
-          $('#folder_tree').jstree(true).refresh();
-          $('#addFolder').modal('hide');
-          FolderTreeDisplayFunc();
-        })
+  
     });
+  }
+FolderTreeDisplayFunc();
+$(document).ready(function() {
+  $('#addfolderBtn').on('click', function() {
+    var NewFolderName =$('#addfolderInput').val();
+    var updateNode =jsonTreeData;
+
+    var newNode =new Object();
+    var date = new Date();
+    newNode.id = date.getTime().toString() ;
+    newNode.name = NewFolderName;
+    newNode.text = NewFolderName;
+    newNode.parent_id =currentFolderId;
+    newNode.state ={};
+    newNode.children =[];
+    newNode.data={};
+    newNode.a_attr ={"href":"google.com"};
+    // console.log("current JsonTreeData :" + jsonTreeData);
+    insertNodeIntoTree(jsonTreeData[0],currentFolderId,newNode)
+    // alert($('#addfolderInput').val());
+    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+    $('#folder_tree').jstree(true).refresh();
+    $('#addFolder').modal('hide');
+  });
+
+  $('#renamefolderBtn').on('click', function() {
+    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+    var rename = $('#renamefolderInput').val();
+    updateNodeInTree(jsonTreeData[0], currentFolderId, rename);
+    $('#folder_tree').jstree(true).refresh();
+    $('#renameFolder').modal('hide');
+    });
+  
+  $('#deletefolderBtn').on('click', function() { 
+    $('#folder_tree').jstree(true).settings.core.data = jsonTreeData;
+    deleteNodeFromTree(jsonTreeData[0],currentFolderId);
+    $('#deleteFolder').modal('hide');
+    $('#folder_tree').jstree(true).refresh();
+  });
+
+  $('#selectRename').on('click', function() {
+    $('#renamefolderInput').val(currentFolderName);
+  });
+  $('#selectDelete').on('click', function() {
+    if($('#selected_folder').val()==""){
+      var deleteTxt = "Are you sure you want to delete empty?";
+      $('#folderDeleteSentence').text(deleteTxt);
+      var deleteTxt ="";
+    }
+    else{
+      var deleteTxt = "Are you sure you want to delete" +" '" + currentFolderName + "'"+ " Folder ?";
+      $('#folderDeleteSentence').text(deleteTxt);
+      var deleteTxt ="";
+    }
+  });
+});
+
+    
 </script>
 @endsection
