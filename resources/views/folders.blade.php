@@ -125,7 +125,10 @@ input {
 var currentFolderId = 0 ;
 var currentFolderName ="";
 var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
- 
+
+// [{"id":"0","name":"ResourceData","text":"ResourceData","parent_id":"111","state":{"opened":"true"},"children":[{"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0","state":{"selected":"true"},"a_attr":{"href":"google.com"},"childeren":[{"id":"1607023252945","name":"New Folder","text":"New Folder","parent_id":"100","a_attr":{"href":"google.com"}}]},{"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0","children":[{"id":"1607023060928","name":"New Folder","text":"New Folder","parent_id":"200","a_attr":{"href":"google.com"}},{"id":"1607023201681","name":"new","text":"new","parent_id":"200","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0","children":[{"id":"1607023079560","name":"New Folder","text":"New Folder","parent_id":"300","a_attr":{"href":"google.com"}},{"id":"1607023186737","name":"teste","text":"teste","parent_id":"300","a_attr":{"href":"google.com"}},{"id":"1607023194841","name":"new","text":"new","parent_id":"300","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"400","name":"ALL PROJECT","text":"ALL PROJECT","parent_id":"0","children":[{"id":"1607023068377","name":"New Folder","text":"New Folder","parent_id":"400","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"1","name":"DATA","text":"DATA","parent_id":"0","children":[{"id":"2","name":"2020","text":"2020","parent_id":"1","children":[{"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}]
+var existFolder = false ;
+console.log(jsonFolderDirInform);
 function insertNodeIntoTree(node, nodeId, newNode) {
   if (node.id == nodeId) {
       let n = 0;
@@ -133,10 +136,22 @@ function insertNodeIntoTree(node, nodeId, newNode) {
       if (newNode) {
 
         if(node.children === undefined){
-          node.childeren= [newNode];
+          node.children= [newNode];
         }
         else{
-          node.children.push(newNode);
+          for (let i = 0 ; i < node.children.length ; i++)
+          {
+            if(node.children[i].name == newNode.name)
+            {
+              existFolder = true ;
+              alert("The folder name exists");
+
+            }
+          }
+          if(existFolder == false)
+          {
+            node.children.push(newNode);
+          }
         }
         // node.children.push(newNode);
       }
@@ -204,7 +219,6 @@ var renameFolderDir ="" ;
 var deleteFolderDir ="" ;
 var deleteFolderDir ="" ;
  
- 
 function FolderTreeDisplayFunc(){
   $(document).ready(function() {
     $('#folder_tree')
@@ -260,26 +274,30 @@ $(document).ready(function() {
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     $('#addFolder').modal('hide');
-    $.ajax({
-          type:"POST",
-          url: "{{ url('/addFolder') }}",
-          headers: {
-				               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				           },
-          data: {"folderName" : newNode.name ,"addFolderDir":addFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
-          success:function(data){
-            alert("create " + "'" + newNode.name + "'" + " folder!");
-          }, 
-          error: function (xhr, ajaxOptions, thrownError) {
-            alert("Already floder exist!");
-          }
+    // alert("exsitFolder  :  " +existFolder);
+    if(existFolder == false)
+    {
+      $.ajax({
+            type:"POST",
+            url: "{{ url('/addFolder') }}",
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+            data: {"folderName" : newNode.name ,"addFolderDir":addFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
+            success:function(data){
+              alert("create " + "'" + newNode.name + "'" + " folder!");
+            }, 
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert("Already floder exist!");
+            }
 
-        }).done(function() {
-          $( this ).addClass( "done" );
-    });
-
-    $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
-    $('#folder_tree').jstree(true).refresh();
+          }).done(function() {
+            $( this ).addClass( "done" );
+      });
+      $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
+      $('#folder_tree').jstree(true).refresh();
+    }
+    existFolder = false ;
   });
 
   $('#renamefolderBtn').on('click', function() {
