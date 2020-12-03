@@ -41,6 +41,13 @@ class FoldersController extends Controller
 
         return response()->json("nice");
     }
+    // getFolderDirInform
+    public function getFolderDirInform()
+    {
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $data["jsonFolderDirInform"]= $jsonFolderDirInform;
+        return  response()->json($data);
+    }
     public function renameFolder()
     {
         $folderName = $_REQUEST['folderName'];

@@ -239,7 +239,7 @@ function FolderTreeDisplayFunc(){
             }
             addFolderDir = addFolderDir + folder_dir[i] + '/' 
           }
-          alert(addFolderDir);
+          // alert(addFolderDir);
           currentFolderName = folder_dir[folder_dir.length-1] ;
         }
         currentFolderId = data.instance.get_node(data.selected[0]).id;
@@ -270,7 +270,7 @@ $(document).ready(function() {
     newNode.children =[];
     newNode.data={};
     newNode.a_attr ={"href":"google.com"};
-    alert("id :" + newNode.id + "  name: " + newNode.name + "  " );
+    // alert("id :" + newNode.id + "  name: " + newNode.name + "  " );
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     $('#addFolder').modal('hide');
@@ -285,7 +285,7 @@ $(document).ready(function() {
                     },
             data: {"folderName" : newNode.name ,"addFolderDir":addFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
             success:function(data){
-              alert("create " + "'" + newNode.name + "'" + " folder!");
+              // alert("create " + "'" + newNode.name + "'" + " folder!");
             }, 
             error: function (xhr, ajaxOptions, thrownError) {
               alert("Already floder exist!");
@@ -304,9 +304,9 @@ $(document).ready(function() {
     $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
     var rename = $('#renamefolderInput').val();
     updateNodeInTree(jsonFolderDirInform[0], currentFolderId, rename);
-    $('#folder_tree').jstree(true).refresh();
     $('#renameFolder').modal('hide');
     // alert(renameFolderDir +currentFolderName +" change name : " + renameFolderDir +rename );
+    var oldFolderName = currentFolderName;
     $.ajax({
           type:"POST",
           url: "{{ url('/renameFolder') }}",
@@ -315,15 +315,35 @@ $(document).ready(function() {
                   },
           data: {"folderName" : currentFolderName ,"rename": rename,"renameFolderDir":renameFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
           success:function(data){
-            alert("change the name" + " from " +"'"+ currentFolderName + " ' " +" folder " + " to " + "'" + rename +"' " +"folder" +'!');
+            // alert("change the name" + " from " +"'"+ oldFolderName + " ' " +" folder " + " to " + "'" + rename +"' " +"folder" +'!');
           }, 
           error: function (xhr, ajaxOptions, thrownError) {
-            alert("change name faild!");
+            alert("Folder name exist!");
           }
 
         }).done(function() {
+          // $( this ).addClass( "done" );
+
+      });
+      $.ajax({
+          type:"POST",
+          url: "{{ url('/getFolderDirInform') }}",
+          headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+          data: { },
+          success:function(data){
+            jsonFolderDirInform = JSON.parse(data["jsonFolderDirInform"]);
+            console.log(jsonFolderDirInform);
+            $('#folder_tree').jstree(true).settings.core.data = jsonFolderDirInform;
+            $('#folder_tree').jstree(true).refresh();
+          },  
+        }).done(function() {
           $( this ).addClass( "done" );
-    });
+      });
+      console.log(jsonFolderDirInform);
+      // $('#folder_tree').jstree(true).refresh();
+
   });
   
   $('#deletefolderBtn').on('click', function() { 
@@ -331,9 +351,9 @@ $(document).ready(function() {
     deleteNodeFromTree(jsonFolderDirInform[0],currentFolderId);
     $('#deleteFolder').modal('hide');
     $('#folder_tree').jstree(true).refresh();
-    alert("deleteFolderDir "+deleteFolderDir + currentFolderName );
+    // alert("deleteFolderDir "+deleteFolderDir + currentFolderName );
     var deletedFolderName = currentFolderName;
-    alert("cur : " + currentFolderName);
+    // alert("cur : " + currentFolderName);
     $.ajax({
           type:"POST",
           url: "{{ url('/deleteFolder') }}",
@@ -342,7 +362,7 @@ $(document).ready(function() {
                   },
           data: {"folderName" : currentFolderName , "deleteFolderDir":deleteFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
           success:function(data){
-            alert("success " +"'" + deletedFolderName + "'"+ " delete");
+            // alert("success " +"'" + deletedFolderName + "'"+ " delete");
           }, 
           error: function (xhr, ajaxOptions, thrownError) {
             alert("delete folder faild");
