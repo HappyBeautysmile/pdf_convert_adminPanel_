@@ -98,9 +98,10 @@ input {
     </div>
   </div>
 </div>
-<script src="{{ asset('js/createProject/jsonData.js') }}" ></script>
+<!-- <script src="{{ asset('js/createProject/jsonData.js') }}" ></script> -->
 <script>
   var srcPdfFileArray = <?php echo js_array($src_pdfFileArray);?>;//convert php array to javascript array
+  var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
   var currentPdfPageIndex =2;
   var sourceDir ="./Home1/uploads/media";
   var folder_dir =["ok"];
@@ -206,21 +207,21 @@ input {
                 return null;
               }
               folder_dir=[];
-              for(var i = 0 ; i < jsonTreeData.length ; i++)
+              for(var i = 0 ; i < jsonFolderDirInform.length ; i++)
               {
-                folder_dir[0] = jsonTreeData[i].name;
-                if(data.instance.get_node(data.selected[0]).id == jsonTreeData[i].id)
+                folder_dir[0] = jsonFolderDirInform[i].name;
+                if(data.instance.get_node(data.selected[0]).id == jsonFolderDirInform[i].id)
                 {
                   break;
                 }
-                if(jsonTreeData[i].children !=null)
+                if(jsonFolderDirInform[i].children !=null)
                 {
-                  getParent(jsonTreeData[i] ,data.instance.get_node(data.selected[0]).id ,0);
+                  getParent(jsonFolderDirInform[i] ,data.instance.get_node(data.selected[0]).id ,0);
                 }
               }
               // alert(folder_dir);
               // $('#selected_data').val( table.row( this ).data()[0]);
-              currentFolder_dir ="./TCPDFCustomize/ResourceData/"
+              currentFolder_dir ="./TCPDFCustomize/"
               var txt_folder_dir=""
               for(var i = 0 ; i < folder_dir.length ; i++)
               {
@@ -265,7 +266,7 @@ input {
         })
         .jstree({
           'core' : {
-          'data' : jsonTreeData
+          'data' : jsonFolderDirInform
         }
         });
     } );
