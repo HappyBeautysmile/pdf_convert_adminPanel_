@@ -26,6 +26,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/createProject','CreateProjectController@index' );
 Route::get('/allPdf','AllPdfController@index' );
 Route::get('/folders','FoldersController@index' );
+Route::post('/addFolder','FoldersController@addFolder')->name('addFolder');
+
+
 Route::get('/data','DataController@index' );
 Route::get('/pictures','PicturesController@index' );
 Route::get('/homePage','HomePageController@index' );
