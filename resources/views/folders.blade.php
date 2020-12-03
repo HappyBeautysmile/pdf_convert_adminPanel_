@@ -212,11 +212,9 @@ function FolderTreeDisplayFunc(){
             txt_folder_dir += folder_dir[i];
             if(folder_dir.length != i + 1){
               txt_folder_dir +=" > " ;
-            }
-            addFolderDir = addFolderDir + folder_dir[i] + '/' 
-            if(folder_dir.length != i + 1){
               renameFolderDir = renameFolderDir + folder_dir[i] + '/' 
             }
+            addFolderDir = addFolderDir + folder_dir[i] + '/' 
           }
           // alert(renameFolderDir);
           currentFolderName = folder_dir[folder_dir.length-1] ;
@@ -280,6 +278,8 @@ $(document).ready(function() {
     updateNodeInTree(jsonFolderDirInform[0], currentFolderId, rename);
     $('#folder_tree').jstree(true).refresh();
     $('#renameFolder').modal('hide');
+    // rename($renameFolderDir.$folderName,$renameFolderDir.$rename);
+    // alert(renameFolderDir +currentFolderName +" change name : " + renameFolderDir +rename );
     $.ajax({
           type:"POST",
           url: "{{ url('/renameFolder') }}",
@@ -288,10 +288,10 @@ $(document).ready(function() {
                   },
           data: {"folderName" : currentFolderName ,"rename": rename,"renameFolderDir":renameFolderDir ,"jsonFolderDirInform" : jsonFolderDirInform},
           success:function(data){
-            alert("change the name" + "from '" + currentFolderName + "'" +"folder" + "to" + "'" + rename +"'" +'!');
+            alert("change the name" + " from " +"'"+ currentFolderName + " ' " +" folder " + " to " + "'" + rename +"' " +"folder" +'!');
           }, 
           error: function (xhr, ajaxOptions, thrownError) {
-            alert("Name is same!");
+            alert("change name faild!");
           }
 
         }).done(function() {
