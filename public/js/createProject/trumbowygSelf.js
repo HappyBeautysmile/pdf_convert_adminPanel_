@@ -5,20 +5,32 @@ $('#trumbowyg-demo').trumbowyg({
         ['undo', 'redo'], // Only supported in Blink browsers
         ['formatting'],
         ['strong', 'em', 'del'],
-        ['superscript', 'subscript'],
-        ['link'],
+        // ['superscript', 'subscript'],
+        // ['link'],
         ['insertImage'],
         ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-        ['unorderedList', 'orderedList'],
-        ['horizontalRule'],
-        ['removeformat'],
+        // ['unorderedList', 'orderedList'],
+        // ['horizontalRule'],
+        // ['removeformat'],
         ['fullscreen'],
         ['foreColor', 'backColor'],
         ['fontfamily'],
         ['fontsize'],
-        ['historyUndo', 'historyRedo'],
+        // ['historyUndo', 'historyRedo'],
         ['template']
-    ]
+    ],
+    plugins: {
+      templates: [
+      {
+              name: 'Template 1',
+              html: '<p>I am a template!</p>'
+          },
+          {
+              name: 'Template 2',
+              html: '<p>I am a different template!</p>'
+         }
+        ]
+      }
 });
 $('#temp').html($('#trumbowyg-demo').trumbowyg('html'));
 // var content = $('#trumbowyg-demo').html();

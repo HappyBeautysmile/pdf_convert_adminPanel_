@@ -50,7 +50,6 @@
         <div style="width:100%;height:600px">
           <!-- One "tab" for each step in the form: -->
           <div class="tab">
-              <h1>Content:</h1>
               <div id="trumbowyg-demo">
               </div>
           </div>
