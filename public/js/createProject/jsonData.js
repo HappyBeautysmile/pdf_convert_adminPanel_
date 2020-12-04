@@ -1,4 +1,4 @@
-var jsonTreeData1 =
+var jsonFolderDirInform1 =
 [
     {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0",    "data":{},
         "a_attr":{"href":"google.com"}
@@ -43,7 +43,7 @@ var jsonTreeData1 =
             "a_attr":{"href":"google.com"}
         }
 ];
-var jsonTreeData =
+var jsonFolderDirInform =
 [
     {"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0",    "data":{},
         "a_attr":{"href":"google.com"}
