@@ -96,13 +96,18 @@
                               <!-- Tab panes -->
                               <div class="col-sm-12 select_lable" style="text-align:left!important">
                                 <div class="tab-content">
-                                  <div class="tab-pane container fade" id="projects">...projects
-                                  </div>
-                                  <div class="tab-pane container fade" id="images">..images.</div>
-                                  <div class="tab-pane container fade" id="allPdf">..allPdf.</div>
-                                  <div class="tab-pane container fade" id="allProject">..allProject.</div>
                                   <div class="tab-pane container active" id="datas_area">
-                                        <table id="datas_table" class="display" width="100%"></table>
+                                    <div style="position:relative">
+                                      <!-- Search form -->
+                                      <div style="width:250px; padding:0 10px;position:absolute ;right:0px ;z-index:10; background-color: white" >
+                                        <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
+                                          <i class="fa fa-search" aria-hidden="true" style="color:#4dd0e1"></i>
+                                          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" id="dataAuthorSerachInput"
+                                            aria-label="Search" style="border: none ; border-bottom:2px solid #4dd0e1; ">
+                                        </form>
+                                      </div>
+                                      <table id="datas_table" class="display" width="100%"></table>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
