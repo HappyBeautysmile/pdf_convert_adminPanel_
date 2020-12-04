@@ -94,32 +94,8 @@
                       <!-- Modal body -->
                       <div class="modal-body modal-content" >
                           <div class="row">
-                              <!-- Nav pills -->
-                              <div class="col-sm-3 select_lable" style="text-align:left!important">
-                                <ul class="nav nav-tabs flex-column">
-                                  <li>
-                                      <ul class="nav nav-pills flex-column">
-                                        <li class="nav-item">
-                                          <a class="nav-link disabled" data-toggle="pill" href="#projects"><i class="fa fa-angle-right"></i> PROJECTS</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link disabled" data-toggle="pill" href="#images"><i class="fa fa-angle-right"></i> IMAGES</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link disabled" data-toggle="pill" href="#allPdf"><i class="fa fa-angle-right"></i> ALL PDF</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link disabled" data-toggle="pill" href="#allProject"><i class="fa fa-angle-right"></i> ALL PROJECT</a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link active" data-toggle="pill" href="#datas_area" id='data_choose_btn'><i class="fa fa-angle-right"></i> DATA</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                  </ul>
-                                </div>
                               <!-- Tab panes -->
-                              <div class="col-sm-9 select_lable" style="text-align:left!important">
+                              <div class="col-sm-12 select_lable" style="text-align:left!important">
                                 <div class="tab-content">
                                   <div class="tab-pane container fade" id="projects">...projects
                                   </div>
