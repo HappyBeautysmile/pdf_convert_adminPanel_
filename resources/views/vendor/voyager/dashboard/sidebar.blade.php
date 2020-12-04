@@ -20,9 +20,9 @@
             <ul class="nav navbar-nav">
                 <li class="">
                 <!-- href="{{ url('/homePage') }} -->
-                    <a target="_self" href="{{ url('/admin/roles') }}">
+                    <!-- <a target="_self" href="{{ url('/admin/roles') }}">
                         <span class="icon voyager-lock"></span> <span class="title">Roles</span>
-                    </a> 
+                    </a>  -->
                     <!---->
                 </li>
                 <li class="">
