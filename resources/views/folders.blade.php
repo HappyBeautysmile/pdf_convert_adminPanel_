@@ -272,9 +272,12 @@ $(document).ready(function() {
     newNode.a_attr ={"href":"google.com"};
     // alert("id :" + newNode.id + "  name: " + newNode.name + "  " );
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
-    if(addFolderDir =="")
+    currentState = $('#selected_folder').val();
+    if(currentState =="" || currentState == undefined)
     {
+      // alert(currentState);
       addFolderDir = "ResourceData/";
+      currentFolderId = 0;
     }
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     $('#addFolder').modal('hide');
@@ -375,6 +378,7 @@ $(document).ready(function() {
         }).done(function() {
           $( this ).addClass( "done" );
     });
+    addFolderDir ="";
   });
 
   $('#selectRename').on('click', function() {
