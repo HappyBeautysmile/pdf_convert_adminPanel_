@@ -97,7 +97,7 @@
                               <!-- Nav pills -->
                               <div class="col-sm-3 select_lable" style="text-align:left!important">
                                 <ul class="nav nav-tabs flex-column">
-                                  <li>HOME
+                                  <li>
                                       <ul class="nav nav-pills flex-column">
                                         <li class="nav-item">
                                           <a class="nav-link disabled" data-toggle="pill" href="#projects"><i class="fa fa-angle-right"></i> PROJECTS</a>
@@ -156,7 +156,7 @@
                       <!-- Modal body -->
                       <div class="modal-body">
                           <ul class="nav nav-tabs flex-column">
-                            <li>HOME
+                            <li>
                                 <div class="well" id="folder_tree"></div>
                               </li>
                             </ul>
@@ -240,9 +240,11 @@
 <script>
   var choosedData = [];
   var dataUrlArray = JSON.parse(<?php echo json_encode($jsonDataInformDir);?>);
+  var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
  
   $('#generator').on('click', function() {
-      var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +"/";
+    // alert("generator: " + dirInform);
+      var requestDirInForm = "./TCPDFCustomize/" + dirInform +"/";
       var fileName = $('#selected_data').val();
       $.ajax({
           type:"POST",
@@ -262,7 +264,7 @@
     })
   $('#viewPdfs').on('click', function() {
       $soureDir = "./Home1/uploads/media/";
-      var requestDirInForm = "./TCPDFCustomize/ResourceData/" + dirInform +'/';
+      var requestDirInForm = "./TCPDFCustomize/" + dirInform +'/';
       var fileName = $('#selected_data').val();
       // alert("soureDir is" + requestDirInForm) ;
       $.ajax({
@@ -286,7 +288,7 @@
     })
   
 </script>
-<script src="{{ asset('js/createProject/jsonData.js') }}" ></script>
+<!-- <script src="{{ asset('js/createProject/jsonData.js') }}" ></script> -->
 <script src="{{ asset('js/createProject/createProjectFunctions.js') }}" ></script>
 <script src="{{ asset('js/createProject/main.js') }}" ></script>
 <script src="{{ asset('js/createProject/trumbowygSelf.js') }}" ></script>

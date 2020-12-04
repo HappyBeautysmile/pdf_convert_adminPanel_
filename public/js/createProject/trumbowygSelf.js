@@ -39,7 +39,7 @@ $('#temp').html($('#trumbowyg-demo').trumbowyg('html'));
         var table = $('#datas_table').DataTable();
         $('#datas_table').on( 'click', 'tr', function () {
           // alert( table.row( this ).data()[0]);
-          currentFolder_dir ="./TCPDFCustomize/ResourceData/"
+          currentFolder_dir ="./TCPDFCustomize/"
           $('#selected_data').val( table.row( this ).data()[0]);
           $("#select_data_name_modal").html( table.row( this ).data()[0]);
           $("#select_data_name").html( table.row( this ).data()[0]);

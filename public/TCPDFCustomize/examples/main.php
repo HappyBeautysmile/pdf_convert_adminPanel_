@@ -178,7 +178,7 @@ $ordernumber = 22 ;
 $pdf->lastPage();
 // $pdf->Output('kuitti'.$ordernumber.'.pdf', 'D');
 // $pdf->Output(__DIR__ .'/images/'. 'kuitti'.$ordernumber.'.pdf', 'F');
-$pdf->Output(__DIR__ .'../../ResourceData/'.$dirInform.'/'.$convertedPdfName[$printID].'.pdf', 'F');
+$pdf->Output(__DIR__ .'../../'.$dirInform.'/'.$convertedPdfName[$printID].'.pdf', 'F');
 
 // Store the file name into variable 
 //============================================================+
