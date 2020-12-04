@@ -42,13 +42,13 @@
                             <div class="form-group">
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
-                                       value="{{ old('name', $dataTypeContent->name ?? '') }}">
+                                       value="{{ old('name', $dataTypeContent->name ?? '') }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">{{ __('voyager::generic.email') }}</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
-                                       value="{{ old('email', $dataTypeContent->email ?? '') }}">
+                                       value="{{ old('email', $dataTypeContent->email ?? '') }}" required>
                             </div>
 
                             <div class="form-group">
@@ -57,7 +57,7 @@
                                     <br>
                                     <small>{{ __('voyager::profile.password_hint') }}</small>
                                 @endif
-                                <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
+                                <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password" required>
                             </div>
 
                             @can('editRoles', $dataTypeContent)
