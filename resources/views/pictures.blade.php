@@ -141,7 +141,7 @@
   </div>
 </div>
 <script>
-  var jsonTreeData =
+  var jsonFolderDirInform =
     [
         {"id":"100","name":"Background","text":"Background","parent_id":"0",    "data":{},
             "a_attr":{"href":"google.com"}
@@ -215,16 +215,16 @@
                 return null;
               }
               folder_dir=[];
-              for(var i = 0 ; i < jsonTreeData.length ; i++)
+              for(var i = 0 ; i < jsonFolderDirInform.length ; i++)
               {
-                folder_dir[0] = jsonTreeData[i].name;
-                if(data.instance.get_node(data.selected[0]).id == jsonTreeData[i].id)
+                folder_dir[0] = jsonFolderDirInform[i].name;
+                if(data.instance.get_node(data.selected[0]).id == jsonFolderDirInform[i].id)
                 {
                   break;
                 }
-                if(jsonTreeData[i].children !=null)
+                if(jsonFolderDirInform[i].children !=null)
                 {
-                  getParent(jsonTreeData[i] ,data.instance.get_node(data.selected[0]).id ,0);
+                  getParent(jsonFolderDirInform[i] ,data.instance.get_node(data.selected[0]).id ,0);
                 }
               }
               // alert(folder_dir);
@@ -245,7 +245,7 @@
         })
         .jstree({
           'core' : {
-          'data' : jsonTreeData
+          'data' : jsonFolderDirInform
         }
         });
     } );
