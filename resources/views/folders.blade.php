@@ -272,6 +272,10 @@ $(document).ready(function() {
     newNode.a_attr ={"href":"google.com"};
     // alert("id :" + newNode.id + "  name: " + newNode.name + "  " );
     // console.log("current jsonFolderDirInform :" + jsonFolderDirInform);
+    if(addFolderDir =="")
+    {
+      addFolderDir = "ResourceData/";
+    }
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
     $('#addFolder').modal('hide');
     // alert("exsitFolder  :  " +existFolder);
