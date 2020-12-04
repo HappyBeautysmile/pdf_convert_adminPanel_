@@ -43,6 +43,7 @@
                 $('#dirInform').val(dirInform);
                 }
             }
+            // alert("dirInform : " + dirInform);
             // var date = new Date;
         
             // var seconds = date.getSeconds();
