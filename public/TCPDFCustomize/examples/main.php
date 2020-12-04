@@ -67,125 +67,79 @@ function formatJavaScript($string, $doubleQuotesContext = true, $addQuotes = fal
     return $string;
         
 }
+
+class MYPDF extends TCPDF {
+
+    //Page header
+    public function Header() {
+    }
+
+    // Page footer
+    public function Footer() {
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 8);
+        // Page number
+        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+    }
+}
+
 function pdfConvertFunc($printID)
 {
-$htmldata = ($_REQUEST["htmldata"]);
-$dirInform =($_REQUEST["dirInform"]);
-$convertedPdfName =($_REQUEST["convertedPdfName"]);
-// create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $htmldata = ($_REQUEST["htmldata"]);
+    $dirInform =($_REQUEST["dirInform"]);
+    $convertedPdfName =($_REQUEST["convertedPdfName"]);
+    // create new PDF document
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-// set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle($convertedPdfName[$printID]);
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+    // set document information
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('Nicola Asuni');
+    $pdf->SetTitle($convertedPdfName[$printID]);
+    $pdf->SetSubject('TCPDF Tutorial');
+    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
-// set default header data
-// $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
+    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+        require_once(dirname(__FILE__).'/lang/eng.php');
+        $pdf->setLanguageArray($l);
+    }
 
-// // set header and footer fonts
-// $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-// $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    // ---------------------------------------------------------
 
-// // set default monospaced font
-// $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    // set font
+    $pdf->SetFont('dejavusans', '', 10);
 
-// // set margins
-// $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-// $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-// $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    // add a page
+    $pdf->AddPage();
 
-// // set auto page breaks
-// $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+    // writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
+    // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
-// // set image scale factor
-// $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-	require_once(dirname(__FILE__).'/lang/eng.php');
-	$pdf->setLanguageArray($l);
-}
-
-// ---------------------------------------------------------
-
-// set font
-$pdf->SetFont('dejavusans', '', 10);
-
-// add a page
-$pdf->AddPage();
-
-// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
-// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
-
-// create some HTML content
+    // create some HTML content
 
 
-///----------------1D Barcode---------------------
+    ///----------------1D Barcode---------------------
 
-$barcodenum = '';
-for($item = 0; $item<32; $item++)
-{
-	$barcodenum .= rand(0,9);
-}
+    $barcodenum = '';
+    for($item = 0; $item<32; $item++)
+    {
+        $barcodenum .= rand(0,9);
+    }
 
-$params = $pdf->serializeTCPDFtagParameters(array($barcodenum, 'C128C', '', '', 0, 0, 0.2, array('position'=>'S', 'border'=>false, 'padding'=>4, 'fgcolor'=>array(0,0,0), 'bgcolor'=>array(255,255,255), 'text'=>false, 'font'=>'helvetica', 'fontsize'=>8, 'stretchtext'=>2), 'N'));    
-$str='<table cellspacing="0" cellpadding="1" border="0">            
-<tr> 
-    <td align="left">barcode</td>
-</tr>
-<tr> 
-    <td align="center" style="padding-left:5px;">';
-    $str .= '<tcpdf method="write1DBarcode" params="'.$params.'" />';
-    $str .='</td>
-</tr>
-</table>';
+    $params = $pdf->serializeTCPDFtagParameters(array($barcodenum, 'C128C', '', '', 0, 0, 0.2, array('position'=>'S', 'border'=>false, 'padding'=>4, 'fgcolor'=>array(0,0,0), 'bgcolor'=>array(255,255,255), 'text'=>false, 'font'=>'helvetica', 'fontsize'=>8, 'stretchtext'=>2), 'N'));    
 
-// $pdf->writeHTML($str,true, false,false,false,'left');
-//---------------------2D HTML-----------------------
+    $pdf->writeHTML($htmldata[$printID], true, false, true, false, '');
 
-// $style = array(
-//     'border' => 0,
-//     'vpadding' => '0',
-//     'hpadding' => '0',
-//     'fgcolor' => array(0,0,0),
-//     'bgcolor' => false, //array(255,255,255)
-//     'module_width' => 1, // width of a single module in points
-//     'module_height' => 1 // height of a single module in points
-// );
-// $pdf->write2DBarcode('http://www.tcpdf.org', 'DATAMATRIX', 80, 150, 50, 50, $style, 'N');
-//--------------------------------------------------
+    // Print some HTML Cells
 
-// $q = json_decode($_REQUEST["q"]);
+    $ordernumber = 22 ;
+    // ---------------------------------------------------------
 
 
-// $html ='<p style="color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;"><span style="color: #dcdcaa;">getTrumbowygContent</span></p>WOOWOWOWOOW';
+    $pdf->lastPage();
+    $pdf->Output(__DIR__ .'../../'.$dirInform.'/'.$convertedPdfName[$printID].'.pdf', 'F');
 
-
-// $html = formatJavaScript($html);
-
-// output the HTML content
-$pdf->writeHTML($htmldata[$printID], true, false, true, false, '');
-
-// Print some HTML Cells
-
-$ordernumber = 22 ;
-// ---------------------------------------------------------
-
-
-$pdf->lastPage();
-// $pdf->Output('kuitti'.$ordernumber.'.pdf', 'D');
-// $pdf->Output(__DIR__ .'/images/'. 'kuitti'.$ordernumber.'.pdf', 'F');
-$pdf->Output(__DIR__ .'../../ResourceData/'.$dirInform.'/'.$convertedPdfName[$printID].'.pdf', 'F');
-
-// Store the file name into variable 
-//============================================================+
-// END OF FILE
-//============================================================+
-// file_put_contents('kuitti'.$ordernumber.'.pdf',$pdf);
-// $pdf->Upload('My Post Code.pdf', $pdf->data);
 
 }
 $pdfValue =($_REQUEST["pdfValue"]);

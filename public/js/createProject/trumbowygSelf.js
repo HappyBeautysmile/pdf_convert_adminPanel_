@@ -48,6 +48,19 @@ $('#temp').html($('#trumbowyg-demo').trumbowyg('html'));
                 { title: "Author" }
             ]
         } );
+        var oTable = $('#datas_table').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+        $('#dataAuthorSerachInput').on( 'keyup', function () {
+            oTable
+                .columns( 2 )
+                .search( this.value )
+                .draw();
+        } );
+        $('#dataNameSerachInput').on( 'keyup', function () {
+            oTable
+                .columns( 0 )
+                .search( this.value )
+                .draw();
+        } );
         var table = $('#datas_table').DataTable();
         $('#datas_table').on( 'click', 'tr', function () {
           // alert( table.row( this ).data()[0]);
