@@ -16,11 +16,19 @@
   // echo 'var cities = ', js_array($jsonDataInformDir ), ';';
 ?>
 <style>
+.dataTables_wrapper .dataTables_filter {
+      float: right;
+      text-align: right;
+      visibility: hidden;
+  }
+   .datas_table_length{
+    float: right;
+  }
 </style>
 <div class="container">
   <div class="row" style="margin-top:50px;">
     {{ csrf_field() }}
-    <div class="col-sm-10"> 
+    <div class="col-sm-10" style="position:relative"> 
       <div class="tab-content">
         <div class="tab-pane container active" id="datas_area">
           <div class="text-right" >
@@ -41,17 +49,28 @@
               <input type="submit" value="Upload xlsx" name="submit">
             </form> -->
           </div>
-          <!-- Search form -->
-          <div style="position:relative">
-            <div style="width:250px; padding:0 10px;position:absolute ;right:0px ;z-index:10; background-color: white" >
+          <div >
+          
+
+            <!-- Search  author form -->
+            <div style="width:250px; padding:0 10px; right:0px;top:20px ;z-index:10;float:right; background-color: white ;margin:10px;" >
               <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
                 <i class="fa fa-search" aria-hidden="true" style="color:#4dd0e1"></i>
-                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" id="dataAuthorSerachInput"
+                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Author Search" id="dataAuthorSerachInput"
+                  aria-label="Search" style="border: none ; border-bottom:2px solid #4dd0e1; ">
+              </form>
+            </div>
+            <!-- Search  name form -->
+
+            <div style="width:250px; padding:0 10px; right:0px;top:20px ;z-index:10;float:right; background-color: white ;margin:10px;" >
+              <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
+                <i class="fa fa-search" aria-hidden="true" style="color:#4dd0e1"></i>
+                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Name Search" id="dataNameSerachInput"
                   aria-label="Search" style="border: none ; border-bottom:2px solid #4dd0e1; ">
               </form>
             </div>
             <table id="datas_table" class="display" width="100%"></table>
-          <div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,10 +96,17 @@
                 { title: "Author" }
               ],
           } );
+          
           var oTable = $('#datas_table').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
             $('#dataAuthorSerachInput').on( 'keyup', function () {
                 oTable
                     .columns( 2 )
+                    .search( this.value )
+                    .draw();
+            } );
+            $('#dataNameSerachInput').on( 'keyup', function () {
+                oTable
+                    .columns( 0 )
                     .search( this.value )
                     .draw();
             } );
