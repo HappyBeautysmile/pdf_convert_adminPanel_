@@ -111,7 +111,7 @@
                       
                       <!-- Modal footer -->
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
                       </div>
                       
                     </div>
@@ -139,7 +139,7 @@
                       
                       <!-- Modal footer -->
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
                       </div>
                       
                     </div>
