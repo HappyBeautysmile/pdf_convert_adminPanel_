@@ -27,8 +27,8 @@
                       <div class="control-group">
                           <!-- File Upload --> 
                           {{ csrf_field() }}
-                          <input class="input-file" id="fileInput" type="file" id="fileToUpload" name="fileToUpload">
-                          <button class="btn btn-success" id="wpc_contact">Button</button>
+                          <input class="input-file" id="fileInput" type="file" id="fileToUpload" value="Choose a file" name="fileToUpload">
+                          <button class="btn btn-success" id="wpc_contact">Upload</button>
                       </div>
                   </fieldset>
               </form>           
