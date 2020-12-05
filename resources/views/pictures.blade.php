@@ -31,15 +31,15 @@
 
 <div class="container">
   <div class="row" style="margin-top:50px;">
-	<div class="col-sm-3" style="background:#FFFAF0;border-radius:5px; overflow: scroll; height:550px;">
-		<h3><i class="fa fa-folder-open-o" style="font-size:30x;color:yellow!important"></i> Media Folder</h3>
-      <ul class="nav nav-tabs flex-column bg-light" style="border:2px solid gray!important; overflow: scroll; ">
-        <li>
-          <div class="well" id="folder_tree"  style="height:440px"></div>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-8"> 
+    <!-- <div class="col-sm-3" style="background:#FFFAF0;border-radius:5px; overflow: scroll; height:550px;">
+      <h3><i class="fa fa-folder-open-o" style="font-size:30x;color:yellow!important"></i> Media Folder</h3>
+        <ul class="nav nav-tabs flex-column bg-light" style="border:2px solid gray!important; overflow: scroll; ">
+          <li>
+            <div class="well" id="folder_tree"  style="height:440px"></div>
+          </li>
+        </ul>
+    </div> -->
+    <div class="col-sm-10"> 
       <div class="tab-content">
       <div class="container">
       <form
