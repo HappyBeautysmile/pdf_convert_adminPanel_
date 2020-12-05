@@ -289,7 +289,7 @@ FolderTreeDisplayFunc();
   crossorigin="anonymous"
 ></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="{{ asset('js/imageJs/vendor/jquery.ui.widget.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/vendor/jquery.ui.widget.js') }}" defer></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
 <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
@@ -299,23 +299,23 @@ FolderTreeDisplayFunc();
 <!-- blueimp Gallery script -->
 <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="{{ asset('js/imageJs/jquery.iframe-transport.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.iframe-transport.js') }}" defer></script> 
 <!-- The basic File Upload plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload.js') }}" defer></script>
 <!-- The File Upload processing plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-process.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-process.js') }}" defer></script> 
 <!-- The File Upload image preview & resize plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-image.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-image.js') }}" defer></script> 
 <!-- The File Upload audio preview plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-audio.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-audio.js') }}" defer></script> 
 <!-- The File Upload video preview plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-video.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-video.js') }}" defer></script> 
 <!-- The File Upload validation plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-validate.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-validate.js') }}" defer></script> 
 <!-- The File Upload user interface plugin -->
-<script src="{{ asset('js/imageJs/jquery.fileupload-ui.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/jquery.fileupload-ui.js') }}" defer></script> 
 <!-- The main application script -->
-<script src="{{ asset('js/imageJs/demo.js') }}" defer></script> -->
+<script src="{{ asset('js/imageJs/demo.js') }}" defer></script> 
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 <!--[if (gte IE 8)&(lt IE 10)]>
   <script src="js/cors/jquery.xdr-transport.js"></script>
