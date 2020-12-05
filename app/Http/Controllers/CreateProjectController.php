@@ -17,10 +17,10 @@ class CreateProjectController extends Controller
     }
     public function index()
     {
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt");
         $data["jsonDataInformDir"]= $jsonDataInformDir;
 
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
 
         $data["page_flg"]="createProject";
@@ -33,7 +33,7 @@ class CreateProjectController extends Controller
         $fileName = $_REQUEST['fileName'];
         $src_pdfFileArray = scandir($soureDir,0);
 
-        $jsonDataDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt");
+        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/".$fileName.".txt");
         $jsonData = json_decode($jsonDataDir);
 
         return response()->json(array('src_pdfFileArray' => $src_pdfFileArray, 'jsonData' =>  $jsonData));
@@ -42,7 +42,7 @@ class CreateProjectController extends Controller
 
         $fileName = $_REQUEST['fileName'];
 
-        $jsonDataDir = file_get_contents("./TCPDFCustomize/ResourceData/DATA/2020/Janvier/".$fileName.".txt");
+        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/".$fileName.".txt");
         $jsonData = json_decode($jsonDataDir);
 
         return response()->json(array('jsonData' =>  $jsonData));
