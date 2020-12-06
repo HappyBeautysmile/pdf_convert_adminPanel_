@@ -17,7 +17,7 @@ class CreateProjectController extends Controller
     }
     public function index()
     {
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $data["jsonDataInformDir"]= $jsonDataInformDir;
 
         $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/jsonFolderDirInform.txt");
