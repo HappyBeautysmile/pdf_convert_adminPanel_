@@ -18,7 +18,7 @@ class AllPdfController extends Controller
     public function index()
     {
         $data["page_flg"]="allPdf";
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
         return view('all_pdf',$data);
     }

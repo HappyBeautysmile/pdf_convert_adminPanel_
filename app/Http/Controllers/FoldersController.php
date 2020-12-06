@@ -24,7 +24,7 @@ class FoldersController extends Controller
      */
     public function index()
     {
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
         $data["page_flg"]="folders";
         return view('folders',$data);
@@ -37,14 +37,14 @@ class FoldersController extends Controller
         mkdir("./TCPDFCustomize/".$addFolderDir.$folderName,0777);
 
         $json_data = json_encode($jsonFolderDirInform);
-        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
+        file_put_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt", $json_data);
 
         return response()->json("nice");
     }
     // getFolderDirInform
     public function getFolderDirInform()
     {
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
         return  response()->json($data);
     }
@@ -56,7 +56,7 @@ class FoldersController extends Controller
         $jsonFolderDirInform = $_REQUEST['jsonFolderDirInform'];
         rename("./TCPDFCustomize/".$renameFolderDir.$folderName,"./TCPDFCustomize/".$renameFolderDir.$rename);
         $json_data = json_encode($jsonFolderDirInform);
-        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
+        file_put_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt", $json_data);
         return response()->json("nice");
     }
     public function deleteFolder()
@@ -76,7 +76,7 @@ class FoldersController extends Controller
         }
         rrmdir("./TCPDFCustomize/".$deleteFolderDir.$folderName);
         $json_data = json_encode($jsonFolderDirInform);
-        file_put_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt", $json_data);
+        file_put_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt", $json_data);
         return response()->json("nice");
     }
 }
