@@ -20,7 +20,7 @@ class CreateProjectController extends Controller
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $data["jsonDataInformDir"]= $jsonDataInformDir;
 
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
 
         $data["page_flg"]="createProject";

@@ -18,7 +18,7 @@ class PicturesController extends Controller
     
     public function index()
     {
-        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/ResourceData/jsonFolderDirInform.txt");
+        $jsonFolderDirInform = file_get_contents("./TCPDFCustomize/DATA/jsonFolderDirInform.txt");
         $data["jsonFolderDirInform"]= $jsonFolderDirInform;
         
         $data["page_flg"]="pictures";
