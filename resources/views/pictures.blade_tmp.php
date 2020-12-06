@@ -63,6 +63,15 @@
               <i class="glyphicon glyphicon-upload"></i>
               <span>Start upload</span>
             </button>
+            <button type="reset" class="btn btn-warning cancel">
+              <i class="glyphicon glyphicon-ban-circle"></i>
+              <span>Cancel upload</span>
+            </button>
+            <button type="button" class="btn btn-danger delete">
+              <i class="glyphicon glyphicon-trash"></i>
+              <span>Delete selected</span>
+            </button>
+            <input type="checkbox" class="toggle" />
             <!-- The global file processing state -->
             <span class="fileupload-process"></span>
           </div>
@@ -90,11 +99,11 @@
               <tr>
                 <th class="th-sm">Image
                 </th>
-                <th class="th-sm">Url
+                <th class="th-sm">Name
+                </th>
+                <th class="th-sm">Name
                 </th>
                 <th class="th-sm">Size
-                </th>
-                <th class="th-sm">Status
                 </th>
               </tr>
              
@@ -226,7 +235,18 @@
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
         <td>
-          uploaded
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
         </td>
     </tr>
   {% } %}

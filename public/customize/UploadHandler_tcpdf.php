@@ -10,7 +10,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-class UploadHandler
+class UploadHandler_tcpdf
 {
 
     protected $options;
@@ -42,7 +42,7 @@ class UploadHandler
     const IMAGETYPE_GIF = 'image/gif';
     const IMAGETYPE_JPEG = 'image/jpeg';
     const IMAGETYPE_PNG = 'image/png';
-    const pdf_image_dir ='/images/';
+
     protected $image_objects = array();
     protected $response = array();
 
@@ -53,9 +53,14 @@ class UploadHandler
             // 'upload_url' => $this->get_full_url().'/files/',
 
 
+
             'script_url' => $this->get_full_url().'/'.$this->basename($this->get_server_var('SCRIPT_NAME')),
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/images/',
-            'upload_url' => $this->get_full_url().'/images/',
+            // 'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/images/',
+            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/TCPDFCustomize/examples/images/',
+            'upload_url' => $this->get_full_url().'/TCPDFCustomize/examples/images/',
+
+            'upload_dir1' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/images/',
+            // 'upload_url' => $this->get_full_url().'/images/',
 
             'input_stream' => 'php://input',
             'user_dirs' => false,
@@ -267,6 +272,20 @@ class UploadHandler
             .$version_path.$file_name;
     }
 
+    protected function get_upload_path_1($file_name = null, $version = null) {
+        $file_name = $file_name ? $file_name : '';
+        if (empty($version)) {
+            $version_path = '';
+        } else {
+            $version_dir = @$this->options['image_versions'][$version]['upload_dir1'];
+            if ($version_dir) {
+                return $version_dir.$this->get_user_path().$file_name;
+            }
+            $version_path = $version.'/';
+        }
+        return $this->options['upload_dir1'].$this->get_user_path()
+            .$version_path.$file_name;
+    }
     protected function get_query_separator($url) {
         return strpos($url, '?') === false ? '?' : '&';
     }
@@ -1153,10 +1172,12 @@ class UploadHandler
         if ($this->validate($uploaded_file, $file, $error, $index, $content_range)) {
             $this->handle_form_data($file, $index);
             $upload_dir = $this->get_upload_path();
+            $upload_dir_1 = $this->get_upload_path_1();
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, $this->options['mkdir_mode'], true);
             }
             $file_path = $this->get_upload_path($file->name);
+            $file_path_1 = $this->get_upload_path_1($file->name);
             $append_file = $content_range && is_file($file_path) &&
                 $file->size > $this->get_file_size($file_path);
             if ($uploaded_file && is_uploaded_file($uploaded_file)) {
@@ -1167,8 +1188,17 @@ class UploadHandler
                         fopen($uploaded_file, 'r'),
                         FILE_APPEND
                     );
+                    file_put_contents(
+                        $file_path_1,
+                        fopen($uploaded_file, 'r'),
+                        FILE_APPEND
+                    );
+                    // copy($file_path, $file_path_1);
+
                 } else {
                     move_uploaded_file($uploaded_file, $file_path);
+                    // copy images
+                    copy($file_path, $file_path_1);
                 }
             } else {
                 // Non-multipart uploads (PUT method support)
@@ -1177,8 +1207,14 @@ class UploadHandler
                     fopen($this->options['input_stream'], 'r'),
                     $append_file ? FILE_APPEND : 0
                 );
+                file_put_contents(
+                    $file_path_1,
+                    fopen($this->options['input_stream'], 'r'),
+                    $append_file ? FILE_APPEND : 0
+                );
             }
-            $file_size = $this->get_file_size($file_path, $append_file);
+
+            $file_size = $this->get_file_size($file_path , $append_file);
             if ($file_size === $file->size) {
                 $file->url = $this->get_download_url($file->name);
                 if ($this->has_image_file_extension($file->name)) {
@@ -1424,6 +1460,16 @@ class UploadHandler
                 // param_name is an array identifier like "files[]",
                 // $upload is a multi-dimensional array:
                 foreach ($upload['tmp_name'] as $index => $value) {
+                   
+                //    $this->handle_file_upload_1(
+                //         $upload['tmp_name'][$index],
+                //         $file_name ? $file_name : $upload['name'][$index],
+                //         $size ? $size : $upload['size'][$index],
+                //         $upload['type'][$index],
+                //         $upload['error'][$index],
+                //         $index,
+                //         $content_range
+                //     );
                     $files[] = $this->handle_file_upload(
                         $upload['tmp_name'][$index],
                         $file_name ? $file_name : $upload['name'][$index],
@@ -1437,6 +1483,19 @@ class UploadHandler
             } else {
                 // param_name is a single object identifier like "file",
                 // $upload is a one-dimensional array:
+             
+                // $this->handle_file_upload_1(
+                //     isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
+                //     $file_name ? $file_name : (isset($upload['name']) ?
+                //         $upload['name'] : null),
+                //     $size ? $size : (isset($upload['size']) ?
+                //         $upload['size'] : $this->get_server_var('CONTENT_LENGTH')),
+                //     isset($upload['type']) ?
+                //         $upload['type'] : $this->get_server_var('CONTENT_TYPE'),
+                //     isset($upload['error']) ? $upload['error'] : null,
+                //     null,
+                //     $content_range
+                // );
                 $files[] = $this->handle_file_upload(
                     isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
                     $file_name ? $file_name : (isset($upload['name']) ?
