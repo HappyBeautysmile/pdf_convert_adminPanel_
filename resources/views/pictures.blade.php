@@ -29,6 +29,9 @@
   <link href="{{ asset('css/imageCss/jquery.fileupload-ui-noscript.css') }}" rel="stylesheet">
 </noscript>
 
+
+
+
 <div class="container">
   <div class="row" style="margin-top:50px;">
     <!-- <div class="col-sm-3" style="background:#FFFAF0;border-radius:5px; overflow: scroll; height:550px;">
@@ -91,8 +94,34 @@
           </div>
         </div>
         <!-- The table listing the files available for upload/download -->
-        <table role="presentation" class="table table-striped">
-          <tbody class="files"></tbody>
+        <table role="presentation" class="table table-striped " id="imageList">
+            <thead>
+              <tr>
+                <th class="th-sm">Image
+                </th>
+                <th class="th-sm">Name
+                </th>
+                <th class="th-sm">Name
+                </th>
+                <th class="th-sm">Size
+                </th>
+              </tr>
+             
+            </thead>
+          <tbody class="files">
+              <tr>
+                <td>Image</td>
+                <td>Image</td>
+                <td>Image</td>
+                <td>Image</td>
+              </tr>
+              <tr>
+                <td>Image</td>
+                <td>Image</td>
+                <td>Image</td>
+                <td>Image</td>
+              </tr>
+            </tbody>
         </table>
       </form>
  
@@ -140,69 +169,9 @@
     </div>
   </div>
 </div>
-<script>
-  var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
-  var findSelectFlag = false ;
-  var imageFolderDir ="" ;
-  function getParent(tree, childNode, index)
-  {
-    var i, res;
-    if (tree!="[object Object]" || !tree.children.length) {
-      return null;
-    }
-    for (var i = 0 ;i < tree.children.length; i++) {
-      if (tree.children[i].id == childNode) {
-        folder_dir[index++] = tree.name ;
-        folder_dir[index++] = tree.children[i].name ;
-        findSelectFlag = true;
-        return tree;
-      }
-      if(tree.children[i].children != null && tree.children[i].children.length > 0){
-        folder_dir[index] = tree.name ;
-        res = getParent(tree.children[i], childNode, index + 1);
-        if (res) {
-          return res;
-        }
-      }
-    }
-    return null;
-  }
-  function FolderTreeDisplayFunc(){
-  $(document).ready(function() {
-    $('#folder_tree')
-      .on("changed.jstree", function (e, data) {
-        folder_dir=[];
-        findSelectFlag = false ;
-        imageFolderDir ="" ;
-        getParent(jsonFolderDirInform[0] ,data.instance.get_node(data.selected[0]).id ,0);
-        var  currentFolderName=" "
-        if(findSelectFlag == true){
-          addFolderDir ="" ,renameFolderDir ="",deleteFolderDir="";
-          for(var i = 0 ; i < folder_dir.length ; i++)
-          {
-            imageFolderDir += folder_dir[i];
-            imageFolderDir +="/" ;
-          }
-          // alert(imageFolderDir);
-          currentFolderName = folder_dir[folder_dir.length-1] ;
-        }
-        currentFolderId = data.instance.get_node(data.selected[0]).id;
-        // $('#selected_folder').val(txt_folder_dir);
-        // $('#renamefolderInput').val(currentFolderName);
-      })
-      .jstree({
-        'core' : {
-        'data' : jsonFolderDirInform
-      }
-      });
-  
-    });
-  }
-FolderTreeDisplayFunc();
-  
-</script>
+
  <!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
+ <script id="template-upload" type="text/x-tmpl">
   {% for (var i=0, file; file=o.files[i]; i++) { %}
       <tr class="template-upload {%=o.options.loadImageFileTypes.test(file.type)?' image':''%}">
           <td>
@@ -240,9 +209,9 @@ FolderTreeDisplayFunc();
   {% } %}
 </script>
     <!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
+<script id="template-download"  type="text/x-tmpl">
   {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download  {%=file.thumbnailUrl?' image':''%}">
+    <tr class="template-download  {%=file.thumbnailUrl?' image':''%}" role="row">
         <td>
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
@@ -283,6 +252,16 @@ FolderTreeDisplayFunc();
   {% } %}
 </script>
 
+<script>
+  var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
+  var findSelectFlag = false ;
+  var imageFolderDir ="" ;
+  $(document).ready(function () {
+      $('#imageList').DataTable();
+      $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
   integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
@@ -320,4 +299,6 @@ FolderTreeDisplayFunc();
 <!--[if (gte IE 8)&(lt IE 10)]>
   <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
+
+
 @endsection

@@ -22,14 +22,14 @@ class DataController extends Controller
     public function index()
     {
 
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $data["page_flg"]="data";
         $data["jsonDataInformDir"]= $jsonDataInformDir;
         return view('data',$data);
     }
     public function xlsxuploadingToJson()
     {
-        $target_dir = "TCPDFCustomize/DATA/2020/";
+        $target_dir = "TCPDFCustomize/DATA/";
         $target_file = $target_dir . 'upload.xlsx';
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -50,7 +50,7 @@ class DataController extends Controller
                 // echo "Sorry, there was an error uploading your file.";
             }
             require realpath(__DIR__.'/Classes/PHPExcel.php');
-            $tmpfname = "./TCPDFCustomize/DATA/2020/upload.xlsx";
+            $tmpfname = "./TCPDFCustomize/DATA/upload.xlsx";
             $excelReader = PHPExcel_IOFactory::createReaderForFile($tmpfname);
             $excelObj = $excelReader->load($tmpfname);
             $worksheet = $excelObj->getSheet();//
@@ -90,7 +90,7 @@ class DataController extends Controller
         // $jsonDataSrcDir = "./TCPDFCustomize/DATA/2020/Janvier/";
         // $src_jsonDataFileArray = scandir($jsonDataSrcDir,0);
         // var_dump($src_jsonDataFileArray);
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
         $fileExist = false ;
 
@@ -101,13 +101,19 @@ class DataController extends Controller
                 $fileExist = true ;
             }
         }
+        // for($i = 0 ; $i < sizeof($jsonDataInform) ; $i++)
+        // {
+        //     if($jsonDataInform[$i].value() == $fileName){
+        //         $fileExist = true ;
+        //     }
+        // }
         if($fileExist == false)
         {
             array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name));
             $json_data = json_encode($jsonDataInform);
-            file_put_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt", $json_data);
+            file_put_contents("./TCPDFCustomize/DATA/jsonDataInform.txt", $json_data);
         }     
-        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/2020/Janvier/jsonDataInform.txt");
+        $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
        
 

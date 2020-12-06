@@ -60,7 +60,7 @@ input {
                     <input type="text" class="form-control"  style= "font-size:20px; padding:10px" value="New Folder" placeholder="insert a new folder name.." id = "addfolderInput">
                     <div class="input-group-append">
                       <button type="button" class="btn btn-primary"   style="width:80px" id = "addfolderBtn">Okay</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> -->
                     </div>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ input {
                     <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename.."  id = "renamefolderInput">
                     <div class="input-group-append">
                       <button type="button" class="btn btn-primary"   style="width:80px" id ="renamefolderBtn">Okay</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> -->
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ input {
                   <p id="folderDeleteSentence">Are you sure you want to delete</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                  <!-- <button type="button" class="btn btn-success" data-dismiss="modal">No</button> -->
                   <button type="button" class="btn btn-danger"  id = "deletefolderBtn">Delete</button>
                 </div>
               </div>
