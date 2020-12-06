@@ -33,16 +33,18 @@ class CreateProjectController extends Controller
         $fileName = $_REQUEST['fileName'];
         $src_pdfFileArray = scandir($soureDir,0);
 
-        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/jsonData".$fileName.".txt");
+        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/jsonData/".$fileName.".txt");
         $jsonData = json_decode($jsonDataDir);
 
         return response()->json(array('src_pdfFileArray' => $src_pdfFileArray, 'jsonData' =>  $jsonData));
     }
+
+
     public function pdfGenerate(){
 
         $fileName = $_REQUEST['fileName'];
 
-        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/jsonData".$fileName.".txt");
+        $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/jsonData/".$fileName.".txt");
         $jsonData = json_decode($jsonDataDir);
 
         return response()->json(array('jsonData' =>  $jsonData));
