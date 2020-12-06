@@ -71,14 +71,14 @@
                                     @endphp
                                     @include('voyager::formfields.relationship')
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="additional_roles" required>{{ __('voyager::profile.roles_additional') }}</label>
                                     @php
                                         $row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();
                                         $options = $row->details;
                                     @endphp
                                     @include('voyager::formfields.relationship')
-                                </div>
+                                </div> -->
                             @endcan
                             @php
                             if (isset($dataTypeContent->locale)) {
@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <div class="panel panel panel-bordered panel-warning">
                         <div class="panel-body">
                             <div class="form-group">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <button type="submit" class="btn btn-primary pull-right save">
