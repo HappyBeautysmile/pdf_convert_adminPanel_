@@ -96,27 +96,28 @@ class DataController extends Controller
 
         $currentDay=date('y/m/d');
         // echo "time is " .  $currentDay;
-        foreach ($jsonDataInform as $value) {
-            if($value[0] == $fileName){
-                $fileExist = true ;
-            }
-        }
-        // for($i = 0 ; $i < sizeof($jsonDataInform) ; $i++)
-        // {
-        //     if($jsonDataInform[$i].value() == $fileName){
+        // foreach ($jsonDataInform as $value) {
+        //     if($value[0] == $fileName){
         //         $fileExist = true ;
         //     }
         // }
+        for($i = 0; $i < sizeof($jsonDataInform) ;$i++)
+        {
+            if($jsonDataInform[$i][0] ==$fileName){
+                $fileExist = true ;
+                $jsonDataInform[$i][1] = $currentDay;
+            }
+        }
         if($fileExist == false)
         {
             array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name));
-            $json_data = json_encode($jsonDataInform);
-            file_put_contents("./TCPDFCustomize/DATA/jsonDataInform.txt", $json_data);
         }     
+        $json_data = json_encode($jsonDataInform);
+        file_put_contents("./TCPDFCustomize/DATA/jsonDataInform.txt", $json_data);
+
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
        
-
         // var_dump($jsonDataInform);
         return response()->json($jsonDataInformDir);
         // $data["page_flg"]="data";
