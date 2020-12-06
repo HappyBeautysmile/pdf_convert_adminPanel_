@@ -34,7 +34,7 @@
             }
             var pdfValue = htmldata.length;
             dirInform="" ;
-            // var dirInform = 'DATA/jsonData';
+            // var dirInform = 'DATA/jsonData/';
             for(var i = 0 ; i < folder_dir.length ; i++)
             {
                 dirInform += folder_dir[i];

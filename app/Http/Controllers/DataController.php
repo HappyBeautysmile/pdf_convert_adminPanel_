@@ -79,15 +79,15 @@ class DataController extends Controller
                 ];
             }
             $json_data = json_encode($data);
-            file_put_contents("./TCPDFCustomize/DATA/jsonData".$fileName.".txt", $json_data);
+            file_put_contents("./TCPDFCustomize/DATA/jsonData/".$fileName.".txt", $json_data);
           
             // Recovering
-            // $the_data = file_get_contents("./TCPDFCustomize/DATA/jsonData".$fileName.".txt");
+            // $the_data = file_get_contents("./TCPDFCustomize/DATA/jsonData/".$fileName.".txt");
             // $the_array = json_decode($the_data);
             // echo  $the_data;
             // echo  Auth::user()->name;
         }
-        // $jsonDataSrcDir = "./TCPDFCustomize/DATA/jsonData";
+        // $jsonDataSrcDir = "./TCPDFCustomize/DATA/jsonData/";
         // $src_jsonDataFileArray = scandir($jsonDataSrcDir,0);
         // var_dump($src_jsonDataFileArray);
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");

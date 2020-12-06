@@ -1,1 +1,1 @@
-[["exemple_data_EXCEL","20\/11\/29","admin"],["test","20\/11\/29","admin"],["sample","20\/11\/30","admin"],["sample_100","20\/12\/04","member"],["test_vitaily","20\/12\/04","member1"],["test_vitaily - Copy","20\/12\/04","Admin"],["sample_test","20\/12\/05","Admin"],["test_vitaily","20\/12\/06","Admin"],["test_vitaily","20\/12\/06","Admin"]]
+[["test_vitaily","20\/12\/06","Admin"]]
