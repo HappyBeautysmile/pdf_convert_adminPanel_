@@ -100,19 +100,7 @@
              
             </thead>
           <tbody class="files">
-              <tr>
-                <td>Image</td>
-                <td>Image</td>
-                <td>Image</td>
-                <td>Image</td>
-              </tr>
-              <tr>
-                <td>Image</td>
-                <td>Image</td>
-                <td>Image</td>
-                <td>Image</td>
-              </tr>
-            </tbody>
+          </tbody>
         </table>
       </form>
  
@@ -236,10 +224,10 @@
   var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
   var findSelectFlag = false ;
   var imageFolderDir ="" ;
-  $(document).ready(function () {
-      $('#imageList').DataTable();
-      $('.dataTables_length').addClass('bs-select');
-    });
+  // $(document).ready(function () {
+  //     $('#imageList').DataTable();
+  //     $('.dataTables_length').addClass('bs-select');
+  //   });
 </script>
 
 <script
