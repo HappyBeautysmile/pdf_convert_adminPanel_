@@ -276,7 +276,7 @@ $(document).ready(function() {
     if(currentState =="" || currentState == undefined)
     {
       // alert(currentState);
-      addFolderDir = "ResourceData/";
+      addFolderDir = "DOSSIERS/";
       currentFolderId = 0;
     }
     insertNodeIntoTree(jsonFolderDirInform[0],currentFolderId,newNode)
