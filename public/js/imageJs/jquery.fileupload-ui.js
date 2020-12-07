@@ -497,9 +497,9 @@
       setTimeout(() => {
         var table = $('#imageList').DataTable();
       }, 200);
-      setTimeout(function(){
-        $( "#imageList" ).load();
-      }, 1000);
+      // setTimeout(function(){
+      //   $( "#imageList" ).load();
+      // }, 1000);
 
         return $(this.options.templatesContainer).html(result).children();
       },
