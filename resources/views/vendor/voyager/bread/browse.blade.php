@@ -86,7 +86,7 @@
                                         <?php $i = 0; ?>
                                         @foreach($dataType->browseRows as $row)
                                         <?php $i++ ?>
-                                        @if($i!=4 && $i!=5 && $i!=7)  
+                                        @if($i!=4 && $i!=6 && $i!=7)  
 
                                             <th>
                                                 @if ($isServerSide && $row->type !== 'relationship')
@@ -127,7 +127,7 @@
                                             }
                                             @endphp
                                             <?php $t++;?>
-                                            @if($t!=4 && $t!=5 && $t!=7)  
+                                            @if($t!=4 && $t!=6 && $t!=7)  
                                             <td>
                                                 @if (isset($row->details->view))
                                                     @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse', 'view' => 'browse', 'options' => $row->details])

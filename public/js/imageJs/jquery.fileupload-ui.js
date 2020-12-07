@@ -10,6 +10,7 @@
  */
 
 /* global define, require */
+
 (function (factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -494,13 +495,8 @@
       }
       
       setTimeout(() => {
-        $('#imageList').DataTable({});
+        $('#imageList').DataTable();
       }, 1000)
-      // if(reload == true)
-      // {
-      //   location.reload();
-      //   reload = false ;
-      // }
       // $('#imageList').data.reload();
 
         return $(this.options.templatesContainer).html(result).children();
@@ -513,12 +509,10 @@
     },
 
     _renderUpload: function (files) {
-      // reload = true ;
       return this._renderTemplate(this.options.uploadTemplate, files);
     },
 
     _renderDownload: function (files) {
-      // reload = true ;
       return this._renderTemplate(this.options.downloadTemplate, files)
         .find('a[download]')
         .each(this._enableDragToDesktop)
@@ -720,7 +714,6 @@
           options.uploadTemplate = tmpl(options.uploadTemplateId);
         }
         if (options.downloadTemplateId) {
-
           options.downloadTemplate = tmpl(options.downloadTemplateId);
         }
       }
