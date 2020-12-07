@@ -224,6 +224,8 @@
   var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
   var findSelectFlag = false ;
   var imageFolderDir ="" ;
+  var reload = false ;
+
   // $(document).ready(function () {
   //     $('#imageList').DataTable();
   //     $('.dataTables_length').addClass('bs-select');

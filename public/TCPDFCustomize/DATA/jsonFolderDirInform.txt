@@ -1,1 +1,1 @@
-[{"id":"0","name":"DOSSIERS","text":"DOSSIERS","parent_id":"111","state":{"opened":"true"}}]
+[{"id":"0","name":"DOSSIERS","text":"DOSSIERS","parent_id":"111","state":{"opened":"true"},"children":[{"id":"1607323414090","name":"New Folder","text":"New Folder","parent_id":"0","a_attr":{"href":"google.com"}},{"id":"1607323419128","name":"test","text":"test","a_attr":{"href":"google.com"}}]}]
