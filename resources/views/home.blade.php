@@ -2,38 +2,30 @@
 
 @section('content')
 <style>
-ul > li > a{
-    font-size:20px;   
-    border:none!important;
-}
-ul > li > a.active{
-  color:white!important;
-}
-ul{
-  border:none!important;
-}
+
 </style>
-<nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
+<link href="{{ asset('css/menuBarCss.css') }}" rel="stylesheet">
+<nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm" id="navMenuBar">
   <div class="container" >
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" id="menuBar">
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='homePage'?'active':''}}"  href="{{ url('/homePage') }}">Home PAGE</a>
+        <a class="nav-link  {{ $page_flg =='homePage'?'active':''}}"  href="{{ url('/homePage') }}">Home PAGE</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='createProject'?'active':''}}" href="{{ url('/createProject') }}" >CREAT PROJECT</a>
+        <a class="nav-link {{ $page_flg =='createProject'?'active':''}}" href="{{ url('/createProject') }}" >CREAT PROJECT</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='pictures'?'active':''}}" href="{{ url('/pictures') }}">PICTURES</a>
+        <a class="nav-link {{ $page_flg =='pictures'?'active':''}}" href="{{ url('/pictures') }}">PICTURES</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='allPdf'?'active':''}}"  href="{{ url('/allPdf') }}">ALL PDF</a>
+        <a class="nav-link {{ $page_flg =='allPdf'?'active':''}}"  href="{{ url('/allPdf') }}">ALL PDF</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='data'?'active':''}}"  href="{{ url('/data') }}">DATA</a>
+        <a class="nav-link {{ $page_flg =='data'?'active':''}}"  href="{{ url('/data') }}">DATA</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link bg-success {{ $page_flg =='folders'?'active':''}}"  href="{{ url('/folders') }}">FOLDERS</a>
+        <a class="nav-link {{ $page_flg =='folders'?'active':''}}"  href="{{ url('/folders') }}">FOLDERS</a>
       </li>
     </ul>
   </div>

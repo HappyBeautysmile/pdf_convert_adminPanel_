@@ -2,7 +2,8 @@
     function pdfConvertFunc(){
         console.log(choosedData[0]);
         // alert("chooseData  " + choosedData[0]);
-
+        document.getElementById("pdfConvertFinished").style.display = "none";
+        document.getElementById("pdfConverting").style.display = "inline";
         $('#pdfConvertModal').modal({
             backdrop: false            
         });
@@ -59,11 +60,12 @@
                 data: {"htmldata": htmldata,"convertedPdfName" : convertedPdfName ,"dirInform" :dirInform ,"pdfValue" : pdfValue}
                 }).done(function() {
                 $( this ).addClass( "done" );
+                // alert("finished");
+                // pdfConvertFinished();
+                setTimeout(pdfConvertFinished, 1000);
             });
         });
-        document.getElementById("pdfConvertFinished").style.display = "none";
-        document.getElementById("pdfConverting").style.display = "inline";
-        setTimeout(pdfConvertFinished, 1000);
+
     }
     function pdfConvertFinished() {
         document.getElementById("pdfConvertFinished").style.display = "inline";
