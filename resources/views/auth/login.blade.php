@@ -58,9 +58,10 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <!-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
-                                    </a>
+                                    </a> -->
+                                    <button type="button" class="btn btn-outline-info" onclick="resetPassword()">Connection problem?</button>
                                 @endif
                             </div>
                         </div>
@@ -70,4 +71,10 @@
         </div>
     </div>
 </div>
+<script>
+    function resetPassword()
+    {
+        alert("Thanks for the contact administering the site");
+    }
+</script>
 @endsection

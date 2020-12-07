@@ -1,1 +1,1 @@
-[{"id":"0","name":"DOSSIERS","text":"DOSSIERS","parent_id":"111","state":{"opened":"true"},"children":[{"id":"1607297407398","name":"paints","text":"paints","parent_id":"0","a_attr":{"href":"google.com"},"children":[{"id":"1607297425150","name":"paint","text":"paint","parent_id":"1607297407398","a_attr":{"href":"google.com"}}]}]}]
+[{"id":"0","name":"DOSSIERS","text":"DOSSIERS","parent_id":"111","state":{"opened":"true"}}]
