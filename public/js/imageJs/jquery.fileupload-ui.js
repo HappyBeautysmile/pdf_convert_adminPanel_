@@ -493,8 +493,16 @@
       if (result instanceof $) {
         return result;
       }
-      return $(this.options.templatesContainer).html(result).children();
-    },
+      // page navigation _______________________________________________
+      setTimeout(() => {
+        var table = $('#imageList').DataTable();
+      }, 200);
+      setTimeout(function(){
+        $( "#imageList" ).load();
+      }, 1000);
+
+        return $(this.options.templatesContainer).html(result).children();
+      },
 
     _renderPreviews: function (data) {
       data.context.find('.preview').each(function (index, elm) {
