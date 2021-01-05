@@ -1,0 +1,45 @@
+ul > li > a{  
+    border:none!important;
+	color:#6c757d!important;
+	font-size:17px!important;
+}
+ul > li > a.active{
+  color:#2a303d!important;
+  background-color:  #ffc107!important;
+  font-weight:bold!important;
+}
+ul > li > a:hover{
+  color:#2a303d!important;
+  background-color:  #ffc107!important;
+  opacity: 0.6!important;
+  transition: 0.3s!important;
+}
+ul{
+  border:none!important;
+}
+#navMenuBar{
+    background-color: #ffc107!important;
+}
+#app{
+    background-color: #fafafa!important;
+}
+.trumbowyg{background-color: #ffffff!important;height:650px!important;}
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  margin: 0 2px;
+  border: none;  
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+.step.finish {
+  background-color: #4CAF50;
+}

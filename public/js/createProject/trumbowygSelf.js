@@ -2,9 +2,9 @@
 $('#trumbowyg-demo').trumbowyg({
     btns: [
         ['viewHTML'],
-        ['undo', 'redo'], // Only supported in Blink browsers
+        ['historyUndo', 'historyRedo'],
         ['formatting'],
-        ['strong', 'em', 'del'],
+        ['strong', 'em'],
         // ['superscript', 'subscript'],
         // ['link'],
         ['insertImage'],
@@ -16,18 +16,21 @@ $('#trumbowyg-demo').trumbowyg({
         ['foreColor', 'backColor'],
         ['fontfamily'],
         ['fontsize'],
-        // ['historyUndo', 'historyRedo'],
         ['template']
     ],
     plugins: {
       templates: [
       {
-              name: 'Template 1',
-              html: '<p>I am a template!</p>'
+              name: '#01 Template Test Roni',
+              html: '<table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:28px; line-height: 20px; color:#CC0000;text-align: center;"> JE SUIS TEMPLATE 01 </td> </tr> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:18px; line-height: 20px; color:#CC0000;text-align: center;"> Mon ID est {ID}. <br> Mon nom est {Last name} {First name}. <br> Je vis à {City}. <br> Mon numéro de telephone est {Telephone no}. <br> Mon adresse mail est {E-mail}. <br> Ma date de naissance est le {Birthday_date}. <br> Exemples: <br> {fields_01} <br> {fields_02} <br> {fields_03} <br> {fields_04} <br> {fields_05} <br> {fields_06} <br> {fields_07} <br> {fields_08} <br> {fields_09} <br> {fields_10} <br> </td> </tr> </table>'
           },
           {
-              name: 'Template 2',
-              html: '<p>I am a different template!</p>'
+              name: '#02 Template Test Roni',
+              html: '<table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:28px; line-height: 20px; color:#007E33;text-align: center;"> JE SUIS TEMPLATE 02 </td> </tr> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:18px; line-height: 20px; color:#007E33;text-align: center;"> Mon ID est {ID}. <br> Mon nom est {Last name} {First name}. <br> Je vis à {City}. <br> Mon numéro de telephone est {Telephone no}. <br> Mon adresse mail est {E-mail}. <br> Ma date de naissance est le {Birthday_date}. <br> Exemples: <br> {fields_01} <br> {fields_02} <br> {fields_03} <br> {fields_04} <br> {fields_05} <br> {fields_06} <br> {fields_07} <br> {fields_08} <br> {fields_09} <br> {fields_10} <br> </td> </tr> </table>'
+         },
+		 {
+              name: '#03 Template Test Roni',
+              html: '<table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:28px; line-height: 20px; color:#9933CC;text-align: center;"> JE SUIS TEMPLATE 03 </td> </tr> <tr> <td align="center" valign="top" bgcolor="#ffffff" style="font-family:Arial, sans-serif;font-size:18px; line-height: 20px; color:#9933CC;text-align: center;"> Mon ID est {ID}. <br> Mon nom est {Last name} {First name}. <br> Je vis à {City}. <br> Mon numéro de telephone est {Telephone no}. <br> Mon adresse mail est {E-mail}. <br> Ma date de naissance est le {Birthday_date}. <br> Exemples: <br> {fields_01} <br> {fields_02} <br> {fields_03} <br> {fields_04} <br> {fields_05} <br> {fields_06} <br> {fields_07} <br> {fields_08} <br> {fields_09} <br> {fields_10} <br> </td> </tr> </table>'
          }
         ]
       }

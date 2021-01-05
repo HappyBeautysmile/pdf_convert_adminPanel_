@@ -1,22 +1,8 @@
 @extends('home')
-
 @section('main_area')
 <style>
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-.select_lable{
-  font-size:20px;
-  text-align:right;
-  font-weight: bold;
-}
+.modal-roni{width:95%!important;padding:2rem!important}.modal-roni-button{width:100px!important}
 </style>
-<div class="container">
-
 <script>
   function getSourceFiles()
   {
@@ -46,57 +32,39 @@ input {
   }
 </script>
 <div class="container">
-    <div class="row" style="margin-top:50px;">
-        <div class="col-sm-2 select_lable">Select FOLDER</div>
-        <div class="col-sm-9"> 
-            <p>
-            <input class="col-sm-10" placeholder="select folder..." oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
-            <button type="button" class="btn btn-success btn-lg"name="select_folder_btn"  data-toggle="modal" data-target="#folder" id="viewPdfs" >SELECT</button> 
-            </p>
-        </div>
-    </div>
-    <div class="modal fade" id="folder">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-        
-            <!-- Modal Header -->
-            <div class="modal-header">
-            <h1 class="modal-title">Select Folder</h1>
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <ul class="nav nav-tabs flex-column">
-                <li>HOME
-                    <div class="well" id="folder_tree"></div>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-            </div>
-            
-        </div>
-    </div>
-</div>
-  <center><h2 class="text-success">PDF Preview</h2></center>
-  <div class="row">
-    <div class="col-sm-4" style="">
-      <div class="" style="height: 50%;padding-top:30px;">
-      </div>
-      <div class="" style="height: 50%;">
-        <button type="button" class="btn btn-outline-info btn-lg" style="float:left" id="backPdfViewBtn" onclick="nextPdfFunc(-1)"><span><i class="fa fa-hand-o-left" style="font-size:25px"></i> BACK </span> </button>
-        <button type="button" class="btn btn-outline-info btn-lg" style="float:right" id="nextPdfViewBtn" onclick="nextPdfFunc(1)"><span>NEXT <i class="fa fa-hand-o-right" style="font-size:25px"></i></span> </button>
-      </div>
-    </div>
-    <div class="col-sm-8" style="">
-      <iframe src="" id="pdfView" width="100%" height="500px">
-      </iframe>
-    </div>
-  </div>
+	<div class="col-md-9 mx-auto">
+		<div class="input-group mb-3" style="margin-top:30px;">
+			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Séléctionnez un dossier" oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
+			<div class="input-group-prepend">
+				<button class="btn btn-primary rounded-right" type="button" name="select_folder_btn" data-toggle="modal" data-target="#folder" id="viewPdfs">Choisir</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="folder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-left">
+			<div class="modal-content modal-roni">
+				<p class="h3 text-left" id="staticBackdropLabel">
+					Choisir un dossier
+				</p>
+				<div class="well" id="folder_tree"></div>
+				<div style="margin-top:20px">
+					<button type="button" class="btn btn-link float-right" data-dismiss="modal" aria-label="Close">Annuler</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top:40px;">
+		<div class="col-md-4 mx-auto">
+			<button type="button" class="btn btn-outline-primary" style="float:left" id="backPdfViewBtn" onclick="nextPdfFunc(-1)"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i> Précedent </span></button>
+			<button type="button" class="btn btn-outline-primary" style="float:right" id="nextPdfViewBtn" onclick="nextPdfFunc(1)"><span>Suivant <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></button>
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 mx-auto" style="margin:20px 0px">
+			<iframe src="" id="pdfView" width="90%" height="777px" class="embed-responsive embed-responsive-21by9 border bg-white"></iframe>
+		</div>
+	</div>
 </div>
 <!-- <script src="{{ asset('js/createProject/jsonData.js') }}" ></script> -->
 <script>
@@ -273,5 +241,4 @@ input {
     
 </script>
 </div>
-
 @endsection

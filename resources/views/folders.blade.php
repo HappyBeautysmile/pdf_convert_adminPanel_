@@ -1,132 +1,73 @@
 @extends('home')
-
 @section('main_area')
 <style>
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-.select_lable{
-  font-size:20px;
-  text-align:right;
-  font-weight: bold;
-}
+.modal-roni{width:95%!important;padding:2rem!important}.modal-roni-button{width:100px!important}
 </style>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
 <div class="container">
-  <div class = "row" style="margin-top:50px;">
-      <div class="col-sm-2 select_lable">Selected FOLDER</div>
-      <div class="col-sm-9"> 
-          <p>
-          <input class="col-sm-10" placeholder="select folder..." oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
-          </p>
-      </div>
-  </div>
-  <div class = "row">
-    <div class="col-sm-7">
-      <ul class="nav nav-tabs flex-column">
-        <li>
-          <div class="well" id="folder_tree" ></div>
-        </li>
-      </ul>
-      </div>
-      <div class="col-sm-5">      
-        <div class="row" style="padding-top:10px">
-          <button type="button" class="btn btn-success btn-lg" style="width:160px" data-toggle="modal" data-target="#addFolder">ADD Folder</button>
-        </div> 
-        <div class="row" style="padding-top:10px">
-          <button type="button" class="btn btn-info btn-lg" style="width:160px" data-toggle="modal" data-target="#renameFolder" id="selectRename">Rename Folder</button>
-        </div> 
-        <div class="row" style="padding-top:10px">
-          <button type="button" class="btn btn-danger btn-lg" style="width:160px" data-toggle="modal" data-target="#deleteFolder" id="selectDelete">Delete Folder</button>
-        </div> 
-
-          <!-- Add New Folder Modal -->
-          <div class="modal fade" id="addFolder" role="dialog">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title"><i class="material-icons" style="font-size:30px;color:#5cb85c">create_new_folder</i></h5>
-                  <span style="font-size:23px;">Add Folder</span>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control"  style= "font-size:20px; padding:10px" value="New Folder" placeholder="insert a new folder name.." id = "addfolderInput">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-primary"   style="width:80px" id = "addfolderBtn">Okay</button>
-                      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Rename Folder Modal -->
-          <div class="modal fade" id="renameFolder" role="dialog">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-
-                <div class="modal-header" >
-                  <h5 class="modal-title"><i class="material-icons" class="text-success" style="font-size:30px;color:#5bc0de">mode_edit</i></h5>
-                  <span style="font-size:23px;">Folder Rename</span>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" style= "font-size:20px; padding:10px"  placeholder="insert that folder rename.."  id = "renamefolderInput">
-                    <div class="input-group-append">
-                      <button type="button" class="btn btn-primary"   style="width:80px" id ="renamefolderBtn">Okay</button>
-                      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Delete Folder Modal -->
-          <div class="modal fade" tabindex="-1" id='deleteFolder'>
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title"> <i class="material-icons" style="font-size:30px;color:#d9534f">delete</i></h5><span style="font-size:23px;">Delete !</span>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p id="folderDeleteSentence">Are you sure you want to delete</p>
-                </div>
-                <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-success" data-dismiss="modal">No</button> -->
-                  <button type="button" class="btn btn-danger"  id = "deletefolderBtn">Delete</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-      </div>
-    </div>
+	<div class = "row" style="margin-top:30px;">
+		<div class="col-md-3">
+			<div style="padding-bottom:10px"><button type="button" class="btn btn-success" style="width:200px" data-toggle="modal" data-target="#addFolder"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un dossier</button></div>
+			<div style="padding-bottom:10px"><button type="button" class="btn btn-danger" style="width:200px;" data-toggle="modal" data-target="#deleteFolder" id="selectDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Suprimmer un dossier</button></div>
+			<div style="padding-bottom:10px"><button type="button" class="btn btn-info" style="width:200px;" data-toggle="modal" data-target="#renameFolder" id="selectRename"><i class="fa fa-refresh" aria-hidden="true"></i> Renommer un dossier</button></div>
+		</div>
+		<div class="col-md-9">
+			<div class="input-group input-group-lg" style="margin-bottom:15px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text text-dark" id="inputGroup-sizing-lg" style="background-color: fafafa;">Vous êtes ici : </span>
+				</div>
+				<input class="form-control bg-light lead" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" oninput="this.className = ''" name="selected_folder" disabled id="selected_folder">
+			</div>
+			<div class="well" id="folder_tree" ></div>
+		</div>
+	</div>
+	<div class="modal fade" id="addFolder" role="dialog">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content modal-roni">
+				<p class="h3 text-left" style="margin-bottom:20px;">
+					 Ajouter un nouveau dossier
+				</p>
+				<div class="well"><input type="text" class="form-control" placeholder="Écrivez le nouveau nom du dossier" id ="addfolderInput" aria-label="Large" value="Nouveau dossier"></div>
+				<div style="margin-top:20px">
+					<button type="button" class="btn btn-primary modal-roni-button float-right" id ="addfolderBtn">Valider</button>
+					<button type="button" class="btn btn-link float-right" data-dismiss="modal" aria-label="Close">Annuler</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" tabindex="-1" id='deleteFolder'>
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content modal-roni">
+				<p class="h3 text-left">
+					Êtes-vous sûr de vouloir supprimer le dossier ?
+				</p>
+				<div style="margin-top:20px">
+					<button type="button" class="btn btn-primary modal-roni-button float-right" id = "deletefolderBtn">Valider</button>
+					<button type="button" class="btn btn-link float-right" data-dismiss="modal" aria-label="Close">Annuler</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="renameFolder" role="dialog">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content modal-roni">
+				<p class="h3 text-left">
+					Renommer un dossier 
+				</p>
+				<div class="well"><input type="text" class="form-control" placeholder="Sélectionnez d'abord un dossier" id = "renamefolderInput" aria-label="Large"></div>
+				<p class="font-italic text-right" style="padding-top:15px">Une fois le dossier renommé, merci d'actualiser la page</p>
+				<div style="margin-top:10px">
+					<button type="button" class="btn btn-primary modal-roni-button float-right" id = "renamefolderBtn">Valider</button>
+					<button type="button" class="btn btn-link float-right" data-dismiss="modal" aria-label="Close">Annuler</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <meta name="_token" content="{!! csrf_token() !!}" />
-
 <script>
 var currentFolderId = 0 ;
 var currentFolderName ="";
 var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
-
-// [{"id":"0","name":"ResourceData","text":"ResourceData","parent_id":"111","state":{"opened":"true"},"children":[{"id":"100","name":"PROJECTS","text":"PROJECTS","parent_id":"0","state":{"selected":"true"},"a_attr":{"href":"google.com"},"childeren":[{"id":"1607023252945","name":"New Folder","text":"New Folder","parent_id":"100","a_attr":{"href":"google.com"}}]},{"id":"200","name":"IMAGES","text":"IMAGES","parent_id":"0","children":[{"id":"1607023060928","name":"New Folder","text":"New Folder","parent_id":"200","a_attr":{"href":"google.com"}},{"id":"1607023201681","name":"new","text":"new","parent_id":"200","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"300","name":"ALL PDF","text":"ALL PDF","parent_id":"0","children":[{"id":"1607023079560","name":"New Folder","text":"New Folder","parent_id":"300","a_attr":{"href":"google.com"}},{"id":"1607023186737","name":"teste","text":"teste","parent_id":"300","a_attr":{"href":"google.com"}},{"id":"1607023194841","name":"new","text":"new","parent_id":"300","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"400","name":"ALL PROJECT","text":"ALL PROJECT","parent_id":"0","children":[{"id":"1607023068377","name":"New Folder","text":"New Folder","parent_id":"400","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}},{"id":"1","name":"DATA","text":"DATA","parent_id":"0","children":[{"id":"2","name":"2020","text":"2020","parent_id":"1","children":[{"id":"7","name":"Janvier","text":"Janvier","parent_id":"2","a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}],"a_attr":{"href":"google.com"}}]
 var existFolder = false ;
 console.log(jsonFolderDirInform);
 function insertNodeIntoTree(node, nodeId, newNode) {
@@ -372,11 +313,11 @@ $(document).ready(function() {
             // alert("success " +"'" + deletedFolderName + "'"+ " delete");
           }, 
           error: function (xhr, ajaxOptions, thrownError) {
-            alert("delete folder faild");
+            alert("Dossier a été supprimé ");
           }
 
         }).done(function() {
-          $( this ).addClass( "done" );
+          $( this ).addClass( "OK" );
     });
     addFolderDir ="";
   });
@@ -386,7 +327,7 @@ $(document).ready(function() {
   });
   $('#selectDelete').on('click', function() {
     if($('#selected_folder').val()==""){
-      var deleteTxt = "Are you sure you want to delete empty?";
+      var deleteTxt = "Voulez-vous vraiment supprimer le vide?";
       $('#folderDeleteSentence').text(deleteTxt);
       var deleteTxt ="";
     }
@@ -397,7 +338,5 @@ $(document).ready(function() {
     }
   });
 });
-
-    
 </script>
 @endsection

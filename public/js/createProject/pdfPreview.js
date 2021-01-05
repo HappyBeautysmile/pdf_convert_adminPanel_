@@ -65,8 +65,9 @@ function currentPdfPageFind(){
     {
       for(var t = 0 ; t < srcPdfFileArray.length ; t++)
       {
+        // console.log('erro' + choosedData[i]['ID']);
+        if(choosedData[i]['ID'] == null) continue;
         var str = choosedData[i]['ID'].toString();
-        // alert(str);
         if((srcPdfFileArray[t]).search(str) > -1 && srcPdfFileArray[t].length == str.length + 4)        
         {
           tmpPdfFileArray[inc++] =srcPdfFileArray[t];

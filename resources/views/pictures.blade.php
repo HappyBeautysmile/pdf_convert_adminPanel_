@@ -1,18 +1,5 @@
 @extends('home')
-
 @section('main_area')
-
-<style>
-  #navigation {
-    margin: 10px 0;
-  }
-  @media (max-width: 767px) {
-    #title,
-    #description {
-      display: none;
-    }
-  }
-</style>
 <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('dist/themes/default/style.min.css') }}" rel="stylesheet">
 <script src="{{ asset('dist/jstree.min.js') }}" defer></script> -->
@@ -29,9 +16,6 @@
   <link href="{{ asset('css/imageCss/jquery.fileupload-ui-noscript.css') }}" rel="stylesheet">
 </noscript>
 
-
-
-
 <div class="container">
   <div class="row" style="margin-top:50px;">
     <!-- <div class="col-sm-3" style="background:#FFFAF0;border-radius:5px; overflow: scroll; height:550px;">
@@ -42,7 +26,7 @@
           </li>
         </ul>
     </div> -->
-    <div class="col-sm-10"> 
+    <div class="col-md-12">
       <div class="tab-content">
       <div class="container">
       <form
@@ -52,20 +36,19 @@
         enctype="multipart/form-data"
       >
         <div class="row fileupload-buttonbar">
-          <div class="col-lg-11">
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button">
-              <i class="glyphicon glyphicon-plus"></i>
-              <span>Add files...</span>
-              <input type="file" name="files[]" multiple />
-            </span>
-            <button type="submit" class="btn btn-primary start">
-              <i class="glyphicon glyphicon-upload"></i>
-              <span>Start upload</span>
-            </button>
-            <!-- The global file processing state -->
-            <span class="fileupload-process"></span>
-          </div>
+			 <div class="col-md-9 mx-auto" style="margin-bottom:30px;">
+				<div class="input-group">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="files[]" multiple>
+						<label class="custom-file-label" for="inputGroupFile04">Choisir une image</label>
+					</div>
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="submit" id="inputGroupFileAddon04"><i class="fa fa-download" aria-hidden="true"></i> Télécharger</button>
+					</div>
+				</div>
+				<!-- The global file processing state -->
+				<span class="fileupload-process"></span>
+			</div>
           <!-- The global progress state -->
           <div class="col-lg-1 fileupload-progress fade">
             <!-- The global progress bar -->
@@ -92,7 +75,7 @@
                 </th>
                 <th class="th-sm">Url
                 </th>
-                <th class="th-sm">Size
+                <th class="th-sm">Taille
                 </th>
                 <th class="th-sm">Status
                 </th>
@@ -231,7 +214,6 @@
   //     $('.dataTables_length').addClass('bs-select');
   //   });
 </script>
-
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
   integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
@@ -269,6 +251,4 @@
 <!--[if (gte IE 8)&(lt IE 10)]>
   <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
-
-
 @endsection

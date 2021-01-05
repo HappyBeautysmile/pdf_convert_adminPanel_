@@ -1,5 +1,4 @@
 @extends('home')
-
 @section('main_area')
 <!-- <h1><?php echo gettype($jsonDataInformDir) ?></h1> -->
 <?php
@@ -24,57 +23,57 @@
    .datas_table_length{
     float: right;
   }
+.inputroni{height: auto;}  
 </style>
 <div class="container">
-  <div class="row" style="margin-top:50px;">
-    {{ csrf_field() }}
-    <div class="col-sm-10" style="position:relative"> 
-      <div class="tab-content">
-        <div class="tab-pane container active" id="datas_area">
-          <div class="text-right" >
-              <form method="POST" id="contact" name="13" class="form-horizontal wpc_contact" novalidate="novalidate" enctype="multipart/form-data">
-                  <fieldset>
-                      <div class="control-group">
-                          <!-- File Upload --> 
-                          {{ csrf_field() }}
-                          <input class="input-file" id="fileInput" type="file" id="fileToUpload" value="Choose a file" name="fileToUpload">
-                          <button class="btn btn-success" id="wpc_contact">Upload</button>
-                      </div>
-                  </fieldset>
-              </form>           
-            <!-- <form action=" {{URL::to('/xlsxuploadingToJson')}}" method="post" enctype="multipart/form-data">
-              Select image to upload:
-              {{ csrf_field() }}
-              <input type="file" name="fileToUpload" id="fileToUpload">
-              <input type="submit" value="Upload xlsx" name="submit">
-            </form> -->
-          </div>
-          <div >
-          
-
-            <!-- Search  author form -->
-            <div style="width:250px; padding:0 10px; right:0px;top:20px ;z-index:10;float:right; background-color: white ;margin:10px;" >
-              <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
-                <i class="fa fa-search" aria-hidden="true" style="color:#4dd0e1"></i>
-                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Author Search" id="dataAuthorSerachInput"
-                  aria-label="Search" style="border: none ; border-bottom:2px solid #4dd0e1; ">
-              </form>
-            </div>
-            <!-- Search  name form -->
-
-            <div style="width:250px; padding:0 10px; right:0px;top:20px ;z-index:10;float:right; background-color: white ;margin:10px;" >
-              <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
-                <i class="fa fa-search" aria-hidden="true" style="color:#4dd0e1"></i>
-                <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Name Search" id="dataNameSerachInput"
-                  aria-label="Search" style="border: none ; border-bottom:2px solid #4dd0e1; ">
-              </form>
-            </div>
-            <table id="datas_table" class="display" width="100%"></table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="row" style="margin-top:50px;">
+		{{ csrf_field() }}
+		<div class="col-md-12" style="position:relative">
+			<div class="tab-content">
+				<div class="tab-pane container active" id="datas_area">
+					<form method="POST" id="contact" name="13" class="form-horizontal wpc_contact" novalidate="novalidate" enctype="multipart/form-data">
+					  <fieldset>
+						  <div class="control-group">
+							  <!-- File Upload --> 
+							  {{ csrf_field() }}
+							<div class="row" >	  
+								<div class="col-md-9 mx-auto">
+									<div class="input-group mb-3 text-left" style="margin:10px 0px;">
+									   <input class="form-control text-left inputroni" id="fileInput" type="file" id="fileToUpload" value="Choose a file" name="fileToUpload">
+									   <div class="input-group-prepend">
+										<button class="btn btn-primary rounded-right" id="wpc_contact"><i class="fa fa-download" aria-hidden="true"></i> Télécharger</button>
+									  </div>
+									</div>
+								</div>
+							</div>
+						  </div>
+					  </fieldset>
+					</form> 
+					<div class="row" style="margin-top:20px; margin-bottom:8px;">
+						<div class="col-md-6 mx-auto">
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+							  </div>
+							  <input type="text" class="form-control" placeholder="Par nom de la data" id="dataNameSerachInput"aria-label="Search">
+							</div>
+						</div>
+						<div class="col-md-6 mx-auto">
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+							  </div>
+							  <input type="text" class="form-control" placeholder="Par le nom de l'auteur" id="dataAuthorSerachInput"aria-label="Search">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mx-auto"><table id="datas_table" class="display" width="100%"></table></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <meta name="_token" content="{!! csrf_token() !!}" />
 <script>
@@ -91,9 +90,9 @@
               paging: true,
               // searching : true,
               columns: [
-                { title: "Name data"},
-                { title: "Create date" },
-                { title: "Author" }
+                { title: "Nom de la Data"},
+                { title: "Date de la création"},
+                { title: "Auteur"}
               ],
           } );
           

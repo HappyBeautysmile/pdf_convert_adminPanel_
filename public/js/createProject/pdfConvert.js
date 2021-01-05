@@ -1,6 +1,7 @@
-    // pdf converting begin **********************
-    function pdfConvertFunc(){
-        console.log(choosedData[0]);
+    
+// pdf converting begin **********************
+    function pdfConvertFuncDivide(index){
+        // console.log(choosedData);
         // alert("chooseData  " + choosedData[0]);
         document.getElementById("pdfConvertFinished").style.display = "none";
         document.getElementById("pdfConverting").style.display = "inline";
@@ -9,31 +10,43 @@
         });
         $(document).ready(function() {
             var trumbowygData = getTrumbowygContent();
-            var htmldata = [];
+            var htmldata = [] ,k = 0;
+            var divideUsers = 100 ;
             // alert(choosedData[0]['Last name']);
-            for(var i = 0 ; i < choosedData.length; i++)
+            // console.log("choosedData.length  :" + choosedData);
+            for(var i = 0 + (index-1) * divideUsers ; i < divideUsers * index; i++)
+            // for(var i = 0 + (inde-1) * divideUsers ; i < choosedData.length; i++)
             {
-                htmldata[i] = trumbowygData ;
-                htmldata[i] = htmldata[i].replace("{ID}", choosedData[i]["ID"]);
-                htmldata[i] = htmldata[i].replace("{Last name}", choosedData[i]["Last name"]);
-                htmldata[i] = htmldata[i].replace("{First name}", choosedData[i]["First name"]);
-                htmldata[i] = htmldata[i].replace("{City}", choosedData[i]["City"]);
-                htmldata[i] = htmldata[i].replace("{Telephone no}", choosedData[i]["Telephone no"]);
-                htmldata[i] = htmldata[i].replace("{E-mail}", choosedData[i]["E-mail"]);
-                htmldata[i] = htmldata[i].replace("{Birthday_date}", choosedData[i]["Birthday_date"]);
-                htmldata[i] = htmldata[i].replace("{fields_01}", choosedData[i]["fields_01"]);
-                htmldata[i] = htmldata[i].replace("{fields_02}", choosedData[i]["fields_02"]);
-                htmldata[i] = htmldata[i].replace("{fields_03}", choosedData[i]["fields_03"]);
-                htmldata[i] = htmldata[i].replace("{fields_04}", choosedData[i]["fields_04"]);
-                htmldata[i] = htmldata[i].replace("{fields_05}", choosedData[i]["fields_05"]);
-                htmldata[i] = htmldata[i].replace("{fields_06}", choosedData[i]["fields_06"]);
-                htmldata[i] = htmldata[i].replace("{fields_07}", choosedData[i]["fields_07"]);
-                htmldata[i] = htmldata[i].replace("{fields_08}", choosedData[i]["fields_08"]);
-                htmldata[i] = htmldata[i].replace("{fields_09}", choosedData[i]["fields_09"]);
-                htmldata[i] = htmldata[i].replace("{fields_10}", choosedData[i]["fields_10"]);
-                convertedPdfName[i] = choosedData[i]["ID"];
+                if(i == choosedData.length) break ;
+                if(choosedData[i] == null) {continue ;}
+                if(choosedData[i]["ID"]==null) 
+                {
+                    // console.log("convert:::" + i);
+                    continue;
+                }
+                htmldata[k] = trumbowygData ;
+                htmldata[k] = htmldata[k].replaceAll("{ID}", choosedData[i]["ID"]);
+                htmldata[k] = htmldata[k].replaceAll("{Last name}", choosedData[i]["Last name"]);
+                htmldata[k] = htmldata[k].replaceAll("{First name}", choosedData[i]["First name"]);
+                htmldata[k] = htmldata[k].replaceAll("{City}", choosedData[i]["City"]);
+                htmldata[k] = htmldata[k].replaceAll("{Telephone no}", choosedData[i]["Telephone no"]);
+                htmldata[k] = htmldata[k].replaceAll("{E-mail}", choosedData[i]["E-mail"]);
+                htmldata[k] = htmldata[k].replaceAll("{Birthday_date}", choosedData[i]["Birthday_date"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_01}", choosedData[i]["fields_01"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_02}", choosedData[i]["fields_02"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_03}", choosedData[i]["fields_03"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_04}", choosedData[i]["fields_04"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_05}", choosedData[i]["fields_05"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_06}", choosedData[i]["fields_06"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_07}", choosedData[i]["fields_07"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_08}", choosedData[i]["fields_08"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_09}", choosedData[i]["fields_09"]);
+                htmldata[k] = htmldata[k].replaceAll("{fields_10}", choosedData[i]["fields_10"]);
+                convertedPdfName[k] = choosedData[i]["ID"];
+                k++;
             }
             var pdfValue = htmldata.length;
+            // console.log('pdfValue   ' + pdfValue);
             dirInform="" ;
             // var dirInform = 'DATA/jsonData/';
             for(var i = 0 ; i < folder_dir.length ; i++)
@@ -62,7 +75,15 @@
                 $( this ).addClass( "done" );
                 // alert("finished");
                 // pdfConvertFinished();
-                setTimeout(pdfConvertFinished, 1000);
+            }).done(function() {
+               if(index * divideUsers < choosedData.length)
+               {
+                    index++;
+                    pdfConvertFuncDivide(index);
+               }
+               else{
+                   setTimeout(pdfConvertFinished, 1000);
+               }
             });
         });
 

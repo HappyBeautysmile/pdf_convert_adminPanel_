@@ -1,15 +1,15 @@
 @extends('home')
-
 @section('main_area')
 <style>
-.video-fluid {
-  width: 100%;
-  height: auto;
-}
 </style>
 <div class="container">
-    <video class="video-fluid z-depth-1" autoplay loop controls muted>
-        <source src="https://mdbootstrap.com/img/video/Sail-Away.mp4" type="video/mp4" />
-    </video>
+	<div class="row" style="margin-top:50px;">
+		<div class="col-md-12">
+			<blockquote class="blockquote">
+			  <p class="h2 text-center">Cette page est en cours de construction <br>mais en attendant vous pouvez regarder la vidéo ci-dessous</p>
+			</blockquote>
+			<iframe class="border" id="ytplayer" type="text/html" width="100%" height="555" src="https://www.youtube.com/embed/tiy7peMH3g8?autoplay=1&disablekb=1&fs=0" frameborder="0" allowfullscreen>
+		</div>
+	</div>
 </div>
 @endsection
