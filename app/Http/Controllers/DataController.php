@@ -92,9 +92,11 @@ class DataController extends Controller
         // var_dump($src_jsonDataFileArray);
         $jsonDataInformDir = file_get_contents("./TCPDFCustomize/DATA/jsonDataInform.txt");
         $jsonDataInform = json_decode($jsonDataInformDir);
+
         $fileExist = false ;
 
-        $currentDay=date('y/m/d');
+        $currentDay=date('y/m/d')." " .date("h:i:sa");
+        $usersValue= $lastRow - 1;
         // echo "time is " .  $currentDay;
         // foreach ($jsonDataInform as $value) {
         //     if($value[0] == $fileName){
@@ -106,11 +108,12 @@ class DataController extends Controller
             if($jsonDataInform[$i][0] ==$fileName){
                 $fileExist = true ;
                 $jsonDataInform[$i][1] = $currentDay;
+                $usersValue[$i][3] =$usersValue;
             }
         }
         if($fileExist == false)
         {
-            array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name));
+            array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name ,$usersValue));
         }     
         $json_data = json_encode($jsonDataInform);
         file_put_contents("./TCPDFCustomize/DATA/jsonDataInform.txt", $json_data);

@@ -58,7 +58,16 @@
 			<button type="button" class="btn btn-outline-primary" style="float:left" id="backPdfViewBtn" onclick="nextPdfFunc(-1)"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i> Précedent </span></button>
 			<button type="button" class="btn btn-outline-primary" style="float:right" id="nextPdfViewBtn" onclick="nextPdfFunc(1)"><span>Suivant <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></button>
 			</button>
-		</div>
+    </div>
+		<div class="col-md-4 mx-auto">
+      <div class="input-group mb-3" >
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Please input pdf name" oninput="this.className = ''" name="inputPdfName"  id="inputPdfName">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary rounded-right" type="button" name="select_pdfName_btn"  id="pdfName_btn">Search</button>
+        </div>
+      </div>
+    </div>
+    
 	</div>
 	<div class="row">
 		<div class="col-md-10 mx-auto" style="margin:20px 0px">

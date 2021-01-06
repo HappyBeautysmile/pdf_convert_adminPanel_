@@ -92,7 +92,8 @@
               columns: [
                 { title: "Nom de la Data"},
                 { title: "Date de la création"},
-                { title: "Auteur"}
+                { title: "Auteur"},
+                { title: "Users"}
               ],
           } );
           

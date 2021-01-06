@@ -21,6 +21,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontsize/trumbowyg.fontsize.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/history/trumbowyg.history.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/template/trumbowyg.template.min.js"></script>
+
+		<script src="{{ asset('js/createProject/trumbowygFontfamily.js') }}" defer></script>
+
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('dist/themes/default/style.min.css') }}" rel="stylesheet">
 		<script src="{{ asset('dist/jstree.min.js') }}" defer></script>
