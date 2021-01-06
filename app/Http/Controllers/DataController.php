@@ -94,8 +94,7 @@ class DataController extends Controller
         $jsonDataInform = json_decode($jsonDataInformDir);
 
         $fileExist = false ;
-
-        $currentDay=date('y/m/d')." " .date("h:i:sa");
+        $currentDay=date('y/m/d')." " .date("H:i", strtotime(date("h:i")));;
         $usersValue= $lastRow - 1;
         // echo "time is " .  $currentDay;
         // foreach ($jsonDataInform as $value) {
