@@ -41,6 +41,9 @@ Route::get('/portfolio','PicturesController@index' );
 Route::post('/imageFilesInform', 'PicturesController@imageFilesInform')->name('imageFilesInform');
 
 Route::get('/dashboard','HomePageController@index' );
+Route::post('/newTask', 'HomePageController@newTask')->name('create-new-task');
+
+
 Route::post('/operating', 'CreateProjectController@operating_pdf')->name('operating');
 Route::post('/pdfGenerate', 'CreateProjectController@pdfGenerate')->name('pdfGenerate');
 Route::post('/pdfInformArray', 'AllPdfController@pdfInformArray')->name('pdfInformArray');

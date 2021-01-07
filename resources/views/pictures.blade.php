@@ -79,8 +79,8 @@
                 </th>
                 <th class="th-sm">Status
                 </th>
-                <th class="th-sm">Author
-                </th>
+                <!-- <th class="th-sm">Author
+                </th> -->
               </tr>
              
             </thead>
@@ -169,8 +169,8 @@
                   </button>
               {% } %}
           </td>
-          <td>
-          </td>
+          <!-- <td>
+          </td> -->
       </tr>
   {% } %}
 </script>
@@ -203,9 +203,9 @@
         <td>
           uploaded
         </td>
-        <td>
+        <!-- <td>
           <span>{%=file.author%}</span>
-        </td>
+        </td> -->
     </tr>
   {% } %}
 </script>

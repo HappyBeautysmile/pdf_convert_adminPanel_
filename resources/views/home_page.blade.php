@@ -164,7 +164,8 @@
 		</table>
     </div>
   </div>
-	<div class="modal fade" id="createTask" role="dialog">
+	<form  class="modal fade" action="{{route('create-new-task')}}" id="createTask" role="dialog" method="POST" enctype="multipart/form-data">
+		{{csrf_field()}}
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content modal-roni">
 				<p class="h3 text-left" style="margin-bottom:20px;">
@@ -178,7 +179,7 @@
 							Nom du projet
 						</div>
 						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="Nom du projet" id ="newTaskName" aria-label="Large" value="" require>
+							<input type="text" class="form-control" placeholder="Nom du projet" id ="task_name" aria-label="Large" name="task_name" value="" required>
 						</div>
 					</div>
 					<div class="row">
@@ -188,7 +189,7 @@
 						No ticket
 						</div>
 						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="No ticket" id ="ticketId" aria-label="Large" value="" require>
+							<input type="text" class="form-control" placeholder="No ticket" id ="task_ticket"  name ="task_ticket" aria-label="Large" value="" required>
 						</div>
 					</div>
 					<div class="row">
@@ -199,7 +200,7 @@
 						</div>
 						<div class="col-md-8">
 							<!-- <input type="text" class="form-control" placeholder="Nom du projet" id ="startDate" aria-label="Large" value="Nom du projet"> -->
-							<input data-date-format="mm/dd/yyyy" id="datepicker">
+							<input data-date-format="mm/dd/yyyy" id="datepicker" name="datepicker">
 						</div>
 						
 					</div>
@@ -212,17 +213,17 @@
 						</div>
 						<div class="col-md-8">
 							<!-- <input type="text" class="form-control" placeholder="Nom du projet" id ="endDate" aria-label="Large" value="Nom du projet"> -->
-							<input data-date-format="mm/dd/yyyy" id="datepicker_2">
+							<input data-date-format="mm/dd/yyyy" id="datepicker_2" name="datepicker_2">
 						</div>
 					</div>
 				</div>
 				<div style="margin-top:20px">
-					<button type="button" class="btn btn-primary modal-roni-button float-right" id ="addfolderBtn">Valider</button>
+					<button type="submit" class="btn btn-primary modal-roni-button float-right" id ="addfolderBtn" >Valider</button>
 					<button type="button" class="btn btn-link float-right" data-dismiss="modal" aria-label="Close">Annuler</button>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form >
 
 
 	<div class="modal fade" id="editTask" role="dialog">
