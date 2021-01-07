@@ -61,9 +61,9 @@
     </div>
 		<div class="col-md-4 mx-auto">
       <div class="input-group mb-3" >
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Please input pdf name" oninput="this.className = ''" name="inputPdfName"  id="inputPdfName">
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Please input pdf name"  name="inputPdfName"  id="inputPdfName">
         <div class="input-group-prepend">
-          <button class="btn btn-primary rounded-right" type="button" name="select_pdfName_btn"  id="pdfName_btn">Search</button>
+          <button class="btn btn-primary rounded-right" type="button" name="select_pdfName_btn" onclick="searchPdfFunc()"  id="pdfName_btn">Search</button>
         </div>
       </div>
     </div>
@@ -105,6 +105,7 @@
   }
   function nextPdfFunc(index)
   {
+    // console.log("currentPdfPageIndex :"  + currentPdfPageIndex);
     // alert("nextStep" : currentPdfPageIndex + index) ;
     if(srcPdfFileArray.length > 3){
       $(document).ready(function() {
@@ -137,7 +138,18 @@
         });
     }
   }
-
+  function searchPdfFunc()
+  {
+    // console.log(srcPdfFileArray);
+    var checkPdfId = -1;
+    var  searchName="";
+    $(document).ready(function() {
+        searchName = $('#inputPdfName').val();
+        console.log("searchPdfName :" + searchName);
+        $("#pdfView").attr("src",currentFolder_dir  +searchName+".pdf");
+      });
+   
+  }
     function generatePossible()
     {
       $(document).ready(function() {

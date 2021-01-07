@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
+use DateTime;
+use DateTimezone;
 use PHPExcel_IOFactory;
 
 class DataController extends Controller
@@ -94,7 +96,11 @@ class DataController extends Controller
         $jsonDataInform = json_decode($jsonDataInformDir);
 
         $fileExist = false ;
-        $currentDay=date('y/m/d')." " .date("H:i", strtotime(date("h:i")));;
+
+        $now = new DateTime();
+        date_timezone_set($now,timezone_open("Europe/Paris"));
+        $currentDay =  date_format($now,"d/m/y H:i");
+
         $usersValue= $lastRow - 1;
         // echo "time is " .  $currentDay;
         // foreach ($jsonDataInform as $value) {

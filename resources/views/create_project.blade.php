@@ -137,29 +137,29 @@ setInterval("blink(fermer)",500);
 				<div class="modal-dialog modal-lg modal-dialog-centered">
 					<div class="modal-content modal-roni">
 						<div id="pdfConverting" class="text-center">
-						<p class="h2 text-center" id="staticBackdropLabel">
-							Création des PDF en cours 
-						</p>
-						<div class="well text-left">
-							<h5 class="card-title"><b>Data choisi :</b> <span id='select_data_name_modal'></span></h5>
-							<h5 class="card-title"><b>Dossier choisi :</b> <span id='select_folder_dir_modal'></span></h5>
-						</div>
-						<div id="fermer" style="visibility: visible"><p class="card-text text-danger text-center"><b>@guest @else {{ Auth::user()-> name }}, @endguest veuillez ne pas fermer cette page</b></p></div>
-						<br>
-						<div class="text-center">
-							<button class="btn btn-primary" type="button" disabled>
-								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-								  Veuillez patienter svp
-							</button>
-                           </div>
+							<p class="h2 text-center" id="staticBackdropLabel">
+								Création des PDF en cours 
+							</p>
+							<div class="well text-left">
+								<h5 class="card-title"><b>Data choisi :</b> <span id='select_data_name_modal'></span></h5>
+								<h5 class="card-title"><b>Dossier choisi :</b> <span id='select_folder_dir_modal'></span></h5>
+							</div>
+							<div id="fermer" style="visibility: visible"><p class="card-text text-danger text-center"><b>@guest @else {{ Auth::user()-> name }}, @endguest veuillez ne pas fermer cette page</b></p></div>
+							<br>
+							<div class="text-center">
+								<button class="btn btn-primary" type="button" disabled>
+									<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+									Veuillez patienter svp
+								</button>
+							</div>
 						</div>
 						<input type='hidden' value='' id='dirInform'/>
                         <input type='hidden' value='' id='response_result'/>
-						<div id="pdfConvertFinished" class="text-center">
-						<p class="h2 text-center" id="staticBackdropLabel">C'est terminé </p>
-						<div class="well text-left">
-							<h5 class="card-title">En cliquant le bouton ci-dessous, vous pouvez voir les PDF générés.</h5>
-						</div>
+						<div id="pdfConvertFinished" class="text-center" style="display: none;">
+							<p class="h2 text-center" id="staticBackdropLabel">C'est terminé </p>
+							<div class="well text-left">
+								<h5 class="card-title">En cliquant le bouton ci-dessous, vous pouvez voir les PDF générés.</h5>
+							</div>
 							<button type="button" class="btn btn-success" data-dismiss="modal" onclick="nextPrev(1)" id="viewPdfs">Visualiser les PDF</button>
 						</div>
 					</div>

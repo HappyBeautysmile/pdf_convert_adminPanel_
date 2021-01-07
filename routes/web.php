@@ -24,8 +24,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/createProject','CreateProjectController@index' );
-Route::get('/allPdf','AllPdfController@index' );
+Route::get('/creer-un-projet','CreateProjectController@index' );
+Route::get('/visualiser-les-pdf','AllPdfController@index' );
 Route::get('/folders','FoldersController@index' );
 Route::post('/addFolder','FoldersController@addFolder')->name('addFolder');
 Route::post('/renameFolder','FoldersController@renameFolder')->name('renameFolder');
@@ -36,8 +36,11 @@ Route::post('/getFolderDirInform','FoldersController@getFolderDirInform')->name(
 // getFolderDirInform
 
 Route::get('/data','DataController@index' );
-Route::get('/pictures','PicturesController@index' );
-Route::get('/homePage','HomePageController@index' );
+Route::get('/portfolio','PicturesController@index' );
+
+Route::post('/imageFilesInform', 'PicturesController@imageFilesInform')->name('imageFilesInform');
+
+Route::get('/dashboard','HomePageController@index' );
 Route::post('/operating', 'CreateProjectController@operating_pdf')->name('operating');
 Route::post('/pdfGenerate', 'CreateProjectController@pdfGenerate')->name('pdfGenerate');
 Route::post('/pdfInformArray', 'AllPdfController@pdfInformArray')->name('pdfInformArray');

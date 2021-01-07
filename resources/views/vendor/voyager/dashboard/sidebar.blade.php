@@ -19,7 +19,7 @@
         <div id="adminmenu">
             <ul class="nav navbar-nav">
                 <li class="">
-                <!-- href="{{ url('/homePage') }} -->
+                <!-- href="{{ url('/dashboard') }} -->
                     <!-- <a target="_self" href="{{ url('/admin/roles') }}">
                         <span class="icon voyager-lock"></span> <span class="title">Roles</span>
                     </a>  -->

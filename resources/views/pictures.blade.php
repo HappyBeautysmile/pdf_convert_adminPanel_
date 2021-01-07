@@ -79,6 +79,8 @@
                 </th>
                 <th class="th-sm">Status
                 </th>
+                <th class="th-sm">Author
+                </th>
               </tr>
              
             </thead>
@@ -167,6 +169,8 @@
                   </button>
               {% } %}
           </td>
+          <td>
+          </td>
       </tr>
   {% } %}
 </script>
@@ -199,20 +203,45 @@
         <td>
           uploaded
         </td>
+        <td>
+          <span>{%=file.author%}</span>
+        </td>
     </tr>
   {% } %}
 </script>
 
 <script>
   var jsonFolderDirInform = JSON.parse(<?php echo json_encode($jsonFolderDirInform);?>);
-  var findSelectFlag = false ;
-  var imageFolderDir ="" ;
-  var reload = false ;
+  var imageFilesInformData = JSON.parse(<?php echo json_encode($imageFilesInformData);?>);
 
+  var findSelectFlag = false ;
+  var reload = false ;
+  var firstBegin = 0 ;
   // $(document).ready(function () {
   //     $('#imageList').DataTable();
   //     $('.dataTables_length').addClass('bs-select');
   //   });
+  var currentUserName = <?php echo json_encode($user);?>;
+  // console.log("currentUserName : " + currentUserName);
+  function ToimageInformUpload(files)
+  {
+    $.ajax({
+        type:"POST",
+        url: "{{ url('/imageFilesInform') }}",
+        headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 },
+        data: {"imageFilesInformData" :files },
+        success:function(data){
+          console.log(data)
+        },  
+        error: function () {
+          alert("no connect imageFilesInform!");
+        }
+      }).done(function() {
+    });
+  }
+
 </script>
 <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
