@@ -23,7 +23,15 @@ class HomePageController extends Controller
     public function index()
     {
         
+        $taskList = Task::where('status','=',"En cours")->orderBy('id','desc')->get();
+        $finishedtaskList = Task::where('status','=',"terminées")->orderBy('id','desc')->get();
+
         $data["page_flg"]="homePage";
+        $data["taskList"]=$taskList;
+        $data["finishedtaskList"]=$finishedtaskList;
+        $data["currentUser"] = Auth::user()->name;
+        $data["currentUser_role"] = Auth::user()->role_id;
+
         return view('home_page',$data);
     }
     public function newTask(Request $request)
@@ -31,7 +39,7 @@ class HomePageController extends Controller
     // protected $fillable = ['task_name', 'task_ticket', 'start_date', 'end_date', 'status', 'author'];
 
         $input = $request->all();
-        Log::Info( $input ); //accessory
+        // Log::Info( $input ); //accessory
         $task = new Task;
         $task->task_name = $input["task_name"];
         $task->task_ticket = $input["task_ticket"];
@@ -40,8 +48,45 @@ class HomePageController extends Controller
         $task->status = "En cours";
         $task->author = Auth::user()->name;
         $task->save();
-
-        $data["page_flg"]="homePage";
-        return view('home_page',$data);
+        return redirect()->route('dashboard')->with('success','new task successfully.');
     }
+
+    public function editTask(Request $request)
+    {
+
+        $input = $request->all();
+        // Log::Info( $input ); //accessory
+
+         $task = Task::findOrFail($input['task_id_edit']);
+         $task->task_name = $input["task_name_edit"];
+         $task->task_ticket = $input["task_ticket_edit"];
+         $task->start_date = $input["datepicker_3"];
+         $task->end_date = $input["datepicker_4"];
+         $task->update();
+
+        return redirect()->route('dashboard')->with('success','edit task successfully.');
+    }
+
+    public function finishTask(Request $request)
+    {
+
+        $input = $request->all();
+         $task = Task::findOrFail($input['task_id_finish']);
+        Log::Info( $task ); //accessory
+
+         $task->status = 'terminées';
+         $task->update();
+        return redirect()->route('dashboard')->with('success','finish task successfully.');
+    }
+
+    public function removeTask(Request $request)
+    {
+
+        $input = $request->all();
+         $task = Task::findOrFail($input['task_id_remove']);
+        Log::Info( $task ); //accessory
+        $task->delete();
+        return redirect()->route('dashboard')->with('success','remove task successfully.');
+    }
+    
 }

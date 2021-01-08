@@ -40,8 +40,11 @@ Route::get('/portfolio','PicturesController@index' );
 
 Route::post('/imageFilesInform', 'PicturesController@imageFilesInform')->name('imageFilesInform');
 
-Route::get('/dashboard','HomePageController@index' );
+Route::get('/dashboard','HomePageController@index')->name('dashboard');
 Route::post('/newTask', 'HomePageController@newTask')->name('create-new-task');
+Route::post('/edit-task', 'HomePageController@editTask')->name('edit-task');
+Route::post('/finish-task', 'HomePageController@finishTask')->name('finish-task');
+Route::post('/remove-task', 'HomePageController@removeTask')->name('remove-task');
 
 
 Route::post('/operating', 'CreateProjectController@operating_pdf')->name('operating');
