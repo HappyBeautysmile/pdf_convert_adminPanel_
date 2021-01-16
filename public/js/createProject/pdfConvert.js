@@ -208,10 +208,11 @@
                 // alert("finished");
                 // pdfConvertFinished();
             }).done(function() {
-               if(index * divideUsers < choosedData.length)
+               if(index * divideUsers < choosedData.length && index < 2)
                {
                     index++;
                     pdfConvertFuncDivide(index);
+                    
                }
                else{
                    setTimeout(pdfConvertFinished, 1000);

@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Box Resizing - jquery-resizable</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-container {
+            margin: 20px;
+        }
+        .box {
+            margin: 40px;
+            box-shadow: 5px 5px 10px #535353;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            /* limit size with min/max-width/height*/
+            min-height: 100px;
+            min-width: 200px;
+            max-width: 999px;
+            max-height: 800px;
+        }
+
+        .boxheader {
+            background: #535353;
+            color: white;
+            padding: 5px;
+        }
+
+        .boxbody {
+            font-size: 24pt;
+            padding: 20px;
+        }
+
+        .win-size-grip {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            padding: 4px;
+            bottom: 0;
+            right: 0;
+            cursor: nwse-resize;
+            background: url(../assets/wingrip.png) no-repeat;
+        }
+
+        pre {
+            margin: 20px;
+            padding: 10px;
+            background: #eee;
+            border: 1px solid silver;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <h1>
+            jquery-resizable - A simple box resize operation.
+        </h1>
+        <hr />
+        <p>
+            This simple example simply resizes a couple of boxes using a sizing grip at the bottom of the window.
+            Note that .resizable() does not handle of the UI aspects - it only manages the actual resizing
+            operation itself. You're responsible for creating placing the sizing handle where it makes sense
+            for your UI.
+        </p>
+
+        <div class="box">
+            <div class="boxheader">Box 1</div>
+            <div class="boxbody">
+                Resize me
+            </div>
+            <div class="win-size-grip"></div>
+        </div>
+        
+        
+        <div class="box">
+            <div class="boxheader">Box 2</div>
+            <div class="boxbody">
+                Resize me
+            </div>
+            <div class="win-size-grip"></div>
+        </div>
+
+        <hr />
+        <p>
+            To apply resizing use the .resizable plugin and specify the resizable container
+            and a sizing handle that initiates resizing:
+        </p>
+        <pre> $(".box").resizable({ handleSelector: ".win-size-grip"});</pre>      
+        <p></p>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+<script src="../src/jquery-resizable.js"></script>
+<script>    
+    $(".box").resizable({
+        handleSelector: "> .win-size-grip",
+        onDragStart: function (e, $el, opt) {
+            $el.css("cursor", "nwse-resize");
+        },
+        onDragStop: function (e, $el, opt) {
+            $el.css("cursor", "");
+        }
+    });        
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "jquery-resizable-dom",
+  "version": "0.35.0",
+  "description": "A small jquery component to make components resizable",
+  "main": "./dist/jquery-resizable.min.js",
+  "devDependencies": {
+    "uglify-js": "^3.6.9"
+  },
+  "files": [
+    "readme.md",
+    "dist/",
+    "src/",
+    "assets/"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.0"
+  },
+  "scripts": {
+    "pack": "uglifyjs ./src/jquery-resizable.js -o dist/jquery-resizable.min.js --source-map;uglifyjs ./src/jquery-resizableTableColumns.js -o dist/jquery-resizableTableColumns.min.js.js --source-map",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RickStrahl/jquery-resizable"
+  },
+  "keywords": [
+    "resizable",
+    "jquery-resizable",
+    "panel",
+    "jquery",
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Rick Strahl, West Wind Technologies",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RickStrahl/jquery-resizable/issues"
+  },
+  "homepage": "https://github.com/RickStrahl/jquery-resizable"
+}

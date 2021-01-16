@@ -100,8 +100,8 @@ class DataController extends Controller
         $currentDateTime = new DateTime();
         date_timezone_set($currentDateTime,timezone_open("Europe/Paris"));//mm/dd/yyyy
         // $currentDay =  date_format($currentDateTime,"22/12/2021 14:01");
-//        $currentDay =  date_format($currentDateTime,"d").'/'.date_format($currentDateTime,"m").'/20'. date_format($currentDateTime,"y")." ".date_format($currentDateTime,"H:i");
-        $currentDay =  date_format($currentDateTime,"d").'/'.date_format($currentDateTime,"m").'/20'. date_format($currentDateTime,"y")." ".date_format($currentDateTime,"H:i a");
+        $currentDay =  date_format($currentDateTime,"d").'/'.date_format($currentDateTime,"m").'/20'. date_format($currentDateTime,"y")." - ".date_format($currentDateTime,"H:i");
+        // $currentDay =  date_format($currentDateTime,"d").'/'.date_format($currentDateTime,"m").'/20'. date_format($currentDateTime,"y")." ".date_format($currentDateTime,"H:i a");
         $usersValue= $lastRow - 1;
         // echo "time is " .  $currentDay;
         // foreach ($jsonDataInform as $value) {
@@ -109,14 +109,16 @@ class DataController extends Controller
         //         $fileExist = true ;
         //     }
         // }
+
         for($i = 0; $i < sizeof($jsonDataInform) ;$i++)
         {
             if($jsonDataInform[$i][0] ==$fileName){
                 $fileExist = true ;
                 $jsonDataInform[$i][1] = $currentDay;
-                $usersValue[$i][3] =$usersValue;
+                $jsonDataInform[$i][3] =$usersValue;
             }
         }
+        
         if($fileExist == false)
         {
             array_push($jsonDataInform, array($fileName,$currentDay, Auth::user()->name ,$usersValue));

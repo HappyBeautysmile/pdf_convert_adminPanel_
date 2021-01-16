@@ -25,7 +25,8 @@ class HomePageController extends Controller
         
         $taskList = Task::where('status','=',"En cours")->orderBy('id','desc')->get();
         $finishedtaskList = Task::where('status','=',"terminées")->orderBy('id','desc')->get();
-
+        Log::Info( $taskList ); //accessory
+        
         $data["page_flg"]="homePage";
         $data["taskList"]=$taskList;
         $data["finishedtaskList"]=$finishedtaskList;
@@ -45,6 +46,7 @@ class HomePageController extends Controller
         $task->task_ticket = $input["task_ticket"];
         $task->start_date = $input["datepicker"];
         $task->end_date = $input["datepicker_2"];
+        $task->folder_dir = $input["folder_dir"];
         $task->status = "En cours";
         $task->author = Auth::user()->name;
         $task->save();
@@ -62,6 +64,7 @@ class HomePageController extends Controller
          $task->task_ticket = $input["task_ticket_edit"];
          $task->start_date = $input["datepicker_3"];
          $task->end_date = $input["datepicker_4"];
+         $task->folder_dir = $input["folder_dir_edit"];
          $task->update();
 
         return redirect()->route('dashboard')->with('success','edit task successfully.');

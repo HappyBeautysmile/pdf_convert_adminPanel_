@@ -39,7 +39,7 @@
 							<div class="row" >
 								<div class="col-md-9 mx-auto">
 									<div class="input-group mb-3 text-left" style="margin:10px 0px;">
-									   <input class="form-control text-left inputroni" id="fileInput" type="file" id="fileToUpload" value="Choose a file" name="fileToUpload">
+									   <input class="form-control text-left inputroni"  type="file" id="fileToUpload" value="Choose a file" name="fileToUpload">
 									   <div class="input-group-prepend">
 										<button class="btn btn-primary rounded-right" id="wpc_contact"><i class="fa fa-download" aria-hidden="true"></i> Télécharger</button>
 									  </div>
@@ -145,7 +145,10 @@
             error : function(data){
               console.log("error" , data); 
             }
-        });
+        }).done(function() {
+            // alert("yes");
+            $('#fileToUpload').val("");
+      });;
         // alert(src_jsonDataFileArray); 
         
    });

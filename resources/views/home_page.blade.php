@@ -76,8 +76,9 @@
 					<th>No ticket</th>
 					<th>Date 01</th>
 					<th>Date 02</th>
-					<th>Statut</th>
+					<th>Dossier utilisé</th>
 					<th>Auteur</th>
+					<th>Statut</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -91,8 +92,9 @@
 							echo "<td>".$taskList[$t]['task_ticket']."</td>";
 							echo "<td>".$taskList[$t]['start_date']."</td>";
 							echo "<td>".$taskList[$t]['end_date']."</td>";
-							echo "<td>".$taskList[$t]['status']."</td>";
+							echo "<td>".$taskList[$t]['folder_dir']."</td>";
 							echo "<td>".$taskList[$t]['author']."</td>";
+							echo "<td>".$taskList[$t]['status']."</td>";
 							if( $taskList[$t]['author'] == $currentUser  ||  $currentUser_role === 1)
 							{
 								echo "<td>".
@@ -140,8 +142,9 @@
 					<th>No ticket</th>
 					<th>Date 01</th>
 					<th>Date 02</th>
-					<th>Statut</th>
+					<th>Dossier utilisé</th>
 					<th>Auteur</th>
+					<th>Statut</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -154,8 +157,9 @@
 							echo "<td>".$finishedtaskList[$t]['task_ticket']."</td>";
 							echo "<td>".$finishedtaskList[$t]['start_date']."</td>";
 							echo "<td>".$finishedtaskList[$t]['end_date']."</td>";
-							echo "<td>".$finishedtaskList[$t]['status']."</td>";
+							echo "<td>".$finishedtaskList[$t]['folder_dir']."</td>";
 							echo "<td>".$finishedtaskList[$t]['author']."</td>";
+							echo "<td>".$finishedtaskList[$t]['status']."</td>";
 						echo "</tr>";
 					}				
 				?>
@@ -192,6 +196,7 @@
 							<input type="text" class="form-control" placeholder="No ticket" id ="task_ticket"  name ="task_ticket" aria-label="Large" value="" required>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-1">
 						</div>
@@ -214,6 +219,16 @@
 						<div class="col-md-8">
 							<!-- <input type="text" class="form-control" placeholder="Nom du projet" id ="endDate" aria-label="Large" value="Nom du projet"> -->
 							<input data-date-format="mm/dd/yyyy" id="datepicker_2" name="datepicker_2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-3">
+						Dossier utilisé
+						</div>
+						<div class="col-md-8">
+							<input type="text" class="form-control" placeholder="Dossier utilisé" id ="folder_dir"  name ="folder_dir" aria-label="Large" value="" required>
 						</div>
 					</div>
 				</div>
@@ -255,6 +270,7 @@
 							<input type="text" class="form-control" placeholder="No ticket" id ="task_ticket_edit"  name ="task_ticket_edit" aria-label="Large" value="" required>
 						</div>
 					</div>
+				
 					<div class="row">
 						<div class="col-md-1">
 						</div>
@@ -275,6 +291,16 @@
 						</div>
 						<div class="col-md-8">
 							<input data-date-format="mm/dd/yyyy" id="datepicker_4" name="datepicker_4">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-3">
+						Dossier utilisé
+						</div>
+						<div class="col-md-8">
+							<input type="text" class="form-control" placeholder="Dossier utilisé" id ="folder_dir_edit"  name ="folder_dir_edit" aria-label="Large" value="" required>
 						</div>
 					</div>
 				</div>
@@ -321,18 +347,25 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js
+
+
+" charset="UTF-8"></script>
+
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 <script type="text/javascript">
 	var taskListInform = <?php echo json_encode($taskList); ?>;
 	var choosedTaskId = null ;
   $('#datepicker').datepicker({
+		language:  'fr',
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
         todayHighlight: true,
-    });
+	});
 	$('#datepicker').datepicker("setDate", new Date());
 	$('#datepicker_2').datepicker({
+		language:  'fr',
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
@@ -342,6 +375,7 @@
 	
 
 	$('#datepicker_3').datepicker({
+		language:  'fr',
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
@@ -350,6 +384,7 @@
 	$('#datepicker_3').datepicker("setDate", new Date());
 
 	$('#datepicker_4').datepicker({
+		language:  'fr',
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
@@ -366,6 +401,7 @@
 		$('#task_id_finish').val(taskListInform[taskIndex]["id"]);
 		$('#task_id_remove').val(taskListInform[taskIndex]["id"]);
 		$('#task_ticket_edit').val(taskListInform[taskIndex]["task_ticket"]);
+		$('#folder_dir_edit').val(taskListInform[taskIndex]["folder_dir"]);
 		$('#datepicker_3').val(taskListInform[taskIndex]["start_date"]);
 		$('#datepicker_4').val(taskListInform[taskIndex]["end_date"]);
 		console.log(taskListInform);

@@ -7,22 +7,34 @@
 		<title>inoria flies</title>
 		<meta name="description" content="INORWEB : spécialisé en création site web et stratégie digitale, intégration d'emailing, catalogue interactif, développement web, landing page.">
 		<link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon.ico">
+		<link href="{{ asset('css/font_customize.css') }}" rel="stylesheet">
+
 		<script src="{{ asset('js/app.js') }}" defer></script>
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com"> 
-		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/trumbowyg.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/ui/trumbowyg.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/colors/ui/trumbowyg.colors.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/colors/trumbowyg.colors.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontfamily/trumbowyg.fontfamily.min.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontfamily/trumbowyg.fontfamily.min.js"></script> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontsize/trumbowyg.fontsize.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/history/trumbowyg.history.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/template/trumbowyg.template.min.js"></script>
+		
 
-		<script src="{{ asset('js/createProject/trumbowygFontfamily.js') }}" defer></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/resizimg/resizable-resolveconflict.min.js"></script>
+		<script src="{{ asset('js/jquery-resizable-master/dist/jquery-resizable.min.js') }}"  ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/resizimg/trumbowyg.resizimg.min.js"></script>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/langs/fr.min.js"></script>
+
+		<script src="{{ asset('js/createProject/trumbowygFontfamily.js') }}" ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/indent/trumbowyg.indent.min.js" ></script>
 
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('dist/themes/default/style.min.css') }}" rel="stylesheet">
