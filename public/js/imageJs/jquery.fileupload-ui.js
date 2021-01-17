@@ -487,31 +487,9 @@
       }
 
       //rsuhyon
-      console.log("firstBegin : " + firstBegin);
-      if(firstBegin == undefined ||firstBegin ==0 )
-      {
-        for(var i = 0 ; i < files.length ; i++)
-        {
-          files[i]["author"] =currentUserName;
-          // for(var t = 0 ; t <  imageFilesInformData.length ; t++)
-          // {
-          //   if(files[i]["name"] == imageFilesInformData[t]['name'])
-          //   {
-          //     break ;
-          //   }
-          // }
-          // if(t == imageFilesInformData.length)
-          // {
-          //   console.log("new imagefile : "+files[i]["name"]);
-          //   files[i]["author"] =currentUserName;
-          //   imageFilesInformData[imageFilesInformData.length] = files[i]["author"];
-          // }
-        }
+       
         // console.log("imageFilesInformData :" + imageFilesInformData[imageFilesInformData.length-1]['name']);
-        ToimageInformUpload(files);
-        firstBegin = 1;
         // console.log(files);
-      }
       var result = func({
         files: files,
         formatFileSize: this._formatFileSize,

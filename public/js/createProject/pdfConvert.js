@@ -199,6 +199,7 @@
             // var year = date.getFullYear();
             // var month = date.getMonth(); // beware: January = 0; February = 1, etc.
             // var day = date.getDate();
+            console.log("to tcpdfcustomize : " + htmldata);
             $.ajax({
                 type:"POST",
                 url: "TCPDFCustomize/examples/main.php",
