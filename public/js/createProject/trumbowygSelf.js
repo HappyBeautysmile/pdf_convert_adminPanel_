@@ -25,11 +25,9 @@ $('#trumbowyg-demo').trumbowyg({
     plugins: {
       fontfamily: {
         fontList: [
-          {name: 'Sunnday' ,family : 'Sunnday'},
-          {name: 'Bright Star' ,family : 'Bright_Star'},
           {name: 'Chandiluna' ,family : 'Chandiluna'},
           {name: 'Heysweet' ,family : 'heysweet'},
-          {name: 'Baby Chipmunk' ,family : 'Baby_Chipmunk'},
+          {name: 'MelanieRoselyn' ,family : 'MelanieRoselyn'},
           
           {name: 'Arial', family: 'Arial, Helvetica, sans-serif'},
           {name: 'Arial Black', family: 'Arial Black, Gadget, sans-serif'},

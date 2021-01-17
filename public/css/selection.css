@@ -23,7 +23,8 @@ ul{
 #app{
     background-color: #fafafa!important;
 }
-.trumbowyg{background-color: #ffffff!important;height:650px!important;}
+.trumbowyg{background-color: #ffffff!important;height:650px!important;width: 570px!important;
+}
 /* Hide all steps by default: */
 .tab {
   display: none;

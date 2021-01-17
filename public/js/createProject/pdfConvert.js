@@ -25,7 +25,15 @@
                     continue;
                 }
                 htmldata[k] = trumbowygData ;
+                htmldata[k] = htmldata[k].replaceAll("max-width:", "width:");
+                htmldata[k] = htmldata[k].replaceAll("max-height:", "height:");
+                htmldata[k] = htmldata[k].replaceAll("font-size: x-large;", "font-size: 24px;");
+                htmldata[k] = htmldata[k].replaceAll("font-size: large;", "font-size: 18px;");
+                htmldata[k] = htmldata[k].replaceAll("font-size: medium;", "font-size: 16px;");
+                htmldata[k] = htmldata[k].replaceAll("font-size: small;", "font-size: 13px;");
+                htmldata[k] = htmldata[k].replaceAll("font-size: x-small;", "font-size: 10px;");
                 htmldata[k] = htmldata[k].replaceAll("{ID}", choosedData[i]["ID"]);
+                
                 if(choosedData[i]["Last name"] !=null)
                 {
                     htmldata[k] = htmldata[k].replaceAll("{Last name}", choosedData[i]["Last name"]);

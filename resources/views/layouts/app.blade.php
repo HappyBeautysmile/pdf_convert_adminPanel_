@@ -7,7 +7,7 @@
 		<title>inoria flies</title>
 		<meta name="description" content="INORWEB : spécialisé en création site web et stratégie digitale, intégration d'emailing, catalogue interactif, développement web, landing page.">
 		<link rel="icon" type="image/png" sizes="16x16" href="/public/img/favicon.ico">
-		<link href="{{ asset('css/font_customize.css') }}" rel="stylesheet">
+		<link href="{{ asset('TCPDFCustomize/examples/font_customize.css') }}" rel="stylesheet">
 
 		<script src="{{ asset('js/app.js') }}" defer></script>
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
