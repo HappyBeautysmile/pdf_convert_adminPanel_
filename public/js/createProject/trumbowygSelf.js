@@ -6,21 +6,21 @@ $('#trumbowyg-demo').trumbowyg({
         ['historyUndo', 'historyRedo'],
         // ['formatting'],
         ['strong', 'em'],
+        ['underline'],
         ['superscript'], // ['superscript', 'subscript'],
         ['foreColor'],
         // ['foreColor', 'backColor'], 
         // ['link'],
         ['insertImage'],
         ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['indent', 'outdent'],
         // ['unorderedList', 'orderedList'],
         // ['horizontalRule'],
         // ['removeformat'],
         ['fullscreen'],
         ['fontfamily'],
         ['fontsize'],
-        ['template'],
-        ['indent', 'outdent']
-
+        ['template']
     ],
     plugins: {
       fontfamily: {

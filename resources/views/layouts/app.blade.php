@@ -13,13 +13,19 @@
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com"> 
 		<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/ui/trumbowyg.min.css"> -->
+		<link href="{{ asset('js/Trumbowyg223/dist/ui/trumbowyg.min.css') }}" rel="stylesheet">
+
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/colors/ui/trumbowyg.colors.min.css"> -->
+		<link href="{{ asset('js/Trumbowyg223/dist/plugins/colors/ui/trumbowyg.colors.min.css') }}" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/trumbowyg.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/ui/trumbowyg.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/colors/ui/trumbowyg.colors.min.css">
+		
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/trumbowyg.min.js"></script> -->
+		<script src="{{ asset('js/Trumbowyg223/dist/trumbowyg.min.js') }}"></script>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/colors/trumbowyg.colors.min.js"></script>
+
+		<script src="{{ asset('js/Trumbowyg223/plugins/indent/trumbowyg.indent.js') }}"></script>
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontfamily/trumbowyg.fontfamily.min.js"></script> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/fontsize/trumbowyg.fontsize.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/plugins/history/trumbowyg.history.min.js"></script>
@@ -34,7 +40,6 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/langs/fr.min.js"></script>
 
 		<script src="{{ asset('js/createProject/trumbowygFontfamily.js') }}" ></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/indent/trumbowyg.indent.min.js" ></script>
 
 		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('dist/themes/default/style.min.css') }}" rel="stylesheet">
@@ -43,7 +48,6 @@
 		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" defer></script>
 		<script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/numeric-comma.js" defer></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="{{ asset('css/section.css') }}" rel="stylesheet">
 	</head>
 	<body>
 		<div id="app">

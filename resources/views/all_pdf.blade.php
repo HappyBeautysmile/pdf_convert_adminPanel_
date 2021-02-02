@@ -86,7 +86,6 @@
   var dirInform ="./Home/uploads/media";
   var currentFolder_dir = "";
   function currentPdfPageFind(){
-    // alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
     if(srcPdfFileArray.length <= 3)
     {
         $("#nextPdfViewBtn").addClass("disabled");
@@ -101,8 +100,11 @@
       $("#backPdfViewBtn").removeClass('disabled');
       $("#backPdfViewBtn").prop('disabled',false);
     }
+    // alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
+
     document.getElementById("pdfView").src=  currentFolder_dir  + srcPdfFileArray[currentPdfPageIndex];
   }
+  
   function nextPdfFunc(index)
   {
     // console.log("currentPdfPageIndex :"  + currentPdfPageIndex);
@@ -235,6 +237,7 @@
                   data: {"soureDir" :currentFolder_dir},
                   success:function(data){
                     srcPdfFileArray = [];
+                    // console.log("pdfArray : " + data);
                     srcPdfFileArray[0]="",srcPdfFileArray[1]="";
                     inc = 2 ;
                     for(var i = 2 ; i < data.length ; i++)
@@ -245,10 +248,12 @@
                       }
                     }
                     currentPdfPageIndex = 2;
+                    console.log("all_pdf_choose_pdf : " + srcPdfFileArray);
                     currentPdfPageFind();
                   },  
                 }).done(function() {
                   $( this ).addClass( "done" );
+
               });
             }
           }

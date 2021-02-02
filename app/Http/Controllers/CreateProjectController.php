@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CreateProjectController extends Controller
 {
@@ -35,6 +36,7 @@ class CreateProjectController extends Controller
 
         $jsonDataDir = file_get_contents("./TCPDFCustomize/DATA/jsonData/".$fileName.".txt");
         $jsonData = json_decode($jsonDataDir);
+        Log::Info( $jsonData ); //accessory
 
         return response()->json(array('src_pdfFileArray' => $src_pdfFileArray, 'jsonData' =>  $jsonData));
     }

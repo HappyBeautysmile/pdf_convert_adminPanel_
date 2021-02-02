@@ -1,5 +1,6 @@
 @extends('home')
 @section('main_area')
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <style>
 #dashboradTab > li {
 	background-color: #ffc10780 !important;
@@ -47,6 +48,8 @@
 .taskIconStatus:hover{
 	background-color:yellow;
 }
+
+
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
@@ -69,7 +72,7 @@
   <div class="tab-content">
 
 	<div id="menu1" class="container tab-pane  active"><br>
-		<table class="table table-striped">
+		<table class="table table-striped" id="toDoList">
 			<thead>
 				<tr>
 					<th>Nom du projet</th>
@@ -135,7 +138,7 @@
 		</table>
     </div>
     <div id="menu2" class="container tab-pane fade"><br>
-		<table class="table table-striped">
+		<table class="table table-striped" id="finshList">
 			<thead>
 				<tr>
 					<th>Nom du projet</th>
@@ -205,7 +208,7 @@
 						</div>
 						<div class="col-md-8">
 							<!-- <input type="text" class="form-control" placeholder="Nom du projet" id ="startDate" aria-label="Large" value="Nom du projet"> -->
-							<input data-date-format="mm/dd/yyyy" id="datepicker" name="datepicker">
+							<input data-date-format="dd/mm/yyyy" id="datepicker" name="datepicker">
 						</div>
 						
 					</div>
@@ -218,7 +221,7 @@
 						</div>
 						<div class="col-md-8">
 							<!-- <input type="text" class="form-control" placeholder="Nom du projet" id ="endDate" aria-label="Large" value="Nom du projet"> -->
-							<input data-date-format="mm/dd/yyyy" id="datepicker_2" name="datepicker_2">
+							<input data-date-format="dd/mm/yyyy" id="datepicker_2" name="datepicker_2">
 						</div>
 					</div>
 					<div class="row">
@@ -278,7 +281,7 @@
 							Date 01
 						</div>
 						<div class="col-md-8">
-							<input data-date-format="mm/dd/yyyy" id="datepicker_3" name="datepicker_3">
+							<input data-date-format="dd/mm/yyyy" id="datepicker_3" name="datepicker_3">
 						</div>
 						
 					</div>
@@ -290,7 +293,7 @@
 							Date 02
 						</div>
 						<div class="col-md-8">
-							<input data-date-format="mm/dd/yyyy" id="datepicker_4" name="datepicker_4">
+							<input data-date-format="dd/mm/yyyy" id="datepicker_4" name="datepicker_4">
 						</div>
 					</div>
 					<div class="row">
@@ -353,6 +356,36 @@
 " charset="UTF-8"></script>
 
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script>
+	jQuery(document).ready(function($){
+		$('#toDoList').DataTable({
+			language: {
+			lengthMenu: "T'en veux _MENU_ par page",
+			info: "c'est la page _PAGE_ sur _PAGES_",
+			search: "toute recherche",
+			paginate: {
+				first:      "Premier",
+				last:       "Précédent",
+				next:       "Suivant",
+				previous:   "Dernier"
+			}
+			}
+		});
+		$('#finshList').DataTable({
+			language: {
+			lengthMenu: "T'en veux _MENU_ par page",
+			info: "c'est la page _PAGE_ sur _PAGES_",
+			search: "toute recherche",
+			paginate: {
+				first:      "Premier",
+				last:       "Précédent",
+				next:       "Suivant",
+				previous:   "Dernier"
+				}
+			}
+		});
+	});
+</script>
 <script type="text/javascript">
 	var taskListInform = <?php echo json_encode($taskList); ?>;
 	var choosedTaskId = null ;

@@ -1,10 +1,10 @@
 /node_modules
 /public/images/*
-/public/ResourceData/images/
+/public/DOSSIERS/images/
 /public/storage
 /storage/*.key
 /vendor
-/public/TCPDFCustomize/ResourceData/
+/public/TCPDFCustomize/DOSSIERS/
 .env
 .env.backup
 .phpunit.result.cache

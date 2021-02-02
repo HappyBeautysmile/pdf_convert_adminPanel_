@@ -1,4 +1,5 @@
 function currentPdfPageFind(){
+
   // alert("files :   "+srcPdfFileArray.length + "currentPage:  " + currentPdfPageIndex +"page Name  " + srcPdfFileArray[currentPdfPageIndex]);
   if(srcPdfFileArray.length <= 3)
   {
@@ -16,6 +17,7 @@ function currentPdfPageFind(){
   }
   // alert("srcPdfFileArray length :" + srcPdfFileArray.length + " dirInform: " + dirInform + " currentPdfPageIndex: " + currentPdfPageIndex + "srcPdfFileArray :" + srcPdfFileArray[currentPdfPageIndex]);
   // alert(currentFolder_dir  + "sd as as "+ srcPdfFileArray[currentPdfPageIndex]);
+  // console.log( currentFolder_dir + dirInform+'/' + srcPdfFileArray[currentPdfPageIndex]);
   document.getElementById("pdfView").src=  currentFolder_dir + dirInform+'/' + srcPdfFileArray[currentPdfPageIndex];
 }
 
